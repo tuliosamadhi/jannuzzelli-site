@@ -1,0 +1,234 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0b0f1a;
+    color: #eaeaea;
+    line-height: 1.6;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    background: rgba(11, 15, 26, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.lang {
+    color: #00c2ff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: 1px solid #00c2ff;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.lang:hover {
+    background: #00c2ff;
+    color: #0b0f1a;
+}
+
+.lang:focus {
+    outline: 2px solid #00ff88;
+    outline-offset: 2px;
+}
+
+.hero {
+    text-align: center;
+    padding: 120px 20px 80px;
+    animation: fadeIn 0.8s ease;
+}
+
+.profile-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 40px;
+    border: 3px solid #00c2ff;
+    animation: slideDown 0.6s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0 0 30px 0;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin: 0 0 20px 0;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 32px;
+    background: #00c2ff;
+    color: #0b0f1a;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid #00c2ff;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: transparent;
+    color: #00c2ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 194, 255, 0.3);
+}
+
+.btn:focus {
+    outline: 2px solid #00ff88;
+    outline-offset: 2px;
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+section {
+    max-width: 800px;
+    margin: auto;
+    padding: 60px 20px;
+}
+
+section:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.content p {
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+}
+
+.problems ul {
+    list-style: none;
+    padding: 0;
+}
+
+.problems li {
+    padding: 16px 0;
+    padding-left: 32px;
+    position: relative;
+    font-size: 1.05rem;
+    transition: transform 0.2s ease;
+}
+
+.problems li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #00c2ff;
+    font-weight: bold;
+}
+
+.problems li:hover {
+    transform: translateX(8px);
+}
+
+.signature {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, rgba(0, 194, 255, 0.05), rgba(0, 255, 136, 0.05));
+    border-top: 1px solid rgba(0, 194, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 194, 255, 0.2);
+}
+
+.signature p {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+    font-size: 0.95rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .hero {
+        padding: 80px 20px 60px;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 30px;
+    }
+}
