@@ -1,9 +1,35 @@
-# jannuzzelli-site
-It is the jannuzzelli html professional site hosted here on the github
+# Jannuzzelli — Cognitive Architecture Platform
 
-All Rights Reserved
+Strategic and Cognitive Architecture applied to high-level decision-making, behavioral systems, and executive intelligence.
 
-Copyright (c) 2026 Túlio Jannuzzelli
+This repository contains the core structure of the Jannuzzelli digital platform, designed as a minimal, high-performance interface for:
 
-This work is protected by copyright. No part of this work may be used, reproduced, 
-or distributed in any form without explicit written permission from the copyright holder.
+- Strategic positioning
+- Cognitive analysis
+- High-value client acquisition
+- International presence
+
+## Structure
+
+- `/index.html` → Main interface
+- `/style.css` → Visual identity and layout system
+- `/script.js` → Behavioral logic
+- `/en` → English version for global positioning
+
+## Philosophy
+
+This is not a conventional website.
+
+It is a **cognitive interface** designed to:
+
+- Filter low-signal interactions
+- Attract high-level strategic profiles
+- Communicate authority through minimalism and precision
+
+## Status
+
+Active development — iterative refinement based on strategic positioning and cognitive impact.
+
+---
+
+© Jannuzzelli — Strategic & Cognitive Architecture
