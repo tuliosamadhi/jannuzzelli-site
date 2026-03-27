@@ -5,397 +5,238 @@
 }
 
 body {
-    background: #040406;
+    background: #020304;
     color: #eaeaea;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    position: relative;
 }
 
-/* GRADIENT BACKGROUND */
-.bg-gradient {
+.bg-monogram,
+.bg-energy {
     position: fixed;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 20% 30%, rgba(0, 80, 255, 0.08), transparent),
-        radial-gradient(circle at 80% 70%, rgba(255, 200, 0, 0.06), transparent);
-    z-index: -1;
+    inset: 0;
+    z-index: -2;
+    opacity: 0.12;
+    pointer-events: none;
 }
 
-/* CONTAINER */
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 80px 20px;
+.bg-monogram {
+    background: url('assets/monogram.svg') center/contain no-repeat;
 }
 
-/* HERO */
-.hero h1 {
-    font-size: 44px;
-    letter-spacing: 1px;
+.bg-energy {
+    background: radial-gradient(circle at 50% 30%, rgba(0, 200, 255, 0.15), transparent 70%);
 }
 
-.hero h2 {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 30px;
-}
-
-.hero-text {
-    font-size: 18px;
-    color: #bbb;
-    margin-bottom: 20px;
-}
-
-.hero-highlight {
-    font-size: 20px;
-    margin-bottom: 40px;
-}
-
-/* SECTION */
-.section {
-    margin-bottom: 80px;
-}
-
-.section h3 {
-    font-size: 12px;
-    letter-spacing: 2px;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.section li {
-    color: #aaa;
-    margin-bottom: 8px;
-}
-
-/* CTA */
-.cta {
-    padding: 14px 28px;
-    border: 1px solid #aaa;
-    text-decoration: none;
-    color: #fff;
-    transition: 0.3s;
-}
-
-.cta:hover {
-    background: #fff;
-    color: #000;
-}
-
-/* GLOW */
-.glow {
-    box-shadow: 0 0 20px rgba(0, 120, 255, 0.3);
-}
-
-/* CTA FINAL */
-.cta-final {
-    text-align: center;
-    margin-top: 100px;
-}
-
-/* LOADER */
 #loader {
     position: fixed;
-    width: 100%;
-    height: 100%;
-    background: #000;
+    inset: 0;
+    background: #020304;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
+    z-index: 99999;
 }
 
 .loader-text {
-    color: #888;
-    font-size: 14px;
-    letter-spacing: 2px;
-}
-
-/* REVEAL ANIMATION */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: 1s ease;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* HEADER */
-.header {
-    position: absolute;
-    top: 30px;
-    left: 40px;
-}
-
-.logo {
-    width: 120px;
-    opacity: 0.8;
-}
-
-/* HERO IMAGE */
-.hero-visual {
-    margin: 40px 0;
-}
-
-.hero-visual img {
-    width: 220px;
-    border-radius: 12px;
-    filter: grayscale(100%) contrast(110%);
-    opacity: 0.9;
-    transition: 0.4s ease;
-}
-
-.hero-visual img:hover {
-    opacity: 1;
-    transform: scale(1.04);
-}
-
-/* HERO IMPACT */
-.hero-impact {
     font-size: 15px;
-    color: #777;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
+    letter-spacing: 4px;
+    color: #666;
+    font-weight: 500;
 }
 
-/* CTA ADVANCED */
-.cta {
-    position: relative;
-    overflow: hidden;
-}
-
-.cta::after {
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 100%;
-    background: white;
-    top: 0;
-    left: 0;
-    transition: 0.4s;
-    z-index: -1;
-}
-
-.cta:hover::after {
-    width: 100%;
-}
-
-.advanced-cta {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(6px);
-}
-
-.advanced-cta:hover {
-    letter-spacing: 2px;
-}
-
-/* SYMBOLIC LINE */
-.symbolic-line {
-    width: 100%;
-    height: 1px;
-    margin-top: 120px;
-    background: linear-gradient(to right, transparent, #888, transparent);
-    opacity: 0.3;
-}
-
-/* CURSOR */
 .cursor-dot {
-    width: 6px;
-    height: 6px;
-    background: white;
     position: fixed;
+    width: 8px;
+    height: 8px;
+    background: #00c4ff;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
+    mix-blend-mode: difference;
 }
 
 .cursor-ring {
-    width: 30px;
-    height: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
     position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(0, 196, 255, 0.4);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
 }
 
-/* IMAGE SECTION */
+.container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px 140px;
+}
+
+.hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(3.8rem, 8vw, 5.2rem);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 12px;
+}
+
+.hero h2 {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 60px;
+    letter-spacing: 2px;
+}
+
+.hero-visual img {
+    max-width: 260px;
+    border-radius: 16px;
+    margin: 40px 0;
+    box-shadow: 0 0 60px rgba(0, 196, 255, 0.25);
+}
+
+.cta {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 18px 48px;
+    border: 1px solid #00c4ff;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+}
+
+.cta:hover {
+    background: #00c4ff;
+    color: #020304;
+    box-shadow: 0 0 40px rgba(0, 196, 255, 0.5);
+}
+
+.section {
+    padding: 100px 0;
+    position: relative;
+}
+
 .image-section {
     background-size: cover;
     background-position: center;
-    position: relative;
+    color: white;
 }
 
 .image-section::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-}
-
-/* MICRO TAG */
-.micro-tag {
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: #666;
-}
-
-/* FOOTER */
-footer {
-    margin-top: 80px;
-    opacity: 0.6;
-    font-size: 12px;
-}
-
-/* =========================
-   🔐 CAMADA OCULTA
-========================= */
-
-.deep-layer {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: rgba(255, 255, 255, 0.4);
-    opacity: 0;
-    transition: 1s ease;
-}
-
-body.high-intent .deep-layer {
-    opacity: 1;
-}
-
-/* MODO INTENSO */
-body.high-intent {
-    background: #000;
-}
-
-body.high-intent .bg-energy {
-    opacity: 1.5;
+    background: rgba(2, 3, 4, 0.82);
 }
 
 #neural-canvas {
     position: fixed;
     inset: 0;
-    z-index: -5;
-    opacity: 0.6;
-}
-
-/* =========================
-   🧠 NÍVEIS DE CONSCIÊNCIA
-========================= */
-
-body.level-1 {
-    filter: brightness(1.02);
-}
-
-body.level-2 {
-    filter: contrast(1.1);
-}
-
-body.level-3 {
-    filter: contrast(1.2) brightness(1.05);
-}
-
-/* SINGULARIDADE */
-body.singularity {
-    background: #000;
-}
-
-.singularity-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 14px;
-    letter-spacing: 3px;
-    color: rgba(255,255,255,0.6);
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-}
-
-@keyframes fadeIn {
-    to { opacity: 1; }
-}
-
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(
-        circle at var(--x,50%) var(--y,50%),
-        transparent 0%,
-        rgba(0,0,0,0.4) 60%
-    );
     z-index: -1;
+    opacity: 0.45;
     pointer-events: none;
 }
 
-.system-msg {
-    position: fixed;
-    bottom: 20%;
-    left: 5%;
-    font-size: 11px;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 2px;
-    animation: fadeMsg 4s ease forwards;
+/* ====================== PROFILE SECTION ====================== */
+.profile-section {
+    padding: 120px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
-@keyframes fadeMsg {
-    0% { opacity: 0; transform: translateY(10px); }
-    20% { opacity: 1; }
-    100% { opacity: 0; transform: translateY(-10px); }
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 80px;
+    align-items: start;
 }
 
-#access-layer {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.92);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+.profile-image img {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 16px;
+    box-shadow: 0 0 60px rgba(0, 196, 255, 0.25);
+    border: 1px solid rgba(0, 196, 255, 0.2);
 }
 
-.access-box {
-    text-align: center;
+.profile-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.8rem;
+    margin-bottom: 8px;
 }
 
-.access-box input {
-    margin-top: 20px;
-    padding: 10px;
-    background: transparent;
-    border: 1px solid #444;
-    color: white;
+.profile-content h3 {
+    font-size: 1.3rem;
+    color: #00c4ff;
+    margin-bottom: 32px;
+    font-weight: 500;
 }
 
-.entity-voice {
-    position: fixed;
-    top: 15%;
-    right: 5%;
-    font-size: 12px;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 2px;
-    animation: fadeVoice 5s ease forwards;
+.profile-content .lead {
+    font-size: 1.35rem;
+    color: #ddd;
+    margin-bottom: 24px;
 }
 
-@keyframes fadeVoice {
-    0% { opacity: 0; }
-    20% { opacity: 1; }
-    100% { opacity: 0; }
+.problems-list,
+.intersection-list {
+    list-style: none;
+    margin: 24px 0 32px 0;
 }
 
-.granted-msg {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 16px;
-    letter-spacing: 4px;
-    color: rgba(255,255,255,0.8);
-    animation: fadeIn 2s forwards;
+.problems-list li,
+.intersection-list li {
+    padding: 10px 0 10px 28px;
+    position: relative;
+    color: #ccc;
+}
+
+.problems-list li:before,
+.intersection-list li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #00c4ff;
+}
+
+.signature {
+    font-size: 1.25rem;
+    color: #aaa;
+    margin: 32px 0;
+    line-height: 1.6;
+}
+
+.experience {
+    margin-top: 40px;
+    font-size: 1.05rem;
+    color: #999;
+    line-height: 1.7;
+}
+
+/* Responsivo */
+@media (max-width: 860px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .profile-image img {
+        max-width: 320px;
+        margin: 0 auto;
+        display: block;
+    }
 }
