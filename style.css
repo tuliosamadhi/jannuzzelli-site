@@ -183,6 +183,15 @@ body {
     width: 100%;
 }
 
+.advanced-cta {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+}
+
+.advanced-cta:hover {
+    letter-spacing: 2px;
+}
+
 /* SYMBOLIC LINE */
 .symbolic-line {
     width: 100%;
@@ -190,4 +199,203 @@ body {
     margin-top: 120px;
     background: linear-gradient(to right, transparent, #888, transparent);
     opacity: 0.3;
+}
+
+/* CURSOR */
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: white;
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.cursor-ring {
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* IMAGE SECTION */
+.image-section {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.image-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+}
+
+/* MICRO TAG */
+.micro-tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #666;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 80px;
+    opacity: 0.6;
+    font-size: 12px;
+}
+
+/* =========================
+   🔐 CAMADA OCULTA
+========================= */
+
+.deep-layer {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    transition: 1s ease;
+}
+
+body.high-intent .deep-layer {
+    opacity: 1;
+}
+
+/* MODO INTENSO */
+body.high-intent {
+    background: #000;
+}
+
+body.high-intent .bg-energy {
+    opacity: 1.5;
+}
+
+#neural-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: -5;
+    opacity: 0.6;
+}
+
+/* =========================
+   🧠 NÍVEIS DE CONSCIÊNCIA
+========================= */
+
+body.level-1 {
+    filter: brightness(1.02);
+}
+
+body.level-2 {
+    filter: contrast(1.1);
+}
+
+body.level-3 {
+    filter: contrast(1.2) brightness(1.05);
+}
+
+/* SINGULARIDADE */
+body.singularity {
+    background: #000;
+}
+
+.singularity-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.6);
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--x,50%) var(--y,50%),
+        transparent 0%,
+        rgba(0,0,0,0.4) 60%
+    );
+    z-index: -1;
+    pointer-events: none;
+}
+
+.system-msg {
+    position: fixed;
+    bottom: 20%;
+    left: 5%;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+    animation: fadeMsg 4s ease forwards;
+}
+
+@keyframes fadeMsg {
+    0% { opacity: 0; transform: translateY(10px); }
+    20% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+#access-layer {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.access-box {
+    text-align: center;
+}
+
+.access-box input {
+    margin-top: 20px;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid #444;
+    color: white;
+}
+
+.entity-voice {
+    position: fixed;
+    top: 15%;
+    right: 5%;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 2px;
+    animation: fadeVoice 5s ease forwards;
+}
+
+@keyframes fadeVoice {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.granted-msg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.8);
+    animation: fadeIn 2s forwards;
 }
