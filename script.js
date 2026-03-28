@@ -26,30 +26,35 @@ async function askGemini(prompt) {
 
     try {
         const res = await fetch(
-            `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
             {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify({
-                    contents: [{
-                        parts: [{ text: prompt }]
-                    }]
+                    contents: [
+                        {
+                            role: "user",
+                            parts: [{ text: prompt }]
+                        }
+                    ]
                 })
             }
         );
 
-        if (!res.ok) {
-            console.warn("Erro HTTP:", res.status);
-            return "Instabilidade detectada.";
-        }
-
         const data = await res.json();
 
+        if (!res.ok) {
+            console.error("Erro Gemini:", data);
+            return "Falha na geração.";
+        }
+
         return data?.candidates?.[0]?.content?.parts?.[0]?.text
-            || "A decisão já existe dentro de você.";
+            || "A decisão já existe.";
 
     } catch (e) {
-        console.error("Erro Gemini:", e);
+        console.error("Erro crítico:", e);
         return "Clareza precede controle.";
     }
 }
