@@ -53,7 +53,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Reduzido para
 camera.position.z = 11; // Mais longe para espalhar as partículas
 
 // Configuração dinâmica de partículas - MAIS SUTIL
-const particleCount = isMobile ? 800 : 2200; // Reduzido
+let particleCount = isMobile ? 800 : 2200; // Reduzido
 
 const coreGeometry = new THREE.SphereGeometry(1.3, 32, 32);
 const coreMaterial = new THREE.MeshBasicMaterial({
