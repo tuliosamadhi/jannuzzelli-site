@@ -6,7 +6,7 @@ import { updateProfile, getUserType } from './js/profile-engine.js';
 // Carrega o orquestrador de IA local (não trava mais o site se houver falha)
 import { processAI } from './js/ai-orchestrator.js';
 
-// ====================== LOADER (À PROVA DE FALHAS) ======================
+// ====================== LOADER & SCROLL RESET (SISTEMA INTEGRADO) ======================
 const loaderText = document.getElementById("loader-text");
 const sequence = [
     "INITIALIZING SYSTEM...",
@@ -16,6 +16,12 @@ const sequence = [
 ];
 let step = 0;
 
+// 1. Reset de Scroll Imediato
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 function runLoader() {
     if (loaderText && step < sequence.length) {
         loaderText.textContent = sequence[step++];
@@ -24,10 +30,20 @@ function runLoader() {
         const loader = document.getElementById("loader");
         if (loader) {
             loader.style.opacity = "0";
-            setTimeout(() => loader.style.display = "none", 700);
+            setTimeout(() => {
+                loader.style.display = "none";
+                // Garante que mesmo após o fim do loader, o foco não pule para o terminal
+                window.scrollTo(0, 0);
+            }, 700);
         }
     }
 }
+
+// 2. Dispara o Loader e garante o topo no carregamento total
+window.addEventListener("load", () => {
+    window.scrollTo(0, 0);
+    runLoader();
+});
 window.addEventListener("DOMContentLoaded", runLoader);
 
 // ====================== CURSOR E PERFORMANCE MOBILE ======================
