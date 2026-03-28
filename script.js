@@ -1,5 +1,14 @@
 // ====================== JANNUNZELLI COGNITIVE SYSTEM v0.6 - THREE.JS AVANÇADO ======================
 
+window.addEventListener("error", (e) => {
+    console.error("Erro global capturado:", e.message);
+});
+
+import { processAI } from './js/ai-orchestrator.js';
+processAI("teste", (res) => {
+    console.log("AI:", res);
+});
+
 // Import modular
 import { updateProfile, getUserType } from './js/profile-engine.js';
 
@@ -27,7 +36,7 @@ function runLoader() {
         }
     }
 }
-window.addEventListener("load", runLoader);
+window.addEventListener("DOMContentLoaded", runLoader);
 
 // ====================== CURSOR ======================
 const dot = document.querySelector(".cursor-dot");
@@ -191,4 +200,3 @@ document.querySelectorAll('.cta').forEach(btn => {
 
 // ====================== INIT ======================
 console.log("%c🧠 Cognitive System v0.6 - Three.js Avançado Integrado", "color:#00f0ff; font-size:12px");
-revealOnScroll();
