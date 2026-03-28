@@ -70,7 +70,8 @@ const singularityCore = new THREE.Mesh(coreGeometry, coreMaterial);
 scene.add(singularityCore);
 
 // ====================== COGNITIVE PARTICLES FIELD (MELHORADO) ======================
-const particleCount = 3200;
+const isMobile = window.innerWidth < 768;
+const particleCount = isMobile ? 1200 : 3200;
 const positions = new Float32Array(particleCount * 3);
 const colors = new Float32Array(particleCount * 3);
 const sizes = new Float32Array(particleCount);

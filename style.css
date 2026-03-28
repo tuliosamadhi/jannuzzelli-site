@@ -67,6 +67,15 @@ body {
     z-index: 9998;
 }
 
+/* Desativa o cursor personalizado em dispositivos touch (celulares/tablets) */
+@media (pointer: coarse) {
+
+    .cursor-dot,
+    .cursor-ring {
+        display: none !important;
+    }
+}
+
 .container {
     max-width: 920px;
     margin: 0 auto;
