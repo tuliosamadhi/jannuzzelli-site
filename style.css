@@ -459,7 +459,8 @@ body {
     position: fixed;
     width: 4px;
     height: 4px;
-    background: #00c4ff;
+    background: radial-gradient(circle, #FFD700 0%, rgba(255, 215, 0, 0.3) 60%, transparent 100%);
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
     border-radius: 50%;
     pointer-events: none;
     z-index: -1;

@@ -1,3 +1,3 @@
 window.CONFIG = {
-  GEMINI_API_KEY: "SAIzaSyB12Km76wnrnvxZ3XEoFVx6jpc-v7ITixcAQUI"
+    GEMINI_API_KEY: "AIzaSyB12Km76wnrnvxZ3XEoFVx6jpc-v7ITixcAQUI"
 };

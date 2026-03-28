@@ -1,5 +1,5 @@
 // ====================== CONFIG ======================
-const GEMINI_API_KEY = window.CONFIG?.GEMINI_API_KEY;
+const GEMINI_API_KEY = window.CONFIG?.GEMINI_API_KEY; // não usado (mantido por compatibilidade)
 
 // ====================== PERFIL DO USUÁRIO ======================
 const profile = {
@@ -16,47 +16,70 @@ window.addEventListener("scroll", () => {
     profile.maxScroll = Math.max(profile.maxScroll, scroll / height);
 });
 
-// ====================== GEMINI (VERSÃO ESTÁVEL) ======================
-async function askGemini(prompt) {
+// ====================== FAKE AI (IMEDIATA) ======================
+function fakeAI(type = "observing") {
 
-    if (!GEMINI_API_KEY) {
-        console.warn("API KEY não encontrada");
-        return "Sistema não configurado.";
-    }
+    const bank = {
+        observing: [
+            "Você está analisando mais do que deveria.",
+            "Seu padrão de decisão está claro.",
+            "Você busca precisão antes de agir."
+        ],
+        pressure: [
+            "O tempo está jogando contra você.",
+            "Decisão adiada é oportunidade perdida.",
+            "Você já tem informação suficiente."
+        ],
+        closing: [
+            "Isso já pode ser resolvido agora.",
+            "Você está a um passo de avançar.",
+            "Esse é o ponto de decisão."
+        ]
+    };
+
+    const arr = bank[type] || bank.observing;
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+// ====================== IA REAL (HUGGING FACE) ======================
+async function askGemini(prompt) {
 
     try {
         const res = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+            "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2",
             {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    contents: [
-                        {
-                            role: "user",
-                            parts: [{ text: prompt }]
-                        }
-                    ]
+                    inputs: prompt,
+                    parameters: {
+                        max_new_tokens: 120,
+                        temperature: 0.7
+                    }
                 })
             }
         );
 
         const data = await res.json();
 
-        if (!res.ok) {
-            console.error("Erro Gemini:", data);
-            return "Falha na geração.";
-        }
-
-        return data?.candidates?.[0]?.content?.parts?.[0]?.text
-            || "A decisão já existe.";
+        return data?.[0]?.generated_text || null;
 
     } catch (e) {
-        console.error("Erro crítico:", e);
-        return "Clareza precede controle.";
+        console.error("Erro IA:", e);
+        return null;
     }
+}
+
+// ====================== ENGINE HÍBRIDA ======================
+async function askAI(prompt, context = "observing") {
+
+    const instant = fakeAI(context);
+
+    const real = await askGemini(prompt);
+
+    return real || instant;
 }
 
 // ====================== SISTEMA DE MENSAGEM NA TELA ======================
@@ -72,28 +95,34 @@ function showSystemMessage(text) {
     setTimeout(() => msg.remove(), 5000);
 }
 
+// ====================== CLASSIFICAÇÃO DE USUÁRIO ======================
+function getUserIntent() {
+
+    const time = (Date.now() - profile.startTime) / 1000;
+    const scroll = profile.maxScroll * 100;
+    const clicks = profile.interactions;
+
+    if (time > 40 && scroll > 60 && clicks > 2) return "quente";
+    if (time > 20 && scroll > 30) return "morno";
+
+    return "frio";
+}
+
 // ====================== MENSAGEM INTELIGENTE WHATSAPP ======================
 async function getSmartWhatsAppMessage() {
 
-    const timeOnPage = Math.floor((Date.now() - profile.startTime) / 1000);
-    const scroll = Math.round(profile.maxScroll * 100);
-    const interactions = profile.interactions;
-
-    const intent = (timeOnPage > 30 && scroll > 40) ? "decisor" : "explorando";
+    const intent = getUserIntent();
 
     const prompt = `
-Usuário com perfil: ${intent}
+Usuário classificado como: ${intent}
 
-Tempo no site: ${timeOnPage}s
-Scroll: ${scroll}%
-Interações: ${interactions}
+Gere uma mensagem de WhatsApp curta e direta.
 
-Gere uma mensagem curta para WhatsApp demonstrando interesse real.
-Tom: direto, sofisticado, estratégico.
+Tom: executivo, estratégico.
 Sem emojis.
 `;
 
-    const response = await askGemini(prompt);
+    const response = await askAI(prompt, "closing");
 
     return encodeURIComponent(response);
 }
@@ -101,12 +130,11 @@ Sem emojis.
 // ====================== CTA COM PRÉ-FRAME ======================
 async function handleCTA() {
 
-    const preFrame = await askGemini(`
-Usuário está prestes a entrar em contato.
+    const intent = getUserIntent();
 
-Gere uma frase curta que aumente urgência e percepção de valor.
-Tom: elite, direto, psicológico, sem clichê.
-`);
+    const preFrame = fakeAI(
+        intent === "quente" ? "closing" : "pressure"
+    );
 
     showSystemMessage(preFrame);
 
@@ -119,7 +147,7 @@ Tom: elite, direto, psicológico, sem clichê.
             '_blank'
         );
 
-    }, 1200);
+    }, 1000);
 }
 
 // ====================== BOTÃO ======================
@@ -130,28 +158,62 @@ document.querySelectorAll(".cta-button").forEach(btn => {
     });
 });
 
-// ====================== PARTÍCULAS OTIMIZADAS ======================
+// ====================== ENTIDADE VIVA ======================
+function entityLoop() {
+
+    const intent = getUserIntent();
+
+    let context = "observing";
+
+    if (intent === "morno") context = "pressure";
+    if (intent === "quente") context = "closing";
+
+    if (Math.random() > 0.5) {
+        showSystemMessage(fakeAI(context));
+    }
+}
+
+setInterval(entityLoop, 10000);
+
+// ====================== PARTÍCULAS MELHORADAS ======================
 function createFloatingParticle() {
 
-    if (document.querySelectorAll('.floating-particle').length > 120) return;
+    if (document.querySelectorAll('.floating-particle').length > 160) return;
 
     const p = document.createElement('div');
     p.className = 'floating-particle';
 
-    p.style.left = `${Math.random() * 100}vw`;
-    p.style.width = `${Math.random() * 6 + 3}px`;
-    p.style.height = p.style.width;
+    const size = Math.random() * 8 + 4;
 
-    p.style.opacity = Math.random() * 0.6 + 0.3;
-    p.style.animationDuration = `${Math.random() * 20 + 15}s`;
+    p.style.left = `${Math.random() * 100}vw`;
+    p.style.top = `${Math.random() * 100}vh`;
+
+    p.style.width = `${size}px`;
+    p.style.height = `${size}px`;
+
+    p.style.opacity = Math.random() * 0.8 + 0.4;
+
+    p.style.background = `
+        radial-gradient(circle,
+        rgba(255,215,0,1) 0%,
+        rgba(255,215,0,0.6) 40%,
+        rgba(255,215,0,0) 70%)
+    `;
+
+    p.style.boxShadow = `
+        0 0 10px rgba(255,215,0,0.8),
+        0 0 20px rgba(255,215,0,0.4)
+    `;
+
+    p.style.animation = `floatParticle ${Math.random() * 10 + 10}s linear`;
 
     document.body.appendChild(p);
 
-    setTimeout(() => p.remove(), 40000);
+    setTimeout(() => p.remove(), 20000);
 }
 
 setInterval(() => {
     if (document.visibilityState === "visible") {
         createFloatingParticle();
     }
-}, 160);
+}, 80);
