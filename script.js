@@ -16,7 +16,7 @@ const sequence = [
 ];
 let step = 0;
 
-// 1. Reset de Scroll Imediato
+// 1. Reset de Scroll Imediato (Trava o navegador no topo)
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
@@ -32,18 +32,19 @@ function runLoader() {
             loader.style.opacity = "0";
             setTimeout(() => {
                 loader.style.display = "none";
-                // Garante que mesmo após o fim do loader, o foco não pule para o terminal
+                // Garante o topo após o sumiço do loader para anular qualquer autofocus
                 window.scrollTo(0, 0);
             }, 700);
         }
     }
 }
 
-// 2. Dispara o Loader e garante o topo no carregamento total
+// 2. Dispara apenas quando TUDO (inclusive Three.js) estiver pronto
 window.addEventListener("load", () => {
     window.scrollTo(0, 0);
     runLoader();
 });
+// Remova a linha "window.addEventListener("DOMContentLoaded", runLoader);" para evitar duplicidade.
 window.addEventListener("DOMContentLoaded", runLoader);
 
 // ====================== CURSOR E PERFORMANCE MOBILE ======================
@@ -58,56 +59,77 @@ if (!isMobile && dot && ring) {
     });
 }
 
-// ====================== THREE.JS - PARTICLES (OTIMIZADO & SUTIL) ======================
+// ====================== THREE.JS - PARTICLES (PURISTA & SUTIL) ======================
 const canvas = document.getElementById("neural-canvas");
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !isMobile });
 
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Reduzido para sutilizar
-camera.position.z = 11; // Mais longe para espalhar as partículas
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+camera.position.z = 11;
 
-// Configuração dinâmica de partículas - MAIS SUTIL
-let particleCount = isMobile ? 800 : 2200; // Reduzido
-
-const coreGeometry = new THREE.SphereGeometry(1.3, 32, 32);
-const coreMaterial = new THREE.MeshBasicMaterial({
-    color: 0x00f0ff,
-    transparent: true,
-    opacity: 0.18, // Sutilizado
-    blending: THREE.AdditiveBlending
-});
-const singularityCore = new THREE.Mesh(coreGeometry, coreMaterial);
-scene.add(singularityCore);
+// 1. Configuração de partículas - APENAS O FUNDO
+let particleCount = isMobile ? 800 : 2200;
 
 const positions = new Float32Array(particleCount * 3);
 const velocities = new Float32Array(particleCount * 3);
 
 for (let i = 0; i < particleCount * 3; i += 3) {
-    positions[i] = (Math.random() - 0.5) * 28; // Mais espalhado
-    positions[i + 1] = (Math.random() - 0.5) * 28;
-    positions[i + 2] = (Math.random() - 0.5) * 12; // Menos profundidade
+    // Espalha as partículas por toda a tela, sem núcleo central
+    positions[i] = (Math.random() - 0.5) * 35;
+    positions[i + 1] = (Math.random() - 0.5) * 35;
+    positions[i + 2] = (Math.random() - 0.5) * 15;
 
-    velocities[i] = (Math.random() - 0.5) * 0.005; // Mais lento
-    velocities[i + 1] = (Math.random() - 0.5) * 0.005;
-    velocities[i + 2] = (Math.random() - 0.5) * 0.005;
+    velocities[i] = (Math.random() - 0.5) * 0.004;
+    velocities[i + 1] = (Math.random() - 0.5) * 0.004;
+    velocities[i + 2] = (Math.random() - 0.5) * 0.004;
 }
 
 const particleGeometry = new THREE.BufferGeometry();
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
 const particleMaterial = new THREE.PointsMaterial({
-    size: isMobile ? 0.04 : 0.035, // MUITO MENORES E QUADRADOS
+    size: isMobile ? 0.035 : 0.03, // Pontos quase invisíveis, estilo poeira estelar
     color: 0x00c4ff,
     transparent: true,
-    opacity: 0.25, // BEM MAIS SUTIL
+    opacity: 0.2, // Reduzido para não distrair da tipografia
     blending: THREE.AdditiveBlending,
     depthTest: false
 });
 
 const cognitiveParticles = new THREE.Points(particleGeometry, particleMaterial);
 scene.add(cognitiveParticles);
+
+// ====================== ANIMAÇÃO SUTIL ======================
+function animateThree() {
+    requestAnimationFrame(animateThree);
+    const time = Date.now() * 0.0005; // Movimento ainda mais lento e orgânico
+
+    const positionsAttr = cognitiveParticles.geometry.attributes.position;
+    for (let i = 0; i < particleCount * 3; i += 3) {
+        positionsAttr.array[i] += velocities[i];
+        positionsAttr.array[i + 1] += velocities[i + 1];
+
+        // Interação com o mouse extremamente leve
+        if (!isMobile) {
+            positionsAttr.array[i] += mouseX * 0.0008;
+            positionsAttr.array[i + 1] += mouseY * 0.0008;
+        }
+
+        // Reposicionamento suave ao sair dos limites
+        if (Math.abs(positionsAttr.array[i]) > 20) velocities[i] *= -1;
+        if (Math.abs(positionsAttr.array[i + 1]) > 20) velocities[i + 1] *= -1;
+    }
+    positionsAttr.needsUpdate = true;
+
+    // Rotação lenta de todo o campo de partículas
+    cognitiveParticles.rotation.y = time * 0.01;
+    cognitiveParticles.rotation.x = time * 0.005;
+
+    renderer.render(scene, camera);
+}
+animateThree();
 
 // ====================== ANIMAÇÃO E INTERAÇÃO ======================
 let mouseX = 0, mouseY = 0;
