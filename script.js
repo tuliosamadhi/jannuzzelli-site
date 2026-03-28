@@ -1,10 +1,17 @@
-// ====================== JANNUNZELLI COGNITIVE SYSTEM v0.5 - IA FORTE ======================
+// ====================== JANNUNZELLI COGNITIVE SYSTEM v0.6 - THREE.JS AVANÇADO ======================
 
-let profile = { time: 0, scrollDepth: 0, interactions: 0, intensity: 0 };
+// Import modular
+import { updateProfile, getUserType } from './js/profile-engine.js';
 
 // ====================== LOADER ======================
 const loaderText = document.getElementById("loader-text");
-const sequence = ["INITIALIZING SYSTEM...", "Mapping Cognitive Layers...", "Synchronizing Intelligence...", "Access Protocol Ready"];
+const sequence = [
+    "INITIALIZING SYSTEM...",
+    "Mapping Cognitive Layers...",
+    "Synchronizing Intelligence...",
+    "Calibrating Strategic Perception...",
+    "Access Protocol Ready"
+];
 let step = 0;
 
 function runLoader() {
@@ -13,94 +20,175 @@ function runLoader() {
         setTimeout(runLoader, 750);
     } else {
         const loader = document.getElementById("loader");
-        loader.style.transition = "opacity 1s";
-        loader.style.opacity = "0";
-        setTimeout(() => loader.style.display = "none", 1000);
+        if (loader) {
+            loader.style.transition = "opacity 1s ease";
+            loader.style.opacity = "0";
+            setTimeout(() => loader.style.display = "none", 1000);
+        }
     }
 }
 window.addEventListener("load", runLoader);
 
-// ====================== CURSOR + ANIMAÇÕES ======================
+// ====================== CURSOR ======================
 const dot = document.querySelector(".cursor-dot");
 const ring = document.querySelector(".cursor-ring");
 if (dot && ring) {
-    document.addEventListener("mousemove", e => {
+    document.addEventListener("mousemove", (e) => {
         dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
         ring.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     });
 }
 
-// Scan Line + Floating Particles
-function createScanLine() {
-    const scan = document.createElement('div');
-    scan.className = 'scan-line';
-    scan.style.top = `${Math.random() * 80 + 10}vh`;
-    document.body.appendChild(scan);
-    setTimeout(() => scan.remove(), 1800);
-}
-setInterval(() => { if (Math.random() > 0.35) createScanLine(); }, 2200);
+// ====================== THREE.JS AVANÇADO - PARTICLES UPGRADE ======================
+const canvas = document.getElementById("neural-canvas");
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
 
-function createFloatingParticle() {
-    const p = document.createElement('div');
-    p.className = 'floating-particle';
-    p.style.left = `${Math.random() * 100}vw`;
-    p.style.animationDuration = `${Math.random() * 30 + 25}s`;
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 60000);
-}
-setInterval(createFloatingParticle, 280);
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+camera.position.z = 9;
 
-// ====================== IA FORTE (Gemini) ======================
-async function askGemini(prompt) {
-    try {
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=AIzaSyB12Km76wnrnvxZ3XEoFVx6jpc-v7ITixc`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-        });
-        const data = await res.json();
-        return data?.candidates?.[0]?.content?.parts?.[0]?.text || "A decisão já existe dentro de você.";
-    } catch (e) {
-        return "A decisão já existe dentro de você.";
+// ====================== SINGULARITY CORE ORB ======================
+const coreGeometry = new THREE.SphereGeometry(1.3, 64, 64);
+const coreMaterial = new THREE.MeshBasicMaterial({
+    color: 0x00f0ff,
+    transparent: true,
+    opacity: 0.22,
+    blending: THREE.AdditiveBlending
+});
+const singularityCore = new THREE.Mesh(coreGeometry, coreMaterial);
+scene.add(singularityCore);
+
+// ====================== COGNITIVE PARTICLES FIELD (MELHORADO) ======================
+const particleCount = 3200;
+const positions = new Float32Array(particleCount * 3);
+const colors = new Float32Array(particleCount * 3);
+const sizes = new Float32Array(particleCount);
+const velocities = new Float32Array(particleCount * 3); // nova: velocidade
+
+for (let i = 0; i < particleCount * 3; i += 3) {
+    positions[i] = (Math.random() - 0.5) * 20;
+    positions[i + 1] = (Math.random() - 0.5) * 20;
+    positions[i + 2] = (Math.random() - 0.5) * 20;
+
+    // Velocidade inicial suave
+    velocities[i] = (Math.random() - 0.5) * 0.008;
+    velocities[i + 1] = (Math.random() - 0.5) * 0.008;
+    velocities[i + 2] = (Math.random() - 0.5) * 0.008;
+
+    colors[i] = 0.2 + Math.random() * 0.6;
+    colors[i + 1] = 0.7 + Math.random() * 0.3;
+    colors[i + 2] = 1.0;
+
+    sizes[i / 3] = Math.random() * 0.09 + 0.025;
+}
+
+const particleGeometry = new THREE.BufferGeometry();
+particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+particleGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+const particleMaterial = new THREE.PointsMaterial({
+    size: 0.065,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.85,
+    blending: THREE.AdditiveBlending,
+    depthTest: false
+});
+
+const cognitiveParticles = new THREE.Points(particleGeometry, particleMaterial);
+scene.add(cognitiveParticles);
+
+// ====================== ANIMAÇÃO AVANÇADA ======================
+let mouseX = 0, mouseY = 0;
+document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+});
+
+function animateThree() {
+    requestAnimationFrame(animateThree);
+    const time = Date.now() * 0.001;
+
+    // Singularity Core
+    singularityCore.rotation.y = time * 0.1;
+    singularityCore.scale.setScalar(1 + Math.sin(time * 1.8) * 0.12);
+
+    // Particles - Movimento orgânico + reação ao mouse
+    const positionsAttr = cognitiveParticles.geometry.attributes.position;
+    for (let i = 0; i < particleCount * 3; i += 3) {
+        positionsAttr.array[i] += velocities[i];
+        positionsAttr.array[i + 1] += velocities[i + 1];
+        positionsAttr.array[i + 2] += velocities[i + 2];
+
+        // Suave atração ao mouse
+        positionsAttr.array[i] += mouseX * 0.008;
+        positionsAttr.array[i + 1] += mouseY * 0.008;
+
+        // Limite de espaço
+        if (Math.abs(positionsAttr.array[i]) > 12) velocities[i] *= -0.8;
+        if (Math.abs(positionsAttr.array[i + 1]) > 12) velocities[i + 1] *= -0.8;
+        if (Math.abs(positionsAttr.array[i + 2]) > 12) velocities[i + 2] *= -0.8;
     }
-}
+    positionsAttr.needsUpdate = true;
 
-// Insight dinâmico no Hero
-async function triggerInsight() {
-    if (profile.intensity < 35) return;
-    const prompt = `Usuário no site de Arquitetura Cognitiva. Tempo: ${profile.time}s. Gere frase curta, profunda e estratégica (máx 14 palavras).`;
-    const text = await askGemini(prompt);
-    const target = document.querySelector('.hero-highlight');
-    if (text && target) {
-        target.style.transition = "opacity 1s";
-        target.style.opacity = "0";
-        setTimeout(() => { target.textContent = text; target.style.opacity = "1"; }, 800);
-    }
-}
+    // Rotação suave do campo
+    cognitiveParticles.rotation.y = time * 0.035;
+    cognitiveParticles.rotation.x = time * 0.015 + mouseY * 0.4;
 
-// ====================== FECHAMENTO INTELIGENTE WHATSAPP ======================
-async function getClosingMessage() {
-    const prompt = `Usuário demonstrou alta intenção. Tempo: ${profile.time}s. Gere mensagem curta e persuasiva para WhatsApp pedindo conversa estratégica com Túlio Jannuzzelli.`;
-    const aiText = await askGemini(prompt);
-    return encodeURIComponent(aiText || "Olá Túlio, gostaria de uma conversa estratégica.");
+    // Pulsação global
+    cognitiveParticles.scale.setScalar(1 + Math.sin(time * 2.5) * 0.04);
+
+    renderer.render(scene, camera);
+}
+animateThree();
+
+// Resize
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ====================== PERFIL PSICOLÓGICO ======================
+updateProfile(); // inicia o tracking
+
+// ====================== COPY DINÂMICO ======================
+function updateDynamicCopy() {
+    const el = document.querySelector('.hero-highlight');
+    if (!el) return;
+    const type = getUserType();
+    let message = "Poucos percebem o que realmente importa agora.";
+    if (type === "decisor") message = "Você já sabe o que precisa fazer.";
+    else if (type === "analitico") message = "Tudo já foi analisado. Falta apenas sua decisão.";
+    else if (type === "morno") message = "Você está perto de ver o que poucos enxergam.";
+
+    el.style.transition = "opacity 0.9s";
+    el.style.opacity = "0";
+    setTimeout(() => {
+        el.textContent = message;
+        el.style.opacity = "1";
+    }, 700);
+}
+setInterval(updateDynamicCopy, 4500);
+
+// ====================== WHATSAPP INTELIGENTE ======================
+function handleCTA(e) {
+    e.preventDefault();
+    const type = getUserType();
+    let msg = "Quero entender melhor o que você faz.";
+    if (type === "decisor") msg = "Quero começar agora. Me mostra o caminho direto.";
+    else if (type === "analitico") msg = "Analisei seu método. Quero entender como aplicar no meu caso.";
+    const url = `https://wa.me/5512981216006?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
 }
 
 document.querySelectorAll('.cta').forEach(btn => {
-    btn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        const message = await getClosingMessage();
-        window.open(`https://wa.me/5512981216006?text=${message}`, '_blank');
-    });
+    btn.addEventListener('click', handleCTA);
 });
-
-// ====================== TRACKING ======================
-setInterval(() => { profile.time += 1; }, 1000);
-window.addEventListener("scroll", () => {
-    profile.scrollDepth = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    if (profile.intensity > 40) triggerInsight();
-});
-document.addEventListener("mousemove", () => { profile.interactions += 0.1; });
 
 // ====================== INIT ======================
-console.log("%c🧠 Cognitive System v0.5 - IA Forte Ativada", "color:#00f0ff; font-size:12px");
+console.log("%c🧠 Cognitive System v0.6 - Three.js Avançado Integrado", "color:#00f0ff; font-size:12px");
 revealOnScroll();
