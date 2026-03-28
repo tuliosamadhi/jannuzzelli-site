@@ -2,8 +2,6 @@
 
 // 1. IMPORTAÇÕES E TRATAMENTO DE ERROS DE MÓDULO
 import { updateProfile, getUserType } from './js/profile-engine.js';
-
-// Carrega o orquestrador de IA local (não trava mais o site se houver falha)
 import { processAI } from './js/ai-orchestrator.js';
 
 // ====================== LOADER & SCROLL RESET (SISTEMA INTEGRADO) ======================
@@ -16,7 +14,7 @@ const sequence = [
 ];
 let step = 0;
 
-// 1. Reset de Scroll Imediato (Trava o navegador no topo)
+// Reset de Scroll Imediato (Trava o navegador no topo)
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
@@ -32,20 +30,17 @@ function runLoader() {
             loader.style.opacity = "0";
             setTimeout(() => {
                 loader.style.display = "none";
-                // Garante o topo após o sumiço do loader para anular qualquer autofocus
                 window.scrollTo(0, 0);
             }, 700);
         }
     }
 }
 
-// 2. Dispara apenas quando TUDO (inclusive Three.js) estiver pronto
+// Dispara o loader apenas no load total para garantir o sincronismo
 window.addEventListener("load", () => {
     window.scrollTo(0, 0);
     runLoader();
 });
-// Remova a linha "window.addEventListener("DOMContentLoaded", runLoader);" para evitar duplicidade.
-window.addEventListener("DOMContentLoaded", runLoader);
 
 // ====================== CURSOR E PERFORMANCE MOBILE ======================
 const isMobile = window.innerWidth < 768;
@@ -69,18 +64,14 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 camera.position.z = 11;
 
-// 1. Configuração de partículas - APENAS O FUNDO
 let particleCount = isMobile ? 800 : 2200;
-
 const positions = new Float32Array(particleCount * 3);
 const velocities = new Float32Array(particleCount * 3);
 
 for (let i = 0; i < particleCount * 3; i += 3) {
-    // Espalha as partículas por toda a tela, sem núcleo central
     positions[i] = (Math.random() - 0.5) * 35;
     positions[i + 1] = (Math.random() - 0.5) * 35;
     positions[i + 2] = (Math.random() - 0.5) * 15;
-
     velocities[i] = (Math.random() - 0.5) * 0.004;
     velocities[i + 1] = (Math.random() - 0.5) * 0.004;
     velocities[i + 2] = (Math.random() - 0.5) * 0.004;
@@ -90,10 +81,10 @@ const particleGeometry = new THREE.BufferGeometry();
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
 const particleMaterial = new THREE.PointsMaterial({
-    size: isMobile ? 0.035 : 0.03, // Pontos quase invisíveis, estilo poeira estelar
+    size: isMobile ? 0.035 : 0.03,
     color: 0x00c4ff,
     transparent: true,
-    opacity: 0.2, // Reduzido para não distrair da tipografia
+    opacity: 0.2,
     blending: THREE.AdditiveBlending,
     depthTest: false
 });
@@ -102,6 +93,14 @@ const cognitiveParticles = new THREE.Points(particleGeometry, particleMaterial);
 scene.add(cognitiveParticles);
 
 // ====================== ANIMAÇÃO FINAL E ÚNICA ======================
+let mouseX = 0, mouseY = 0;
+if (!isMobile) {
+    document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+}
+
 function animateThree() {
     requestAnimationFrame(animateThree);
     const time = Date.now() * 0.0005;
@@ -120,49 +119,7 @@ function animateThree() {
         if (Math.abs(positionsAttr.array[i + 1]) > 20) velocities[i + 1] *= -1;
     }
     positionsAttr.needsUpdate = true;
-
     cognitiveParticles.rotation.y = time * 0.01;
-    renderer.render(scene, camera);
-}
-
-// Chame a função apenas uma vez no final do arquivo
-animateThree();
-
-// ====================== ANIMAÇÃO E INTERAÇÃO ======================
-let mouseX = 0, mouseY = 0;
-if (!isMobile) {
-    document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-        mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-    });
-}
-
-function animateThree() {
-    requestAnimationFrame(animateThree);
-    const time = Date.now() * 0.0008; // Mais lento
-
-    singularityCore.rotation.y = time * 0.08;
-    singularityCore.scale.setScalar(1 + Math.sin(time * 1.1) * 0.08); // Pulsação suave
-
-    const positionsAttr = cognitiveParticles.geometry.attributes.position;
-    for (let i = 0; i < particleCount * 3; i += 3) {
-        // Velocidade base suave
-        positionsAttr.array[i] += velocities[i];
-        positionsAttr.array[i + 1] += velocities[i + 1];
-
-        // Reação ao mouse - EXTREMAMENTE SUAVE (Sutilizado)
-        if (!isMobile) {
-            positionsAttr.array[i] += mouseX * 0.001; // Reduzido de 0.005 para 0.001
-            positionsAttr.array[i + 1] += mouseY * 0.001;
-        }
-
-        // Mantém as partículas flutuando suavemente de volta
-        if (positionsAttr.array[i] > 18 || positionsAttr.array[i] < -18) velocities[i] *= -1;
-        if (positionsAttr.array[i + 1] > 18 || positionsAttr.array[i + 1] < -18) velocities[i + 1] *= -1;
-    }
-    positionsAttr.needsUpdate = true;
-    cognitiveParticles.rotation.y = time * 0.015;
-
     renderer.render(scene, camera);
 }
 animateThree();
@@ -210,18 +167,13 @@ function handleAISubmission() {
     const input = aiInput.value.trim();
     if (!input) return;
 
-    // UI: Reseta terminal e mostra loader
     aiInput.value = '';
     aiOutput.textContent = `SYS-ANALYSIS: "${input}" [PENDING]...`;
     aiLoader.style.display = 'block';
 
-    // Chama o orquestrador de IA
     processAI(input, (response) => {
-        // UI: Oculta loader e atualiza output
         aiLoader.style.display = 'none';
         aiOutput.textContent = `SYS-RESPONSE: ${response}`;
-
-        // Pequena animação de "escrevendo"
         aiOutput.style.transition = 'opacity 0.3s';
         aiOutput.style.opacity = '0';
         setTimeout(() => aiOutput.style.opacity = '1', 200);
@@ -239,25 +191,13 @@ document.getElementById('ai-terminal-submit')?.addEventListener('click', handleA
 document.querySelectorAll('.cta').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
-
         const isEn = window.location.pathname.includes('/en/');
-        const userType = getUserType(); // Puxa do seu profile-engine.js
-
-        // Mensagens customizadas por idioma e comportamento
+        const userType = getUserType();
         const config = {
-            EN: {
-                phone: "5512981216006",
-                text: `Hello. I am requesting strategic access via Jannuzzelli System. [Context: ${userType}]`
-            },
-            PT: {
-                phone: "5512981216006",
-                text: `Olá. Solicito acesso estratégico via Sistema Jannuzzelli. [Contexto: ${userType}]`
-            }
+            EN: { phone: "5512981216006", text: `Hello. I am requesting strategic access via Jannuzzelli System. [Context: ${userType}]` },
+            PT: { phone: "5512981216006", text: `Olá. Solicito acesso estratégico via Sistema Jannuzzelli. [Contexto: ${userType}]` }
         };
-
         const selected = isEn ? config.EN : config.PT;
-        const finalMsg = encodeURIComponent(selected.text);
-
-        window.open(`https://wa.me/${selected.phone}?text=${finalMsg}`, '_blank');
+        window.open(`https://wa.me/${selected.phone}?text=${encodeURIComponent(selected.text)}`, '_blank');
     });
 });
