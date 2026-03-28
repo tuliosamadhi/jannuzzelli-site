@@ -101,34 +101,31 @@ const particleMaterial = new THREE.PointsMaterial({
 const cognitiveParticles = new THREE.Points(particleGeometry, particleMaterial);
 scene.add(cognitiveParticles);
 
-// ====================== ANIMAÇÃO SUTIL ======================
+// ====================== ANIMAÇÃO FINAL E ÚNICA ======================
 function animateThree() {
     requestAnimationFrame(animateThree);
-    const time = Date.now() * 0.0005; // Movimento ainda mais lento e orgânico
+    const time = Date.now() * 0.0005;
 
     const positionsAttr = cognitiveParticles.geometry.attributes.position;
     for (let i = 0; i < particleCount * 3; i += 3) {
         positionsAttr.array[i] += velocities[i];
         positionsAttr.array[i + 1] += velocities[i + 1];
 
-        // Interação com o mouse extremamente leve
         if (!isMobile) {
             positionsAttr.array[i] += mouseX * 0.0008;
             positionsAttr.array[i + 1] += mouseY * 0.0008;
         }
 
-        // Reposicionamento suave ao sair dos limites
         if (Math.abs(positionsAttr.array[i]) > 20) velocities[i] *= -1;
         if (Math.abs(positionsAttr.array[i + 1]) > 20) velocities[i + 1] *= -1;
     }
     positionsAttr.needsUpdate = true;
 
-    // Rotação lenta de todo o campo de partículas
     cognitiveParticles.rotation.y = time * 0.01;
-    cognitiveParticles.rotation.x = time * 0.005;
-
     renderer.render(scene, camera);
 }
+
+// Chame a função apenas uma vez no final do arquivo
 animateThree();
 
 // ====================== ANIMAÇÃO E INTERAÇÃO ======================
