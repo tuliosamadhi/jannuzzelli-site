@@ -1,219 +1,106 @@
-// ====================== CONFIG ======================
-const GEMINI_API_KEY = window.CONFIG?.GEMINI_API_KEY; // não usado (mantido por compatibilidade)
+// ====================== JANNUNZELLI COGNITIVE SYSTEM v0.5 - IA FORTE ======================
 
-// ====================== PERFIL DO USUÁRIO ======================
-const profile = {
-    startTime: Date.now(),
-    interactions: 0,
-    maxScroll: 0
-};
+let profile = { time: 0, scrollDepth: 0, interactions: 0, intensity: 0 };
 
-document.addEventListener("click", () => profile.interactions++);
+// ====================== LOADER ======================
+const loaderText = document.getElementById("loader-text");
+const sequence = ["INITIALIZING SYSTEM...", "Mapping Cognitive Layers...", "Synchronizing Intelligence...", "Access Protocol Ready"];
+let step = 0;
 
-window.addEventListener("scroll", () => {
-    const scroll = window.scrollY + window.innerHeight;
-    const height = document.body.scrollHeight;
-    profile.maxScroll = Math.max(profile.maxScroll, scroll / height);
-});
+function runLoader() {
+    if (step < sequence.length) {
+        loaderText.textContent = sequence[step++];
+        setTimeout(runLoader, 750);
+    } else {
+        const loader = document.getElementById("loader");
+        loader.style.transition = "opacity 1s";
+        loader.style.opacity = "0";
+        setTimeout(() => loader.style.display = "none", 1000);
+    }
+}
+window.addEventListener("load", runLoader);
 
-// ====================== FAKE AI (IMEDIATA) ======================
-function fakeAI(type = "observing") {
-
-    const bank = {
-        observing: [
-            "Você está analisando mais do que deveria.",
-            "Seu padrão de decisão está claro.",
-            "Você busca precisão antes de agir."
-        ],
-        pressure: [
-            "O tempo está jogando contra você.",
-            "Decisão adiada é oportunidade perdida.",
-            "Você já tem informação suficiente."
-        ],
-        closing: [
-            "Isso já pode ser resolvido agora.",
-            "Você está a um passo de avançar.",
-            "Esse é o ponto de decisão."
-        ]
-    };
-
-    const arr = bank[type] || bank.observing;
-    return arr[Math.floor(Math.random() * arr.length)];
+// ====================== CURSOR + ANIMAÇÕES ======================
+const dot = document.querySelector(".cursor-dot");
+const ring = document.querySelector(".cursor-ring");
+if (dot && ring) {
+    document.addEventListener("mousemove", e => {
+        dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        ring.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
 }
 
-// ====================== IA REAL (HUGGING FACE) ======================
+// Scan Line + Floating Particles
+function createScanLine() {
+    const scan = document.createElement('div');
+    scan.className = 'scan-line';
+    scan.style.top = `${Math.random() * 80 + 10}vh`;
+    document.body.appendChild(scan);
+    setTimeout(() => scan.remove(), 1800);
+}
+setInterval(() => { if (Math.random() > 0.35) createScanLine(); }, 2200);
+
+function createFloatingParticle() {
+    const p = document.createElement('div');
+    p.className = 'floating-particle';
+    p.style.left = `${Math.random() * 100}vw`;
+    p.style.animationDuration = `${Math.random() * 30 + 25}s`;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 60000);
+}
+setInterval(createFloatingParticle, 280);
+
+// ====================== IA FORTE (Gemini) ======================
 async function askGemini(prompt) {
-
     try {
-        const res = await fetch(
-            "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    inputs: prompt,
-                    parameters: {
-                        max_new_tokens: 120,
-                        temperature: 0.7
-                    }
-                })
-            }
-        );
-
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=AIzaSyB12Km76wnrnvxZ3XEoFVx6jpc-v7ITixc`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
         const data = await res.json();
-
-        return data?.[0]?.generated_text || null;
-
+        return data?.candidates?.[0]?.content?.parts?.[0]?.text || "A decisão já existe dentro de você.";
     } catch (e) {
-        console.error("Erro IA:", e);
-        return null;
+        return "A decisão já existe dentro de você.";
     }
 }
 
-// ====================== ENGINE HÍBRIDA ======================
-async function askAI(prompt, context = "observing") {
-
-    const instant = fakeAI(context);
-
-    const real = await askGemini(prompt);
-
-    return real || instant;
+// Insight dinâmico no Hero
+async function triggerInsight() {
+    if (profile.intensity < 35) return;
+    const prompt = `Usuário no site de Arquitetura Cognitiva. Tempo: ${profile.time}s. Gere frase curta, profunda e estratégica (máx 14 palavras).`;
+    const text = await askGemini(prompt);
+    const target = document.querySelector('.hero-highlight');
+    if (text && target) {
+        target.style.transition = "opacity 1s";
+        target.style.opacity = "0";
+        setTimeout(() => { target.textContent = text; target.style.opacity = "1"; }, 800);
+    }
 }
 
-// ====================== SISTEMA DE MENSAGEM NA TELA ======================
-function showSystemMessage(text) {
-    const msg = document.createElement("div");
-    msg.className = "system-message";
-    msg.innerText = text;
-
-    document.body.appendChild(msg);
-
-    setTimeout(() => msg.classList.add("visible"), 50);
-    setTimeout(() => msg.classList.remove("visible"), 4000);
-    setTimeout(() => msg.remove(), 5000);
+// ====================== FECHAMENTO INTELIGENTE WHATSAPP ======================
+async function getClosingMessage() {
+    const prompt = `Usuário demonstrou alta intenção. Tempo: ${profile.time}s. Gere mensagem curta e persuasiva para WhatsApp pedindo conversa estratégica com Túlio Jannuzzelli.`;
+    const aiText = await askGemini(prompt);
+    return encodeURIComponent(aiText || "Olá Túlio, gostaria de uma conversa estratégica.");
 }
 
-// ====================== CLASSIFICAÇÃO DE USUÁRIO ======================
-function getUserIntent() {
-
-    const time = (Date.now() - profile.startTime) / 1000;
-    const scroll = profile.maxScroll * 100;
-    const clicks = profile.interactions;
-
-    if (time > 40 && scroll > 60 && clicks > 2) return "quente";
-    if (time > 20 && scroll > 30) return "morno";
-
-    return "frio";
-}
-
-// ====================== MENSAGEM INTELIGENTE WHATSAPP ======================
-async function getSmartWhatsAppMessage() {
-
-    const intent = getUserIntent();
-
-    const prompt = `
-Usuário classificado como: ${intent}
-
-Gere uma mensagem de WhatsApp curta e direta.
-
-Tom: executivo, estratégico.
-Sem emojis.
-`;
-
-    const response = await askAI(prompt, "closing");
-
-    return encodeURIComponent(response);
-}
-
-// ====================== CTA COM PRÉ-FRAME ======================
-async function handleCTA() {
-
-    const intent = getUserIntent();
-
-    const preFrame = fakeAI(
-        intent === "quente" ? "closing" : "pressure"
-    );
-
-    showSystemMessage(preFrame);
-
-    setTimeout(async () => {
-
-        const msg = await getSmartWhatsAppMessage();
-
-        window.open(
-            `https://wa.me/5512981216006?text=${msg}`,
-            '_blank'
-        );
-
-    }, 1000);
-}
-
-// ====================== BOTÃO ======================
-document.querySelectorAll(".cta-button").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+document.querySelectorAll('.cta').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
         e.preventDefault();
-        handleCTA();
+        const message = await getClosingMessage();
+        window.open(`https://wa.me/5512981216006?text=${message}`, '_blank');
     });
 });
 
-// ====================== ENTIDADE VIVA ======================
-function entityLoop() {
+// ====================== TRACKING ======================
+setInterval(() => { profile.time += 1; }, 1000);
+window.addEventListener("scroll", () => {
+    profile.scrollDepth = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    if (profile.intensity > 40) triggerInsight();
+});
+document.addEventListener("mousemove", () => { profile.interactions += 0.1; });
 
-    const intent = getUserIntent();
-
-    let context = "observing";
-
-    if (intent === "morno") context = "pressure";
-    if (intent === "quente") context = "closing";
-
-    if (Math.random() > 0.5) {
-        showSystemMessage(fakeAI(context));
-    }
-}
-
-setInterval(entityLoop, 10000);
-
-// ====================== PARTÍCULAS MELHORADAS ======================
-function createFloatingParticle() {
-
-    if (document.querySelectorAll('.floating-particle').length > 160) return;
-
-    const p = document.createElement('div');
-    p.className = 'floating-particle';
-
-    const size = Math.random() * 8 + 4;
-
-    p.style.left = `${Math.random() * 100}vw`;
-    p.style.top = `${Math.random() * 100}vh`;
-
-    p.style.width = `${size}px`;
-    p.style.height = `${size}px`;
-
-    p.style.opacity = Math.random() * 0.8 + 0.4;
-
-    p.style.background = `
-        radial-gradient(circle,
-        rgba(255,215,0,1) 0%,
-        rgba(255,215,0,0.6) 40%,
-        rgba(255,215,0,0) 70%)
-    `;
-
-    p.style.boxShadow = `
-        0 0 10px rgba(255,215,0,0.8),
-        0 0 20px rgba(255,215,0,0.4)
-    `;
-
-    p.style.animation = `floatParticle ${Math.random() * 10 + 10}s linear`;
-
-    document.body.appendChild(p);
-
-    setTimeout(() => p.remove(), 20000);
-}
-
-setInterval(() => {
-    if (document.visibilityState === "visible") {
-        createFloatingParticle();
-    }
-}, 80);
+// ====================== INIT ======================
+console.log("%c🧠 Cognitive System v0.5 - IA Forte Ativada", "color:#00f0ff; font-size:12px");
+revealOnScroll();
