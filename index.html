@@ -2,17 +2,34 @@
 <html lang="pt-BR">
 
 <head>
+    <script>
+        // Intelligent Language Router
+        (function () {
+            const userLang = navigator.language || navigator.userLanguage;
+            const currentPath = window.location.pathname;
+            const hasLangPref = localStorage.getItem('lang_pref'); // Permite que o usuário mude e o site "lembre"
+
+            if (!hasLangPref) {
+                if (userLang.startsWith('en') && !currentPath.includes('/en/')) {
+                    window.location.href = '/en/index.html';
+                }
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <title>Jannuzzelli — Cognitive Strategic Architecture</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Arquitetura Cognitiva Estratégica para decisões em ambientes de alta complexidade.">
+    <meta name="description"
+        content="Arquitetura Cognitiva Estratégica para decisões em ambientes de alta complexidade.">
     <meta name="theme-color" content="#020304">
 
     <meta property="og:title" content="Jannuzzelli — Cognitive Strategic Architecture">
     <meta property="og:description" content="Reconfiguração cognitiva estrutural.">
     <meta property="og:image" content="https://www.jannuzzelli.com.br/assets/monogram.svg">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -52,7 +69,8 @@
                     <span class="terminal-title">Cognitive Inquiry v0.8</span>
                 </div>
                 <div class="terminal-body">
-                    <p id="ai-terminal-output" class="output">SYS: Aguardando entrada cognitiva estratégica... Tente 'preço', 'método' ou seu problema.</p>
+                    <p id="ai-terminal-output" class="output">SYS: Aguardando entrada cognitiva estratégica... Tente
+                        'preço', 'método' ou seu problema.</p>
                     <div class="terminal-input-row">
                         <span class="prompt">&gt;&gt;</span>
                         <input type="text" id="ai-terminal-input" placeholder="Digite seu input..." autofocus>
@@ -72,7 +90,7 @@
                     <h2>Túlio Jannuzzelli</h2>
                     <h3>Strategic & Cognitive Architect</h3>
                     <p class="lead">Destravo decisões estratégicas em contextos de alta complexidade.</p>
-                    
+
                     <div class="content-block">
                         <h4>Você me procura quando:</h4>
                         <ul class="problems-list">
@@ -83,7 +101,8 @@
                         </ul>
                     </div>
 
-                    <p class="signature">Meu trabalho não é aconselhar.<br><strong>É reestruturar sua arquitetura de decisão.</strong></p>
+                    <p class="signature">Meu trabalho não é aconselhar.<br><strong>É reestruturar sua arquitetura de
+                            decisão.</strong></p>
 
                     <div class="content-block intersection-block">
                         <h4>Atuo na interseção entre:</h4>
@@ -94,8 +113,9 @@
                             <li>Tomada de decisão em ambientes complexos</li>
                         </ul>
                     </div>
-                    
-                    <p class="experience">Experiência em ecossistemas de inovação (UNICAMP, USP, MIT, NASA, Google, Distrito) e com organizações premiadas.</p>
+
+                    <p class="experience">Experiência em ecossistemas de inovação (UNICAMP, USP, MIT, NASA, Google,
+                        Distrito) e com organizações premiadas.</p>
                 </div>
             </div>
         </section>
@@ -105,7 +125,8 @@
                 <div class="content-visual-placeholder neural-grid"></div>
                 <div class="content-text-block">
                     <h3>Structural Misalignment</h3>
-                    <p>A maioria dos sistemas parece alinhada. Mas apenas na superfície.<br>Identificamos os desalinhamentos invisíveis que paralisam o crescimento estratégico.</p>
+                    <p>A maioria dos sistemas parece alinhada. Mas apenas na superfície.<br>Identificamos os
+                        desalinhamentos invisíveis que paralisam o crescimento estratégico.</p>
                 </div>
             </div>
         </section>
@@ -115,7 +136,8 @@
                 <div class="content-visual-placeholder fractal-intel"></div>
                 <div class="content-text-block">
                     <h3>Architectural Intervention</h3>
-                    <p>A intervenção ocorre no nível onde a decisão nasce.<br>Reconfiguramos a lógica cognitiva do líder para decisões mais rápidas e precisas.</p>
+                    <p>A intervenção ocorre no nível onde a decisão nasce.<br>Reconfiguramos a lógica cognitiva do líder
+                        para decisões mais rápidas e precisas.</p>
                 </div>
             </div>
         </section>
@@ -132,8 +154,9 @@
     </div>
 
     <canvas id="neural-canvas"></canvas>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script type="module" src="script.js"></script>
 </body>
+
 </html>

@@ -1,3 +1,4 @@
+/* ====================== RESET & BASE ====================== */
 * {
     margin: 0;
     padding: 0;
@@ -10,25 +11,81 @@ body {
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
     position: relative;
+    scrollbar-color: #00c4ff #020304;
+    scrollbar-width: thin;
 }
 
-.bg-monogram,
-.bg-energy {
+/* ====================== BACKGROUND LAYER SYSTEM (Z-INDEX) ====================== */
+
+/* Camada -3: O Monograma (Fundo do fundo) */
+.bg-monogram {
     position: fixed;
     inset: 0;
-    z-index: -2;
-    opacity: 0.12;
+    background: url('assets/monogram.svg') center/contain no-repeat;
+    z-index: -3;
+    opacity: 0.05;
+    /* Extremamente sutil para não brigar com o texto */
     pointer-events: none;
 }
 
-.bg-monogram {
-    background: url('assets/monogram.svg') center/contain no-repeat;
+/* Camada -2: Partículas Three.js (Nano-partículas) */
+#neural-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    opacity: 0.6;
+    /* Aumentado para garantir visibilidade */
+    pointer-events: none;
 }
 
+/* Camada -1: Brilho de Energia (Atmosfera) */
 .bg-energy {
-    background: radial-gradient(circle at 50% 30%, rgba(0, 200, 255, 0.15), transparent 70%);
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(0, 196, 255, 0.1), transparent 70%);
+    z-index: -1;
+    opacity: 0.1;
+    pointer-events: none;
 }
 
+/* ====================== EFEITOS DE SISTEMA ====================== */
+
+/* SCAN LINE: Agora infinito e sutil */
+.scan-line {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    z-index: 9999;
+    pointer-events: none;
+    animation: scanInfinite 4s linear infinite;
+    /* Movimento constante */
+}
+
+@keyframes scanInfinite {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.5;
+    }
+
+    90% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+
+/* LOADER */
 #loader {
     position: fixed;
     inset: 0;
@@ -37,37 +94,39 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 99999;
+    transition: opacity 0.8s ease;
 }
 
 .loader-text {
-    font-size: 15px;
+    font-size: 14px;
     letter-spacing: 4px;
-    color: #666;
-    font-weight: 500;
+    color: #00c4ff;
+    text-transform: uppercase;
+}
+
+/* ====================== CURSOR CUSTOMIZADO ====================== */
+.cursor-dot,
+.cursor-ring {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .cursor-dot {
-    position: fixed;
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     background: #00c4ff;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
 }
 
 .cursor-ring {
-    position: fixed;
-    width: 36px;
-    height: 36px;
-    border: 1px solid rgba(0, 196, 255, 0.4);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(0, 196, 255, 0.3);
+    transition: width 0.3s, height 0.3s;
 }
 
-/* Desativa o cursor personalizado em dispositivos touch (celulares/tablets) */
 @media (pointer: coarse) {
 
     .cursor-dot,
@@ -76,472 +135,108 @@ body {
     }
 }
 
+/* ====================== LAYOUT & CONTEÚDO ====================== */
 .container {
-    max-width: 920px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 25px;
     position: relative;
     z-index: 2;
+    /* Garante que o texto fique acima das partículas */
 }
 
+/* HERO */
 .hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    padding: 100px 20px 140px;
+    padding: 120px 0;
 }
 
 .hero h1 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(3.8rem, 8vw, 5.2rem);
+    font-size: clamp(3.5rem, 9vw, 5.8rem);
     font-weight: 700;
-    line-height: 1.05;
-    margin-bottom: 12px;
+    line-height: 1;
+    margin-bottom: 20px;
 }
 
 .hero h2 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #888;
-    margin-bottom: 60px;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
 }
 
 .hero-visual img {
-    max-width: 260px;
-    border-radius: 16px;
-    margin: 40px 0;
-    box-shadow: 0 0 60px rgba(0, 196, 255, 0.25);
+    max-width: 280px;
+    border-radius: 20px;
+    margin: 50px 0;
+    box-shadow: 0 0 60px rgba(0, 196, 255, 0.2);
+    animation: pulse 8s infinite ease-in-out;
 }
 
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+        filter: brightness(1.2);
+    }
+}
+
+/* BOTÕES (CTA) */
 .cta {
     display: inline-block;
-    margin-top: 40px;
-    padding: 18px 48px;
+    padding: 20px 50px;
     border: 1px solid #00c4ff;
     color: #fff;
     text-decoration: none;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     border-radius: 50px;
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    background: transparent;
 }
 
 .cta:hover {
-    background: #00c4ff;
-    color: #020304;
-    box-shadow: 0 0 40px rgba(0, 196, 255, 0.5);
+    background: rgba(0, 196, 255, 0.1);
+    box-shadow: 0 0 30px rgba(0, 196, 255, 0.4);
+    transform: translateY(-3px);
 }
 
-.section {
-    padding: 100px 0;
-    position: relative;
-}
-
-.image-section {
-    background-size: cover;
-    background-position: center;
-    color: white;
-}
-
-.image-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(2, 3, 4, 0.82);
-}
-
-#neural-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    opacity: 0.45;
-    pointer-events: none;
-}
-
-/* ====================== PROFILE SECTION ====================== */
-.profile-section {
-    padding: 120px 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-.profile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.35fr;
-    gap: 80px;
-    align-items: start;
-}
-
-.profile-image img {
-    width: 100%;
-    max-width: 380px;
-    border-radius: 16px;
-    box-shadow: 0 0 60px rgba(0, 196, 255, 0.25);
-    border: 1px solid rgba(0, 196, 255, 0.2);
-}
-
-.profile-content h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 2.8rem;
-    margin-bottom: 8px;
-}
-
-.profile-content h3 {
-    font-size: 1.3rem;
-    color: #00c4ff;
-    margin-bottom: 32px;
-    font-weight: 500;
-}
-
-.profile-content .lead {
-    font-size: 1.35rem;
-    color: #ddd;
-    margin-bottom: 24px;
-}
-
-.problems-list,
-.intersection-list {
-    list-style: none;
-    margin: 24px 0 32px 0;
-}
-
-.problems-list li,
-.intersection-list li {
-    padding: 10px 0 10px 28px;
-    position: relative;
-    color: #ccc;
-}
-
-.problems-list li:before,
-.intersection-list li:before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: #00c4ff;
-}
-
-.signature {
-    font-size: 1.25rem;
-    color: #aaa;
-    margin: 32px 0;
-    line-height: 1.6;
-}
-
-.experience {
-    margin-top: 40px;
-    font-size: 1.05rem;
-    color: #999;
-    line-height: 1.7;
-}
-
-/* Responsivo */
-@media (max-width: 860px) {
-    .profile-grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
-    }
-
-    .profile-image img {
-        max-width: 320px;
-        margin: 0 auto;
-        display: block;
-    }
-}
-
-/* ====================== MELHORIAS GERAIS ====================== */
-.hero h1 {
-    font-size: clamp(4rem, 9vw, 5.8rem);
-}
-
-.hero h2 {
-    font-size: 1.35rem;
-    letter-spacing: 3px;
-}
-
-/* Seções de conteúdo - sem imagem pesada */
-.section.image-section {
-    background: none !important;
-    /* remove a imagem escura */
-    position: relative;
-}
-
-.section.image-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(0, 196, 255, 0.06), transparent 70%);
-    z-index: -1;
-    pointer-events: none;
-}
-
-/* PROFILE - mais premium */
-.profile-section {
-    padding: 140px 20px;
-}
-
-.profile-grid {
-    gap: 90px;
-}
-
-.profile-image img {
-    width: 100%;
-    max-width: 420px;
-    border-radius: 20px;
-    box-shadow: 0 0 80px rgba(0, 196, 255, 0.35);
-}
-
-/* BOTÃO FINAL CENTRALIZADO E MAIS IMPACTANTE */
-.cta-final {
-    text-align: center;
-    padding: 180px 20px 140px;
-}
-
-.cta-final .cta {
-    font-size: 1.25rem;
-    padding: 22px 64px;
-    letter-spacing: 2px;
-    box-shadow: 0 0 50px rgba(0, 196, 255, 0.4);
-}
-
-/* Mensagens do sistema mais elegantes */
-.system-message {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: rgba(0, 0, 0, 0.85);
-    color: #fff;
-    padding: 12px 18px;
-    border-radius: 12px;
-    font-size: 14px;
-    opacity: 0;
-    transition: all 0.4s ease;
-    z-index: 9999;
-    backdrop-filter: blur(10px);
-}
-
-.system-message.visible {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-/* Respiração sutil no hero (inteligência visual) */
-@keyframes breathe {
-
-    0%,
-    100% {
-        opacity: 0.85;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
-
-.hero-visual img {
-    animation: breathe 8s infinite ease-in-out;
-}
-
-/* ANIMAÇÕES INOVADORAS */
-
-@keyframes neuralPulse {
-
-    0%,
-    100% {
-        filter: brightness(1) drop-shadow(0 0 30px rgba(0, 196, 255, 0.4));
-    }
-
-    50% {
-        filter: brightness(1.15) drop-shadow(0 0 60px rgba(0, 196, 255, 0.6));
-    }
-}
-
-.scan-line {
-    position: fixed;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #00c4ff, transparent);
-    box-shadow: 0 0 20px #00c4ff;
-    z-index: 999;
-    pointer-events: none;
-    animation: scanMove 1.8s linear forwards;
-}
-
-@keyframes scanMove {
-    to {
-        transform: translateY(120vh);
-        opacity: 0;
-    }
-}
-
-.cursor-trail {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    background: rgba(0, 196, 255, 0.6);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    animation: trailFade 0.6s ease forwards;
-}
-
-@keyframes trailFade {
-    to {
-        opacity: 0;
-        transform: scale(0.2);
-    }
-}
-
-/* Hover glow mais forte nas seções */
-.section:hover::before {
-    opacity: 0.25;
-}
-
-/* ====================== ANIMAÇÕES NÍVEL B + C ====================== */
-
-/* Parallax avançado no Hero + Monograma */
-.hero {
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-            rgba(0, 196, 255, 0.12) 0%, transparent 60%);
-    pointer-events: none;
-    transition: all 0.4s ease;
-    z-index: -1;
-}
-
-/* Neural Pulse mais forte no hero */
-.hero-visual img {
-    animation: neuralPulse 10s infinite ease-in-out;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.hero-visual:hover img {
-    transform: scale(1.08) rotate(2deg);
-}
-
-/* Conexão Neural no Hover do CTA */
-.cta {
-    position: relative;
-    overflow: hidden;
-}
-
-.cta::before {
-    content: '';
-    position: absolute;
-    inset: -50%;
-    background: radial-gradient(circle, rgba(0, 196, 255, 0.3) 0%, transparent 70%);
-    opacity: 0;
-    transition: all 0.5s ease;
-    z-index: -1;
-}
-
-.cta:hover::before {
-    opacity: 1;
-    transform: scale(1.4);
-}
-
-/* Scan Line mais dramática */
-.scan-line {
-    position: fixed;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, #00f0ff, #00c4ff, transparent);
-    box-shadow: 0 0 30px #00f0ff, 0 0 60px #00c4ff;
-    z-index: 9999;
-    pointer-events: none;
-    animation: scanMove 1.6s linear forwards;
-}
-
-/* Partículas flutuantes sutis no background */
-.floating-particle {
-    position: fixed;
-    width: 4px;
-    height: 4px;
-    background: radial-gradient(circle, #FFD700 0%, rgba(255, 215, 0, 0.3) 60%, transparent 100%);
-    box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.4;
-    animation: floatParticle linear infinite;
-}
-
-@keyframes floatParticle {
-    to {
-        transform: translateY(-120vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* Efeito de conexão neural no cursor */
-.cursor-connection {
-    position: fixed;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #00c4ff, transparent);
-    z-index: 9997;
-    pointer-events: none;
-    opacity: 0.25;
-}
-
-/* ====================== JANNUNZELLI SYSTEM v0.8 ADDITIONS ====================== */
-
-/* Otimização de Performance e Sutileza */
-body {
-    scrollbar-color: #00c4ff #020304;
-    scrollbar-width: thin;
-}
-
-/* Redução de Brilho Geral para Sutileza */
-.bg-energy {
-    opacity: 0.1;
-    /* Sutilizado */
-}
-
-.bg-monogram {
-    opacity: 0.08;
-    /* Sutilizado */
-}
-
-/* ====================== TERMINAL DE IA (NOVO) ====================== */
+/* ====================== TERMINAL DE IA ====================== */
 .ai-terminal-section {
-    padding: 100px 20px;
-    position: relative;
+    padding: 100px 0;
 }
 
 .terminal-window {
-    background: rgba(2, 3, 4, 0.9);
-    border: 1px solid rgba(0, 196, 255, 0.25);
+    background: rgba(5, 7, 10, 0.85);
+    border: 1px solid rgba(0, 196, 255, 0.2);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 50px rgba(0, 196, 255, 0.2);
-    font-family: 'Inter', monospace;
-    max-width: 860px;
-    margin: 0 auto;
+    backdrop-filter: blur(10px);
 }
 
 .terminal-header {
-    background: rgba(10, 15, 20, 0.95);
-    padding: 10px 18px;
-    border-bottom: 1px solid rgba(0, 196, 255, 0.15);
+    background: rgba(15, 20, 25, 0.9);
+    padding: 12px 20px;
     display: flex;
     align-items: center;
     gap: 8px;
+    border-bottom: 1px solid rgba(0, 196, 255, 0.1);
 }
 
 .terminal-dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
 }
 
@@ -557,174 +252,90 @@ body {
     background: #27c93f;
 }
 
-.terminal-title {
-    color: #888;
-    font-size: 13px;
-    font-weight: 500;
-    margin-left: 10px;
-    letter-spacing: 1.5px;
-}
-
 .terminal-body {
-    padding: 24px 30px;
+    padding: 30px;
 }
 
 .terminal-body p.output {
-    color: #ccc;
+    font-family: 'Inter', monospace;
+    color: #00f0ff;
     font-size: 15px;
-    line-height: 1.7;
-    margin-bottom: 30px;
-    min-height: 50px;
+    line-height: 1.6;
+    margin-bottom: 25px;
 }
 
 .terminal-input-row {
     display: flex;
     align-items: center;
-    gap: 15px;
-    border-top: 1px solid rgba(0, 196, 255, 0.1);
-    padding-top: 18px;
-}
-
-.terminal-input-row .prompt {
-    color: #00c4ff;
-    font-weight: 700;
+    gap: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
 }
 
 .terminal-input-row input {
-    flex-grow: 1;
     background: transparent;
     border: none;
     color: #fff;
-    font-size: 15px;
-    font-family: 'Inter', sans-serif;
+    flex: 1;
+    font-size: 16px;
     outline: none;
-    padding: 8px 0;
 }
 
-/* Botão do Terminal */
-#ai-terminal-submit {
-    background: transparent;
-    border: 1px solid #00c4ff;
-    color: #fff;
-    padding: 9px 22px;
-    border-radius: 5px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+/* ====================== SEÇÕES DE CONTEÚDO ====================== */
+.profile-section {
+    padding: 120px 0;
 }
 
-#ai-terminal-submit:hover {
-    background: rgba(0, 196, 255, 0.15);
-    box-shadow: 0 0 20px rgba(0, 196, 255, 0.3);
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 100px;
+    align-items: center;
 }
 
-/* Loader do Terminal */
-.terminal-loader {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #333;
-    border-top-color: #00c4ff;
-    border-radius: 50%;
-    animation: terminalSpin 1s linear infinite;
-    display: none;
-    /* Ativado via JS */
+.profile-image img {
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 196, 255, 0.15);
 }
 
-@keyframes terminalSpin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* ====================== PREENCHIMENTO DO DESIGN (CONTEÚDO) ====================== */
 .content-enhancement-section {
-    padding: 120px 20px;
+    padding: 80px 0;
 }
 
 .content-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 90px;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
     align-items: center;
-    max-width: 1100px;
-    margin: 0 auto;
 }
 
-.content-enhancement-section.invert .content-grid {
-    grid-template-columns: 1.2fr 1fr;
-    direction: rtl;
-    /* Inverte colunas mantendo fluxo */
-}
-
-.content-enhancement-section.invert .content-text-block {
-    direction: ltr;
-    /* Restaura texto para esquerda */
-}
-
-/* Visual Placeholders para preencher espaço */
 .content-visual-placeholder {
-    width: 100%;
-    height: 380px;
-    border-radius: 16px;
-    border: 1px solid rgba(0, 196, 255, 0.15);
-    position: relative;
-    overflow: hidden;
+    height: 350px;
+    background: rgba(0, 196, 255, 0.03);
+    border: 1px solid rgba(0, 196, 255, 0.1);
+    border-radius: 15px;
 }
 
-.content-visual-placeholder::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(0, 196, 255, 0.08) 0%, transparent 70%);
+/* ====================== FOOTER & CTA FINAL ====================== */
+.cta-final {
+    text-align: center;
+    padding: 150px 0;
 }
 
-/* Text Block das seções de conteúdo */
-.content-text-block h3 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 2.6rem;
-    margin-bottom: 20px;
-    color: #fff;
+footer {
+    text-align: center;
+    padding: 60px 0;
+    color: #555;
+    font-size: 13px;
+    letter-spacing: 1px;
 }
 
-.content-text-block p {
-    font-size: 1.15rem;
-    color: #aaa;
-    line-height: 1.8;
-}
-
-/* Micro Interações para preencher espaço */
-.problems-list li,
-.intersection-list li {
-    transition: all 0.3s ease;
-}
-
-.problems-list li:hover,
-.intersection-list li:hover {
-    color: #fff;
-    transform: translateX(5px);
-}
-
-/* Responsivo para o Terminal e Conteúdo */
 @media (max-width: 860px) {
+
+    .profile-grid,
     .content-grid {
-        grid-template-columns: 1fr !important;
-        gap: 60px;
+        grid-template-columns: 1fr;
+        gap: 50px;
     }
-
-    .content-visual-placeholder {
-        height: 280px;
-    }
-
-    .terminal-body {
-        padding: 18px 20px;
-    }
-}
-
-@media (pointer: coarse) {
-    .terminal-input-row button {
-        display: block;
-    }
-
-    /* Botão no mobile */
 }

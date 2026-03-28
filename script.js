@@ -200,13 +200,29 @@ if (aiInput) {
 }
 document.getElementById('ai-terminal-submit')?.addEventListener('click', handleAISubmission);
 
-// CTAs
+// ====================== SMART CTAs (BILINGUAL WHATSAPP) ======================
 document.querySelectorAll('.cta').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const msg = encodeURIComponent(`Iniciando protocolo estratégico. Contexto detectado: ${getUserType()}`);
-        window.open(`https://wa.me/5512981216006?text=${msg}`, '_blank');
+
+        const isEn = window.location.pathname.includes('/en/');
+        const userType = getUserType(); // Puxa do seu profile-engine.js
+
+        // Mensagens customizadas por idioma e comportamento
+        const config = {
+            EN: {
+                phone: "5512981216006",
+                text: `Hello. I am requesting strategic access via Jannuzzelli System. [Context: ${userType}]`
+            },
+            PT: {
+                phone: "5512981216006",
+                text: `Olá. Solicito acesso estratégico via Sistema Jannuzzelli. [Contexto: ${userType}]`
+            }
+        };
+
+        const selected = isEn ? config.EN : config.PT;
+        const finalMsg = encodeURIComponent(selected.text);
+
+        window.open(`https://wa.me/${selected.phone}?text=${finalMsg}`, '_blank');
     });
 });
-
-console.log("%c🧠 Jannuzzelli System v0.8 Online", "color:#00f0ff; font-weight:bold;");
