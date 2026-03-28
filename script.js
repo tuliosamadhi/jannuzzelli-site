@@ -1,108 +1,106 @@
-// ================= LOADER =================
-const loaderText = document.getElementById("loader-text");
+// ====================== JANNUNZELLI COGNITIVE SYSTEM v0.3 ======================
+// Integração Profunda com Gemini + Fechamento de Negócio
 
-const sequence = [
-    "INITIALIZING SYSTEM...",
-    "Loading Cognitive Architecture...",
-    "Mapping Decision Patterns...",
-    "Calibrating Strategic Perception...",
-    "Access Ready"
-];
+let profile = { time: 0, scrollDepth: 0, interactions: 0, intensity: 0, stage: "awareness" };
 
-let i = 0;
+const GEMINI_API_KEY = "AIzaSyB12Km76wnrnvxZ3XEoFVx6jpc-v7ITixc"; // ← Sua chave
 
-function runLoader() {
-    if (i < sequence.length) {
-        loaderText.innerText = sequence[i++];
-        setTimeout(runLoader, 700);
-    } else {
-        document.getElementById("loader").style.opacity = 0;
+async function askGemini(prompt) {
+    try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: prompt }] }]
+            })
+        });
+        const data = await res.json();
+        return data?.candidates?.[0]?.content?.parts?.[0]?.text || null;
+    } catch (e) {
+        console.warn("Gemini error:", e);
+        return null;
     }
 }
 
-runLoader();
-
-// ================= INTENT =================
-let intent = { depth: 0, focus: 0, hesitation: 0 };
-
+// ====================== TRACKING AVANÇADO ======================
 window.addEventListener("scroll", () => {
-    intent.depth = window.scrollY / document.body.scrollHeight;
+    const depth = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    profile.scrollDepth = depth;
+    if (depth > 0.4) profile.stage = "consideration";
+    if (depth > 0.75) profile.stage = "decision";
+    calculateIntensity();
 });
 
-let lastMove = 0;
-document.addEventListener("mousemove", () => {
-    const now = Date.now();
-    if (now - lastMove < 40) intent.hesitation += 0.3;
-    lastMove = now;
-});
-
-let focusTimer;
-document.addEventListener("mousemove", () => {
-    clearTimeout(focusTimer);
-    focusTimer = setTimeout(() => intent.focus += 2, 1200);
-});
-
-function getIntentScore() {
-    return intent.depth * 40 + intent.focus * 2 - intent.hesitation;
-}
-
-// ================= SESSION LOG =================
-const sessionLog = {
-    start: Date.now(),
-    clicks: 0,
-    maxScroll: 0,
-    intentPeak: 0
-};
-
-document.addEventListener("click", () => sessionLog.clicks++);
-
-window.addEventListener("scroll", () => {
-    const s = window.scrollY / document.body.scrollHeight;
-    if (s > sessionLog.maxScroll) sessionLog.maxScroll = s;
-});
+document.addEventListener("mousemove", () => { profile.interactions += 0.1; });
+document.addEventListener("click", () => { profile.interactions += 2; });
 
 setInterval(() => {
-    const score = getIntentScore();
-    if (score > sessionLog.intentPeak) sessionLog.intentPeak = score;
+    profile.time += 1;
+    calculateIntensity();
 }, 1000);
 
-// ================= CTA =================
-function updateCTA() {
-    const btns = [document.getElementById("cta-main"), document.getElementById("cta-main-2")];
-
-    const score = getIntentScore();
-
-    let msg = "Solicito acesso estratégico";
-
-    if (score > 80) msg = "Estou pronto para reconfiguração estratégica";
-    else if (score > 60) msg = "Quero entender a arquitetura estratégica";
-
-    const meta = `
-[session]
-tempo=${Math.floor((Date.now() - sessionLog.start) / 1000)}s
-intencao=${Math.floor(sessionLog.intentPeak)}
-scroll=${Math.floor(sessionLog.maxScroll * 100)}%
-cliques=${sessionLog.clicks}
-`;
-
-    btns.forEach(btn => {
-        if (btn) {
-            btn.href = `https://wa.me/5512981216006?text=${encodeURIComponent(msg + meta)}`;
-        }
-    });
+function calculateIntensity() {
+    profile.intensity = (profile.time * 0.4) + (profile.scrollDepth * 15) + (profile.interactions * 1.2);
 }
 
-setInterval(updateCTA, 2000);
+// ====================== INTELIGÊNCIA GEMINI ======================
 
-// ================= CONVERSION TRIGGER =================
-let activated = false;
+async function triggerDeepInsight() {
+    if (profile.intensity < 30) return;
 
-setInterval(() => {
-    if (getIntentScore() > 60 && !activated) {
-        activated = true;
-        document.querySelectorAll(".cta").forEach(btn => {
-            btn.innerText = "ACESSAR ARQUITETURA";
-            btn.style.transform = "scale(1.05)";
-        });
+    const prompt = `Usuário está no site de Arquitetura Cognitiva Estratégica de Túlio Jannuzzelli.
+Etapa atual: ${profile.stage}
+Tempo no site: ${profile.time}s
+Profundidade de scroll: ${Math.round(profile.scrollDepth * 100)}%
+Interações: ${Math.round(profile.interactions)}
+Gere uma frase curta (máximo 18 palavras), poderosa e estratégica sobre reconfiguração cognitiva, no tom místico-tecnológico de alta autoridade.`;
+
+    const insight = await askGemini(prompt);
+    if (insight) {
+        const target = document.querySelector('.hero-highlight') || document.querySelector('.signature');
+        if (target) {
+            target.style.transition = "all 1s";
+            target.style.opacity = "0";
+            setTimeout(() => {
+                target.innerHTML = insight;
+                target.style.opacity = "1";
+            }, 900);
+        }
     }
-}, 1500);
+}
+
+// Ativa insights profundos em momentos chave
+setTimeout(() => triggerDeepInsight(), 6500);
+window.addEventListener('scroll', () => {
+    if (profile.intensity > 45) triggerDeepInsight();
+});
+
+// ====================== FECHAMENTO DE NEGÓCIO (WhatsApp Inteligente) ======================
+async function generateClosingMessage() {
+    const prompt = `Usuário demonstrou alta intenção no site de Arquitetura Cognitiva Estratégica.
+Tempo: ${profile.time}s | Scroll: ${Math.round(profile.scrollDepth * 100)}% | Intensidade: ${Math.round(profile.intensity)}
+Escreva uma mensagem curta, profissional e persuasiva para WhatsApp que o usuário pode enviar diretamente para Túlio Jannuzzelli pedindo uma conversa estratégica. Máximo 3 linhas.`;
+
+    const aiMessage = await askGemini(prompt) || "Olá Túlio, vi seu site e gostaria de conversar sobre arquitetura cognitiva.";
+
+    const finalMessage = `${aiMessage}\n\n[Session Data]\nTempo: ${profile.time}s | Intensidade Cognitiva: ${Math.round(profile.intensity)}`;
+
+    return encodeURIComponent(finalMessage);
+}
+
+// Atualiza CTA com mensagem inteligente
+document.querySelectorAll('.cta').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+        if (profile.intensity < 25) return; // ainda não tem intenção suficiente
+
+        e.preventDefault();
+        const message = await generateClosingMessage();
+        const whatsappUrl = `https://wa.me/5512981216006?text=${message}`;
+        window.open(whatsappUrl, '_blank');
+    });
+});
+
+// ====================== INICIALIZAÇÃO ======================
+console.log("%c🧠 Cognitive System v0.3 — Deep AI Integration Activated", "color:#00f0ff; font-size:12px; letter-spacing:1px;");
+
+revealOnScroll(); // função que já existia no script anterior+
