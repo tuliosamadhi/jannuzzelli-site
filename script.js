@@ -164,6 +164,12 @@ setInterval(updateDynamicCopy, 5500);
 const aiInput = document.getElementById('ai-terminal-input');
 const aiOutput = document.getElementById('ai-terminal-output');
 const aiLoader = document.getElementById('ai-loader');
+const isEnglishPage = window.location.pathname.includes('/en/');
+const initialMsg = isEnglishPage
+    ? "SYS: Awaiting strategic input... Try 'ARAM', 'Context' or 'Strategy'."
+    : "SYS: Aguardando entrada cognitiva... Tente 'ARAM', 'Contexto' ou 'Estratégia'.";
+
+if (aiOutput) aiOutput.textContent = initialMsg;
 
 function handleAISubmission() {
     const input = aiInput.value.trim();
