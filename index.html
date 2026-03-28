@@ -14,31 +14,29 @@
     <meta property="og:image" content="https://www.jannuzzelli.com.br/assets/monogram.svg">
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!-- LOADER -->
+    <div class="scan-line"></div>
+
     <div id="loader">
         <div class="loader-text" id="loader-text">INITIALIZING SYSTEM...</div>
     </div>
 
-    <!-- BACKGROUNDS -->
     <div class="bg-monogram"></div>
     <div class="bg-energy"></div>
 
-    <!-- CURSOR -->
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
 
     <div class="container">
         <header class="header">
-            <h4 class="micro-tag">COGNITIVE SYSTEM v0.1</h4>
+            <h4 class="micro-tag">COGNITIVE SYSTEM v0.6</h4>
         </header>
 
-        <!-- HERO -->
         <section class="hero">
             <h1>Jannuzzelli</h1>
             <h2>Cognitive Strategic Architecture</h2>
@@ -46,13 +44,10 @@
                 <img src="assets/singularity-core.jpg" alt="Singularity Core">
             </div>
             <p class="hero-text">Arquitetura estratégica para ambientes onde decisão, percepção e pressão colapsam.</p>
-            <p class="hero-highlight">Não é consultoria.<br>É reconfiguração cognitiva estrutural.</p>
-            <a href="#" class="cta glow magnetic" id="cta-main">
-                SOLICITAR ACESSO ESTRATÉGICO
-            </a>
+            <p class="hero-highlight">Iniciando análise de padrões...</p>
+            <a href="#" class="cta glow magnetic" id="cta-main">SOLICITAR ACESSO ESTRATÉGICO</a>
         </section>
 
-        <!-- PROFILE -->
         <section class="profile-section">
             <div class="profile-grid">
                 <div class="profile-image">
@@ -60,18 +55,14 @@
                 </div>
                 <div class="profile-content">
                     <h2>Túlio Jannuzzelli</h2>
-                    <h3>Strategic &amp; Cognitive Architect</h3>
+                    <h3>Strategic & Cognitive Architect</h3>
                     <p class="lead">Destravo decisões estratégicas em contextos de alta complexidade.</p>
-                    <p>Reestruturo como líderes pensam, decidem e executam — quando crescimento, clareza e controle
-                        estão em risco.</p>
 
                     <h4>Você me procura quando:</h4>
                     <ul class="problems-list">
                         <li>Decisões críticas estão travadas</li>
                         <li>O crescimento desacelerou sem causa clara</li>
-                        <li>Há desalinhamento entre estratégia e execução</li>
                         <li>A complexidade superou a capacidade de decisão</li>
-                        <li>Abordagens tradicionais já não funcionam</li>
                     </ul>
 
                     <p class="signature">Meu trabalho não é aconselhar.<br><strong>É reestruturar sua arquitetura de
@@ -81,37 +72,15 @@
                     <ul class="intersection-list">
                         <li>Arquitetura Estratégica</li>
                         <li>Sistemas Cognitivos</li>
-                        <li>Estruturas Organizacionais</li>
-                        <li>Tomada de decisão em ambientes complexos</li>
+                        <li>Metodologia ARAM</li>
                     </ul>
-
-                    <h4>Formato de trabalho:</h4>
-                    <p><strong>Análise Profunda (1–2 sessões)</strong> — Mapeamento diferenciado dos gargalos críticos
-                        com metodologia ARAM*</p>
-                    <p><strong>Implementação da Reestruturação</strong> — Reorganizar estruturas de decisão, reduzir
-                        ruído e aumentar velocidade estratégica.</p>
-
-                    <p class="experience">Experiência em ecossistemas de inovação (UNICAMP, USP, MIT, NASA, Google,
-                        Distrito) e com executivos, founders e organizações premiadas.</p>
                 </div>
             </div>
         </section>
 
-        <section class="section image-section" style="background-image: url('assets/neural-grid.jpg')">
-            <h3>Structural Misalignment</h3>
-            <p>A maioria dos sistemas parece alinhada. Mas apenas na superfície.</p>
-        </section>
-
-        <section class="section image-section" style="background-image: url('assets/fractal-intelligence.jpg')">
-            <h3>Architectural Intervention</h3>
-            <p>A intervenção ocorre no nível onde a decisão nasce.</p>
-        </section>
-
         <section class="cta-final">
             <p>Acesso requer clareza de intenção.</p>
-            <a href="#" class="cta glow magnetic" id="cta-final">
-                ENTER THE SYSTEM
-            </a>
+            <a href="#" class="cta glow magnetic" id="cta-final">ENTER THE SYSTEM</a>
         </section>
 
         <footer>
@@ -121,6 +90,7 @@
     </div>
 
     <canvas id="neural-canvas"></canvas>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script type="module" src="script.js"></script>
 </body>
