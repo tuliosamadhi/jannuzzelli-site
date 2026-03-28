@@ -103,4 +103,4 @@ document.querySelectorAll('.cta').forEach(btn => {
 // ====================== INICIALIZAÇÃO ======================
 console.log("%c🧠 Cognitive System v0.3 — Deep AI Integration Activated", "color:#00f0ff; font-size:12px; letter-spacing:1px;");
 
-revealOnScroll(); // função que já existia no script anterior+
+revealOnScroll(); // função que já existia no script anterior
