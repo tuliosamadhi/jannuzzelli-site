@@ -3,12 +3,10 @@
 
 <head>
     <script>
-        // Intelligent Language Router
         (function () {
             const userLang = navigator.language || navigator.userLanguage;
             const currentPath = window.location.pathname;
-            const hasLangPref = localStorage.getItem('lang_pref'); // Permite que o usuário mude e o site "lembre"
-
+            const hasLangPref = localStorage.getItem('lang_pref');
             if (!hasLangPref) {
                 if (userLang.startsWith('en') && !currentPath.includes('/en/')) {
                     window.location.href = '/en/index.html';
@@ -17,7 +15,7 @@
         })();
     </script>
     <meta charset="UTF-8">
-    <title>Jannuzzelli — Cognitive Strategic Architecture</title>
+    <title>Jannuzzelli — Arquitetura Estratégica Cognitiva</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Arquitetura Cognitiva Estratégica para decisões em ambientes de alta complexidade.">
@@ -27,13 +25,16 @@
     <meta property="og:description" content="Reconfiguração cognitiva estrutural.">
     <meta property="og:image" content="https://www.jannuzzelli.com.br/assets/monogram.svg">
 
+    <link rel="icon" type="image/svg+xml" href="assets/monogram.svg">
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div class="scan-line"></div>
+
     <div id="loader">
         <div class="loader-text" id="loader-text">INITIALIZING SYSTEM...</div>
     </div>
@@ -46,7 +47,7 @@
 
     <div class="container">
         <header class="header">
-            <h4 class="micro-tag">COGNITIVE SYSTEM v0.8</h4>
+            <h4 class="micro-tag">COGNITIVE SYSTEM v0.9</h4>
         </header>
 
         <section class="hero">
@@ -63,11 +64,11 @@
                     <span class="terminal-dot red"></span>
                     <span class="terminal-dot yellow"></span>
                     <span class="terminal-dot green"></span>
-                    <span class="terminal-title">Cognitive Inquiry v0.8</span>
+                    <span class="terminal-title">Cognitive Inquiry v0.9</span>
                 </div>
                 <div class="terminal-body">
                     <p id="ai-terminal-output" class="output">SYS: Aguardando entrada cognitiva estratégica... Tente
-                        'preço', 'método' ou seu problema.</p>
+                        'ARAM', 'Contexto' ou 'Estratégia'.</p>
                     <div class="terminal-input-row">
                         <span class="prompt">&gt;&gt;</span>
                         <input type="text" id="ai-terminal-input" placeholder="Digite seu input...">
@@ -84,75 +85,76 @@
                     <img src="assets/profile.png" alt="Túlio Jannuzzelli">
                 </div>
                 <div class="profile-content">
-                    <h2>Túlio Jannuzzelli</h2>
-                    <h3>Strategic & Cognitive Architect</h3>
-                    <p class="lead">Destravo decisões estratégicas em contextos de alta complexidade.</p>
+                    <div class="profile-text">
+                        <h2>Túlio Jannuzzelli</h2>
+                        <h3>Strategic & Cognitive Architect</h3>
+                        <p class="lead">Destravo decisões estratégicas em contextos de alta complexidade.</p>
 
-                    <div class="content-block">
-                        <h4>Você me procura quando:</h4>
-                        <ul class="problems-list">
-                            <li>Decisões críticas estão travadas</li>
-                            <li>O crescimento desacelerou sem causa clara</li>
-                            <li>Há desalinhamento entre estratégia e execução</li>
-                            <li>Sistemas tradicionais já não funcionam</li>
-                        </ul>
+                        <div class="content-block">
+                            <h4>Você me procura quando:</h4>
+                            <ul class="problems-list">
+                                <li>Decisões críticas estão travadas</li>
+                                <li>O crescimento desacelerou sem causa clara</li>
+                                <li>Há desalinhamento entre estratégia e execução</li>
+                                <li>Sistemas tradicionais já não funcionam</li>
+                            </ul>
+                        </div>
+
+                        <p class="signature">Meu trabalho não é aconselhar.<br><strong>É reestruturar sua arquitetura de
+                                decisão.</strong></p>
+
+                        <div class="content-block intersection-block">
+                            <h4>Atuo na interseção entre:</h4>
+                            <ul class="intersection-list">
+                                <li>Arquitetura Estratégica</li>
+                                <li>Sistemas Cognitivos</li>
+                                <li>Estruturas Organizacionais</li>
+                                <li>Decision Science</li>
+                            </ul>
+                        </div>
+                        <p class="experience">Experiência em ecossistemas de inovação (MIT, NASA, Google, Distrito) e
+                            com organizações premiadas.</p>
                     </div>
-
-                    <p class="signature">Meu trabalho não é aconselhar.<br><strong>É reestruturar sua arquitetura de
-                            decisão.</strong></p>
-
-                    <div class="content-block intersection-block">
-                        <h4>Atuo na interseção entre:</h4>
-                        <ul class="intersection-list">
-                            <li>Arquitetura Estratégica</li>
-                            <li>Sistemas Cognitivos</li>
-                            <li>Estruturas Organizacionais</li>
-                            <li>Tomada de decisão em ambientes complexos</li>
-                        </ul>
-                    </div>
-
-                    <p class="experience">Experiência em ecossistemas de inovação (UNICAMP, USP, MIT, NASA, Google,
-                        Distrito) e com organizações premiadas.</p>
                 </div>
             </div>
         </section>
 
-        <section class="section content-enhancement-section">
+        <section class="content-enhancement-section">
             <div class="content-grid">
                 <div class="content-visual-placeholder">
-                    <img src="assets/neural-grid.jpg" alt="Neural Grid Alignment"
-                        style="width:100%; height:100%; object-fit:cover; opacity:0.6;">
+                    <img src="assets/neural-grid.jpg" alt="Neural Grid"
+                        style="width:100%; height:100%; object-fit:cover; opacity:0.4;">
                 </div>
-                <div class="content-text-block">
-                    <h3>Structural Misalignment</h3>
-                    <p>A maioria dos sistemas parece alinhada. Mas apenas na superfície.<br>Identificamos os
-                        desalinhamentos invisíveis que paralisam o crescimento estratégico.</p>
+                <div class="content-text">
+                    <h2>Structural Misalignment</h2>
+                    <p>A maioria dos sistemas parece alinhada apenas na superfície. Identificamos os desalinhamentos
+                        invisíveis que paralisam o crescimento estratégico e a fluidez operacional.</p>
                 </div>
             </div>
         </section>
 
-        <section class="section content-enhancement-section invert">
+        <section class="content-enhancement-section">
             <div class="content-grid">
                 <div class="content-visual-placeholder">
-                    <img src="assets/fractal-intelligence.jpg" alt="Fractal Intelligence"
-                        style="width:100%; height:100%; object-fit:cover; opacity:0.6;">
+                    <img src="assets/fractal-intelligence.jpg" alt="Architectural Intervention"
+                        style="width:100%; height:100%; object-fit:cover; opacity:0.4;">
                 </div>
-                <div class="content-text-block">
-                    <h3>Architectural Intervention</h3>
-                    <p>A intervenção ocorre no nível onde a decisão nasce.<br>Reconfiguramos a lógica cognitiva do líder
-                        para decisões mais rápidas e precisas.</p>
+                <div class="content-text">
+                    <h2>Architectural Intervention</h2>
+                    <p>A intervenção ocorre no nível onde a decisão nasce. Reconfiguramos a lógica cognitiva para
+                        decisões mais rápidas, precisas e sustentáveis sob pressão.</p>
                 </div>
             </div>
         </section>
 
         <section class="cta-final">
             <p>Acesso requer clareza de intenção.</p>
-            <a href="#" class="cta glow magnetic" id="cta-final">ENTER THE SYSTEM</a>
+            <a href="#" class="cta glow magnetic">ENTER THE SYSTEM</a>
         </section>
 
         <footer>
-            <p>intelligence@jannuzzelli.pro</p>
-            <p>© 2026 Jannuzzelli — All Rights Reserved</p>
+            <a href="mailto:intelligence@jannuzzelli.pro" class="footer-contact">intelligence@jannuzzelli.pro</a>
+            <p class="footer-rights">© 2026 Jannuzzelli — All Rights Reserved</p>
         </footer>
     </div>
 

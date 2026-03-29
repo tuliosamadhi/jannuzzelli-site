@@ -104,6 +104,35 @@ body {
     text-transform: uppercase;
 }
 
+/* Efeito Scan Line */
+.scan-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 196, 255, 0.02) 50%);
+    background-size: 100% 4px;
+    z-index: 9999;
+    pointer-events: none;
+    animation: scan 10s linear infinite;
+}
+
+@keyframes scan {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 0 100%;
+    }
+}
+
+/* Garante o Z-Pattern Automático */
+.content-enhancement-section:nth-of-type(even) .content-grid {
+    flex-direction: row-reverse;
+}
+
 /* ====================== CURSOR CUSTOMIZADO ====================== */
 .cursor-dot,
 .cursor-ring {
@@ -281,72 +310,146 @@ body {
     outline: none;
 }
 
-/* ====================== SEÇÕES DE CONTEÚDO ====================== */
+/* ====================== PERFIL E HIERARQUIA TIPOGRÁFICA ====================== */
 .profile-section {
-    padding: 120px 0;
+    padding: 140px 0;
+    /* Aumenta o respiro inicial da seção */
 }
 
 .profile-grid {
     display: grid;
     grid-template-columns: 1fr 1.4fr;
-    gap: 100px;
+    gap: 120px;
+    /* Espaço generoso entre a imagem e o texto estratégico */
     align-items: center;
 }
 
-.profile-image img {
-    width: 100%;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 196, 255, 0.15);
+/* Tratamento de Títulos e Parágrafos */
+.profile-text h2 {
+    font-size: 2.8rem;
+    font-weight: 500;
+    margin-bottom: 25px;
+    /* Espaço após o nome */
+    letter-spacing: -1px;
 }
 
+.profile-text h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(0, 196, 255, 0.9);
+    margin-bottom: 45px;
+    /* Grande separação do subtítulo para o corpo */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.profile-text p,
+.profile-text li {
+    font-size: 1.05rem;
+    font-weight: 300 !important;
+    /* Estilo fino e sofisticado */
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 20px;
+    /* Respiro entre parágrafos */
+}
+
+.profile-text ul {
+    margin-top: 30px;
+}
+
+/* ====================== CONTEÚDO ALTERNADO (Z-PATTERN) ====================== */
 .content-enhancement-section {
-    padding: 80px 0;
+    padding: 100px 0;
 }
 
 .content-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    display: flex;
+    /* Mudança para flex para permitir a alternância */
     align-items: center;
+    gap: 100px;
+    margin-bottom: 120px;
+}
+
+/* Lógica de Alternância: Imagem à direita em seções pares */
+.content-enhancement-section:nth-of-type(even) .content-grid {
+    flex-direction: row-reverse;
 }
 
 .content-visual-placeholder {
-    height: 350px;
+    flex: 1;
+    height: 450px;
     background: rgba(0, 196, 255, 0.03);
     border: 1px solid rgba(0, 196, 255, 0.1);
-    border-radius: 15px;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-/* ====================== FOOTER & CTA FINAL ====================== */
-.cta-final {
-    text-align: center;
-    /* Aumentamos o padding vertical para dar mais destaque ao fechamento */
-    padding: 160px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    /* Isso cria um espaço fixo e elegante entre o texto e o botão */
+.content-text {
+    flex: 1.2;
 }
 
-.cta-final p {
-    margin-bottom: 0;
-    /* O gap do container pai já resolve o espaçamento */
+.content-text h2 {
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 35px;
+    /* Afasta o título do corpo de texto */
+    letter-spacing: -0.5px;
+}
+
+.content-text p {
     font-weight: 300;
-    color: #888;
-    max-width: 600px;
-    line-height: 1.6;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    /* Espaço profissional para próximas seções */
 }
 
+/* ====================== FOOTER E FOCO DE CONTATO ====================== */
 footer {
+    padding: 120px 0 60px;
+    /* Aumentado para dar peso ao encerramento */
     text-align: center;
-    padding: 80px 0 40px 0;
-    color: #444;
-    font-size: 12px;
-    letter-spacing: 2px;
+    border-top: 1px solid rgba(0, 196, 255, 0.05);
+    background: linear-gradient(to top, rgba(0, 196, 255, 0.02), transparent);
+}
+
+.footer-contact {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem;
+    color: #00c4ff;
+    text-decoration: none;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.8;
+    /* Efeito de Pulsar Sutil (Glow) */
+    animation: contactGlow 3s infinite alternate;
+}
+
+@keyframes contactGlow {
+    from {
+        text-shadow: 0 0 5px rgba(0, 196, 255, 0.2);
+    }
+
+    to {
+        text-shadow: 0 0 20px rgba(0, 196, 255, 0.6);
+        opacity: 1;
+    }
+}
+
+.footer-contact:hover {
+    letter-spacing: 8px;
+    /* Expansão de autoridade */
+    color: #ffffff;
+}
+
+.footer-rights {
+    font-size: 0.75rem;
     text-transform: uppercase;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    /* Linha sutil de divisão */
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 3px;
+    margin-top: 20px;
 }
 
 /* ====================== RESPONSIVIDADE (MOBILE) ====================== */
