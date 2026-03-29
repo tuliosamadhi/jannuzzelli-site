@@ -1,4 +1,4 @@
-// ====================== JANNUNZELLI COGNITIVE SYSTEM v0.9 - NANO-PARTÍCULAS AVANÇADAS ======================
+// ====================== JANNUNZELLI COGNITIVE SYSTEM v0.7 - COM TERMINAL IA ======================
 
 // Importações
 import { updateProfile, getUserType } from './js/profile-engine.js';
@@ -50,8 +50,7 @@ if (canvas) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     camera.position.z = 10;
 
-    // Nano-partículas
-    const particleCount = window.innerWidth < 768 ? 1200 : 3200;
+    const particleCount = window.innerWidth < 768 ? 1400 : 3200;
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
     const sizes = new Float32Array(particleCount);
@@ -77,7 +76,7 @@ if (canvas) {
         size: 0.07,
         vertexColors: true,
         transparent: true,
-        opacity: 0.85,
+        opacity: 0.82,
         blending: THREE.AdditiveBlending,
         depthTest: false
     });
@@ -85,47 +84,31 @@ if (canvas) {
     const cognitiveParticles = new THREE.Points(particleGeometry, particleMaterial);
     scene.add(cognitiveParticles);
 
-    // Mouse + Gyro/Touch interaction
     let mouseX = 0, mouseY = 0;
-
     document.addEventListener('mousemove', (e) => {
         mouseX = (e.clientX / window.innerWidth) * 2 - 1;
         mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
     });
 
-    // Suporte a movimento do smartphone
-    if ('DeviceOrientationEvent' in window) {
-        window.addEventListener('deviceorientation', (e) => {
-            if (e.beta && e.gamma) {
-                mouseX = e.gamma / 45;
-                mouseY = e.beta / 45;
-            }
-        });
-    }
-
     function animateThree() {
         requestAnimationFrame(animateThree);
         const time = Date.now() * 0.001;
 
-        // Movimento suave das partículas
         const positionsAttr = cognitiveParticles.geometry.attributes.position;
         for (let i = 0; i < particleCount * 3; i += 3) {
-            positionsAttr.array[i + 1] += Math.sin(time + i) * 0.003; // movimento ondulado
+            positionsAttr.array[i + 1] += Math.sin(time + i) * 0.003;
         }
         positionsAttr.needsUpdate = true;
 
-        // Rotação + reação ao mouse
-        cognitiveParticles.rotation.y = time * 0.025 + mouseX * 0.4;
-        cognitiveParticles.rotation.x = time * 0.015 + mouseY * 0.35;
+        cognitiveParticles.rotation.y = time * 0.03 + mouseX * 0.35;
+        cognitiveParticles.rotation.x = time * 0.015 + mouseY * 0.3;
 
-        // Pulsação suave
-        cognitiveParticles.scale.setScalar(1 + Math.sin(time * 2.5) * 0.05);
+        cognitiveParticles.scale.setScalar(1 + Math.sin(time * 2.2) * 0.04);
 
         renderer.render(scene, camera);
     }
     animateThree();
 
-    // Resize
     window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
@@ -133,20 +116,10 @@ if (canvas) {
     });
 }
 
-// ====================== ANIMAÇÕES 2D ======================
-// Scan Line
-function createScanLine() {
-    const scan = document.createElement('div');
-    scan.className = 'scan-line';
-    scan.style.top = `${Math.random() * 80 + 10}vh`;
-    document.body.appendChild(scan);
-    setTimeout(() => scan.remove(), 1800);
-}
-setInterval(() => { if (Math.random() > 0.35) createScanLine(); }, 2200);
-
-// ====================== PERFIL PSICOLÓGICO + COPY DINÂMICO ======================
+// ====================== PERFIL PSICOLÓGICO ======================
 updateProfile();
 
+// ====================== COPY DINÂMICO ======================
 function updateDynamicCopy() {
     const el = document.querySelector('.hero-highlight');
     if (!el) return;
@@ -166,6 +139,42 @@ function updateDynamicCopy() {
 }
 setInterval(updateDynamicCopy, 5500);
 
+// ====================== TERMINAL IA (Restaurado) ======================
+const aiInput = document.getElementById('ai-terminal-input');
+const aiOutput = document.getElementById('ai-terminal-output');
+const aiLoader = document.getElementById('ai-loader');
+
+const isEnglishPage = window.location.pathname.includes('/en/');
+const initialMsg = isEnglishPage
+    ? "SYS: Awaiting strategic input... Try 'ARAM', 'Context' or 'Strategy'."
+    : "SYS: Aguardando entrada cognitiva... Tente 'ARAM', 'Contexto' ou 'Estratégia'.";
+
+if (aiOutput) aiOutput.textContent = initialMsg;
+
+function handleAISubmission() {
+    const input = aiInput.value.trim();
+    if (!input) return;
+
+    aiInput.value = '';
+    aiOutput.textContent = `SYS-ANALYSIS: "${input}" [PENDING]...`;
+    if (aiLoader) aiLoader.style.display = 'block';
+
+    // Simulação de IA (pode ser substituída por chamada real depois)
+    setTimeout(() => {
+        if (aiLoader) aiLoader.style.display = 'none';
+        aiOutput.textContent = `SYS-RESPONSE: Processando padrões cognitivos... Recomendo uma conversa estratégica.`;
+    }, 1400);
+}
+
+if (aiInput) {
+    aiInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleAISubmission();
+    });
+}
+if (document.getElementById('ai-terminal-submit')) {
+    document.getElementById('ai-terminal-submit').addEventListener('click', handleAISubmission);
+}
+
 // ====================== WHATSAPP INTELIGENTE ======================
 function handleCTA(e) {
     e.preventDefault();
@@ -182,5 +191,5 @@ document.querySelectorAll('.cta').forEach(btn => {
 });
 
 // ====================== INIT ======================
-console.log("%c🧠 Cognitive System v0.9 - Nano-partículas aprimoradas", "color:#00f0ff; font-size:12px");
+console.log("%c🧠 Cognitive System v0.7 - Terminal IA Restaurado + Partículas Avançadas", "color:#00f0ff; font-size:12px");
 revealOnScroll();
