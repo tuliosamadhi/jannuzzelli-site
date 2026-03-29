@@ -15,68 +15,82 @@ body {
     scrollbar-width: thin;
 }
 
-/* ====================== BACKGROUND LAYER SYSTEM (Z-INDEX) ====================== */
-
-/* Camada -3: O Monograma (Fundo do fundo) */
+/* ====================== BACKGROUND LAYER SYSTEM ====================== */
+/* Camada -3: Monograma - Mais visível + Respiração sutil */
 .bg-monogram {
     position: fixed;
     inset: 0;
     background: url('assets/monogram.svg') center/contain no-repeat;
     z-index: -3;
-    opacity: 0.05;
-    /* Extremamente sutil para não brigar com o texto */
+    opacity: 0.11;
+    /* Aumentado para ficar perceptível */
+    filter: brightness(1.7) blur(1.5px);
+    animation: monogramBreath 18s ease-in-out infinite;
     pointer-events: none;
 }
 
-/* Camada -2: Partículas Three.js (Nano-partículas) */
+@keyframes monogramBreath {
+
+    0%,
+    100% {
+        opacity: 0.11;
+        transform: scale(1.02);
+    }
+
+    50% {
+        opacity: 0.16;
+        transform: scale(1.05);
+    }
+}
+
+/* Camada -2: Partículas Three.js - Mais visíveis e redondinhas */
 #neural-canvas {
     position: fixed;
     inset: 0;
     z-index: -2;
-    opacity: 0.6;
-    /* Aumentado para garantir visibilidade */
+    opacity: 0.78;
+    /* Aumentado significativamente */
+    mix-blend-mode: screen;
     pointer-events: none;
 }
 
-/* Camada -1: Brilho de Energia (Atmosfera) */
+/* Camada -1: Brilho de Energia */
 .bg-energy {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at 50% 30%, rgba(0, 196, 255, 0.1), transparent 70%);
+    background: radial-gradient(circle at 50% 30%, rgba(0, 196, 255, 0.12), transparent 70%);
     z-index: -1;
-    opacity: 0.1;
+    opacity: 0.14;
     pointer-events: none;
 }
 
 /* ====================== EFEITOS DE SISTEMA ====================== */
-
-/* SCAN LINE: Agora infinito e sutil */
+/* Scan Line - Mais visível e elegante */
 .scan-line {
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #00f0ff, transparent);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #00f0ff, #00c4ff, transparent);
+    box-shadow: 0 0 25px #00f0ff, 0 0 40px rgba(0, 196, 255, 0.4);
     z-index: 9999;
     pointer-events: none;
-    animation: scanInfinite 4s linear infinite;
-    /* Movimento constante */
+    animation: scanInfinite 3.8s linear infinite;
 }
 
 @keyframes scanInfinite {
     0% {
-        transform: translateY(-100px);
+        transform: translateY(-100%);
         opacity: 0;
     }
 
-    10% {
-        opacity: 0.5;
+    12% {
+        opacity: 0.75;
     }
 
-    90% {
-        opacity: 0.5;
+    88% {
+        opacity: 0.75;
     }
 
     100% {
@@ -94,7 +108,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 99999;
-    transition: opacity 0.8s ease;
+    transition: opacity 0.9s ease;
 }
 
 .loader-text {
@@ -104,36 +118,7 @@ body {
     text-transform: uppercase;
 }
 
-/* Efeito Scan Line */
-.scan-line {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, transparent 50%, rgba(0, 196, 255, 0.02) 50%);
-    background-size: 100% 4px;
-    z-index: 9999;
-    pointer-events: none;
-    animation: scan 10s linear infinite;
-}
-
-@keyframes scan {
-    from {
-        background-position: 0 0;
-    }
-
-    to {
-        background-position: 0 100%;
-    }
-}
-
-/* Garante o Z-Pattern Automático */
-.content-enhancement-section:nth-of-type(even) .content-grid {
-    flex-direction: row-reverse;
-}
-
-/* ====================== CURSOR CUSTOMIZADO ====================== */
+/* ====================== CURSOR ====================== */
 .cursor-dot,
 .cursor-ring {
     position: fixed;
@@ -152,7 +137,7 @@ body {
 .cursor-ring {
     width: 34px;
     height: 34px;
-    border: 1px solid rgba(0, 196, 255, 0.3);
+    border: 1px solid rgba(0, 196, 255, 0.35);
     transition: width 0.3s, height 0.3s;
 }
 
@@ -164,24 +149,23 @@ body {
     }
 }
 
-/* ====================== LAYOUT & CONTEÚDO ====================== */
+/* ====================== LAYOUT & HIERARQUIA ====================== */
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 25px;
     position: relative;
     z-index: 2;
-    /* Garante que o texto fique acima das partículas */
 }
 
-/* HERO */
+/* HERO - Mais respiro entre elementos */
 .hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    padding: 120px 0;
+    padding: 140px 20px 170px;
 }
 
 .hero h1 {
@@ -193,38 +177,77 @@ body {
 }
 
 .hero h2 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     color: #888;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     text-transform: uppercase;
+    margin-bottom: 55px;
 }
 
-.hero-visual img {
-    max-width: 280px;
-    border-radius: 20px;
-    margin: 50px 0;
-    box-shadow: 0 0 60px rgba(0, 196, 255, 0.2);
-    animation: pulse 8s infinite ease-in-out;
+.hero-text {
+    margin-bottom: 30px;
+    font-size: 1.4rem;
+    line-height: 1.5;
 }
 
-@keyframes pulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-        filter: brightness(1);
-    }
-
-    50% {
-        transform: scale(1.03);
-        filter: brightness(1.2);
-    }
+.hero-highlight {
+    margin-bottom: 65px;
+    font-size: 1.28rem;
+    font-weight: 400;
+    color: #ddd;
 }
 
-/* BOTÕES (CTA) */
+/* PROFILE - Correção de desalinhamento */
+.profile-section {
+    padding: 160px 20px;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 120px;
+    /* Mais espaço entre foto e texto */
+    align-items: center;
+}
+
+.profile-image img {
+    width: 100%;
+    max-width: 440px;
+    border-radius: 24px;
+    box-shadow: 0 0 90px rgba(0, 196, 255, 0.38);
+}
+
+/* PROFILE TEXT */
+.profile-content h2 {
+    font-size: 2.85rem;
+    margin-bottom: 28px;
+}
+
+.profile-content h3 {
+    font-size: 1.05rem;
+    color: rgba(0, 196, 255, 0.9);
+    margin-bottom: 48px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.profile-content p,
+.profile-content li {
+    font-size: 1.08rem;
+    line-height: 1.82;
+    margin-bottom: 22px;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+/* ====================== CTA FINAL ====================== */
+.cta-final {
+    text-align: center;
+    padding: 180px 20px 150px;
+}
+
 .cta {
     display: inline-block;
-    padding: 20px 50px;
+    padding: 20px 52px;
     border: 1px solid #00c4ff;
     color: #fff;
     text-decoration: none;
@@ -236,240 +259,23 @@ body {
 }
 
 .cta:hover {
-    background: rgba(0, 196, 255, 0.1);
-    box-shadow: 0 0 30px rgba(0, 196, 255, 0.4);
-    transform: translateY(-3px);
+    background: rgba(0, 196, 255, 0.12);
+    box-shadow: 0 0 35px rgba(0, 196, 255, 0.45);
+    transform: translateY(-4px);
 }
 
-/* ====================== TERMINAL DE IA ====================== */
-.ai-terminal-section {
-    padding: 100px 0;
-}
-
-.terminal-window {
-    background: rgba(5, 7, 10, 0.85);
-    border: 1px solid rgba(0, 196, 255, 0.2);
-    border-radius: 12px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-}
-
-.terminal-header {
-    background: rgba(15, 20, 25, 0.9);
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-bottom: 1px solid rgba(0, 196, 255, 0.1);
-}
-
-.terminal-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
-
-.terminal-dot.red {
-    background: #ff5f56;
-}
-
-.terminal-dot.yellow {
-    background: #ffbd2e;
-}
-
-.terminal-dot.green {
-    background: #27c93f;
-}
-
-.terminal-body {
-    padding: 30px;
-}
-
-.terminal-body p.output {
-    font-family: 'Inter', monospace;
-    color: #00f0ff;
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-.terminal-input-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 20px;
-}
-
-.terminal-input-row input {
-    background: transparent;
-    border: none;
-    color: #fff;
-    flex: 1;
-    font-size: 16px;
-    outline: none;
-}
-
-/* ====================== PERFIL E HIERARQUIA TIPOGRÁFICA ====================== */
-.profile-section {
-    padding: 140px 0;
-    /* Aumenta o respiro inicial da seção */
-}
-
-.profile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 120px;
-    /* Espaço generoso entre a imagem e o texto estratégico */
-    align-items: center;
-}
-
-/* Tratamento de Títulos e Parágrafos */
-.profile-text h2 {
-    font-size: 2.8rem;
-    font-weight: 500;
-    margin-bottom: 25px;
-    /* Espaço após o nome */
-    letter-spacing: -1px;
-}
-
-.profile-text h3 {
-    font-size: 1rem;
-    font-weight: 400;
-    color: rgba(0, 196, 255, 0.9);
-    margin-bottom: 45px;
-    /* Grande separação do subtítulo para o corpo */
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.profile-text p,
-.profile-text li {
-    font-size: 1.05rem;
-    font-weight: 300 !important;
-    /* Estilo fino e sofisticado */
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 20px;
-    /* Respiro entre parágrafos */
-}
-
-.profile-text ul {
-    margin-top: 30px;
-}
-
-/* ====================== CONTEÚDO ALTERNADO (Z-PATTERN) ====================== */
-.content-enhancement-section {
-    padding: 100px 0;
-}
-
-.content-grid {
-    display: flex;
-    /* Mudança para flex para permitir a alternância */
-    align-items: center;
-    gap: 100px;
-    margin-bottom: 120px;
-}
-
-/* Lógica de Alternância: Imagem à direita em seções pares */
-.content-enhancement-section:nth-of-type(even) .content-grid {
-    flex-direction: row-reverse;
-}
-
-.content-visual-placeholder {
-    flex: 1;
-    height: 450px;
-    background: rgba(0, 196, 255, 0.03);
-    border: 1px solid rgba(0, 196, 255, 0.1);
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.content-text {
-    flex: 1.2;
-}
-
-.content-text h2 {
-    font-size: 2.2rem;
-    font-weight: 400;
-    margin-bottom: 35px;
-    /* Afasta o título do corpo de texto */
-    letter-spacing: -0.5px;
-}
-
-.content-text p {
-    font-weight: 300;
-    line-height: 1.7;
-    margin-bottom: 40px;
-    /* Espaço profissional para próximas seções */
-}
-
-/* ====================== FOOTER E FOCO DE CONTATO ====================== */
-footer {
-    padding: 120px 0 60px;
-    /* Aumentado para dar peso ao encerramento */
-    text-align: center;
-    border-top: 1px solid rgba(0, 196, 255, 0.05);
-    background: linear-gradient(to top, rgba(0, 196, 255, 0.02), transparent);
-}
-
-.footer-contact {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.2rem;
-    color: #00c4ff;
-    text-decoration: none;
-    letter-spacing: 5px;
-    margin-bottom: 30px;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0.8;
-    /* Efeito de Pulsar Sutil (Glow) */
-    animation: contactGlow 3s infinite alternate;
-}
-
-@keyframes contactGlow {
-    from {
-        text-shadow: 0 0 5px rgba(0, 196, 255, 0.2);
-    }
-
-    to {
-        text-shadow: 0 0 20px rgba(0, 196, 255, 0.6);
-        opacity: 1;
-    }
-}
-
-.footer-contact:hover {
-    letter-spacing: 8px;
-    /* Expansão de autoridade */
-    color: #ffffff;
-}
-
-.footer-rights {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.3);
-    letter-spacing: 3px;
-    margin-top: 20px;
-}
-
-/* ====================== RESPONSIVIDADE (MOBILE) ====================== */
+/* ====================== RESPONSIVIDADE ====================== */
 @media (max-width: 860px) {
-
-    .profile-grid,
-    .content-grid {
+    .profile-grid {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: 70px;
+    }
+
+    .hero {
+        padding: 100px 20px 130px;
     }
 
     .cta-final {
-        padding: 100px 20px;
-        /* Reduz um pouco no mobile para não ficar longo demais */
-        gap: 30px;
-        /* Ajuste fino para telas menores */
-    }
-
-    /* Garante que o texto do CTA não fique apertado nas bordas */
-    .cta-final p {
-        font-size: 0.95rem;
+        padding: 110px 20px;
     }
 }
