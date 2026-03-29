@@ -139,38 +139,88 @@ function updateDynamicCopy() {
 }
 setInterval(updateDynamicCopy, 5500);
 
-// ====================== TERMINAL IA (Restaurado) ======================
+// ====================== TERMINAL IA - BILÍNGUE INTELIGENTE ======================
 const aiInput = document.getElementById('ai-terminal-input');
 const aiOutput = document.getElementById('ai-terminal-output');
 const aiLoader = document.getElementById('ai-loader');
 
 const isEnglishPage = window.location.pathname.includes('/en/');
+
 const initialMsg = isEnglishPage
-    ? "SYS: Awaiting strategic input... Try 'ARAM', 'Context' or 'Strategy'."
-    : "SYS: Aguardando entrada cognitiva... Tente 'ARAM', 'Contexto' ou 'Estratégia'.";
+    ? "SYS: Awaiting strategic input... Try 'ARAM', 'Context', 'Decision' or 'Strategy'."
+    : "SYS: Aguardando entrada cognitiva... Tente 'ARAM', 'Contexto', 'Decisão' ou 'Estratégia'.";
 
 if (aiOutput) aiOutput.textContent = initialMsg;
 
-function handleAISubmission() {
+async function handleAISubmission() {
     const input = aiInput.value.trim();
     if (!input) return;
 
     aiInput.value = '';
-    aiOutput.textContent = `SYS-ANALYSIS: "${input}" [PENDING]...`;
+    aiOutput.textContent = isEnglishPage
+        ? `SYS-ANALYSIS: "${input}" [PROCESSING]...`
+        : `SYS-ANALYSIS: "${input}" [PROCESSANDO]...`;
+
     if (aiLoader) aiLoader.style.display = 'block';
+
+    const userType = getUserType();
+    const language = isEnglishPage ? "EN" : "PT";
+
+    // Prompt inteligente bilíngue
+    const prompt = language === "EN"
+        ? `User type: ${userType}. Input: "${input}". 
+           Respond with a short, deep and strategic phrase (max 2 sentences). 
+           Tone: mystical-technological with high authority. No emojis.`
+        : `Tipo de usuário: ${userType}. Input: "${input}". 
+           Responda com uma frase curta, profunda e estratégica (máx 2 frases). 
+           Tom: místico-tecnológico de alta autoridade. Sem emojis.`;
 
     // Simulação de IA (pode ser substituída por chamada real depois)
     setTimeout(() => {
         if (aiLoader) aiLoader.style.display = 'none';
-        aiOutput.textContent = `SYS-RESPONSE: Processando padrões cognitivos... Recomendo uma conversa estratégica.`;
-    }, 1400);
+
+        let response = "";
+
+        if (language === "EN") {
+            if (userType === "decisor") {
+                response = "Your urgency indicates that the decision point has already been reached. The next step is structural, not tactical.";
+            } else if (userType === "analitico") {
+                response = "Your analysis is deep. The bottleneck is not in the data, but in the architecture that organizes that data.";
+            } else if (userType === "morno") {
+                response = "You are on the threshold. Clarity will come when you align perception with decision structure.";
+            } else {
+                response = "The system has detected cognitive hesitation. The first reconfiguration begins with how you perceive the problem.";
+            }
+        } else {
+            // Português
+            if (userType === "decisor") {
+                response = "Sua urgência indica que o ponto de decisão já foi alcançado. O próximo passo é estrutural, não tático.";
+            } else if (userType === "analitico") {
+                response = "Sua análise é profunda. O gargalo não está nos dados, mas na arquitetura que organiza esses dados.";
+            } else if (userType === "morno") {
+                response = "Você está no limiar. A clareza virá quando alinhar percepção com estrutura de decisão.";
+            } else {
+                response = "O sistema detectou hesitação cognitiva. A primeira reconfiguração começa na forma como você percebe o problema.";
+            }
+        }
+
+        aiOutput.textContent = isEnglishPage
+            ? `SYS-RESPONSE: ${response}`
+            : `SYS-RESPONSE: ${response}`;
+
+        aiOutput.style.transition = 'opacity 0.4s';
+        aiOutput.style.opacity = '0';
+        setTimeout(() => aiOutput.style.opacity = '1', 300);
+    }, 1200);
 }
 
+// Eventos do Terminal
 if (aiInput) {
     aiInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleAISubmission();
     });
 }
+
 if (document.getElementById('ai-terminal-submit')) {
     document.getElementById('ai-terminal-submit').addEventListener('click', handleAISubmission);
 }
