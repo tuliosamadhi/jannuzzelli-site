@@ -99,7 +99,7 @@ body {
     }
 }
 
-/* LOADER */
+/* ====================== LOADER - CORRIGIDO PARA MOBILE ====================== */
 #loader {
     position: fixed;
     inset: 0;
@@ -112,10 +112,33 @@ body {
 }
 
 .loader-text {
-    font-size: 14px;
+    font-size: 15px;
     letter-spacing: 4px;
     color: #00c4ff;
     text-transform: uppercase;
+    font-weight: 500;
+    text-align: center;
+    /* Centralização forte */
+    max-width: 92vw;
+    /* Limite seguro para mobile */
+    padding: 0 25px;
+    /* Margem lateral para evitar colar nas bordas */
+    line-height: 1.55;
+    /* Melhora legibilidade em frases longas */
+    word-break: break-word;
+    /* Quebra palavras longas se necessário */
+    white-space: pre-wrap;
+    /* Permite quebra natural de linha */
+}
+
+/* Ajuste extra para telas muito pequenas */
+@media (max-width: 480px) {
+    .loader-text {
+        font-size: 14px;
+        letter-spacing: 3px;
+        padding: 0 20px;
+        max-width: 95vw;
+    }
 }
 
 /* ====================== CURSOR ====================== */
