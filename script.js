@@ -139,90 +139,110 @@ function updateDynamicCopy() {
 }
 setInterval(updateDynamicCopy, 5500);
 
-// ====================== TERMINAL IA - BILÍNGUE INTELIGENTE ======================
-const aiInput = document.getElementById('ai-terminal-input');
-const aiOutput = document.getElementById('ai-terminal-output');
+// ====================== TERMINAL IA - INTELIGÊNCIA ESTRATÉGICA APRIMORADA ======================
+const terminalInput = document.getElementById('ai-terminal-input');
+const terminalOutput = document.getElementById('ai-terminal-output');
+const terminalSubmit = document.getElementById('ai-terminal-submit');
 const aiLoader = document.getElementById('ai-loader');
 
 const isEnglishPage = window.location.pathname.includes('/en/');
 
 const initialMsg = isEnglishPage
-    ? "SYS: Awaiting strategic input... Try 'ARAM', 'Context', 'Decision' or 'Strategy'."
-    : "SYS: Aguardando entrada cognitiva... Tente 'ARAM', 'Contexto', 'Decisão' ou 'Estratégia'.";
+    ? "SYS: Awaiting strategic input... Try 'ARAM', 'Context', 'Decision', 'Price' or 'Strategy'."
+    : "SYS: Aguardando entrada cognitiva... Tente 'ARAM', 'Contexto', 'Decisão', 'Preço' ou 'Estratégia'.";
 
-if (aiOutput) aiOutput.textContent = initialMsg;
+if (terminalOutput) terminalOutput.textContent = initialMsg;
 
-async function handleAISubmission() {
-    const input = aiInput.value.trim();
-    if (!input) return;
+function processTerminalCommand() {
+    const query = terminalInput.value.trim();
+    if (!query) return;
 
-    aiInput.value = '';
-    aiOutput.textContent = isEnglishPage
-        ? `SYS-ANALYSIS: "${input}" [PROCESSING]...`
-        : `SYS-ANALYSIS: "${input}" [PROCESSANDO]...`;
-
+    // Limpa input e mostra loader
+    terminalInput.value = '';
     if (aiLoader) aiLoader.style.display = 'block';
+    if (terminalSubmit) terminalSubmit.style.opacity = '0.5';
 
+    // Adiciona mensagem do usuário no terminal
+    const userLine = isEnglishPage
+        ? `<br><span class="user-msg">&gt; ${query}</span>`
+        : `<br><span class="user-msg">&gt; ${query}</span>`;
+
+    terminalOutput.innerHTML += userLine;
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+
+    // Obtém o tipo de usuário atual
     const userType = getUserType();
-    const language = isEnglishPage ? "EN" : "PT";
 
-    // Prompt inteligente bilíngue
-    const prompt = language === "EN"
-        ? `User type: ${userType}. Input: "${input}". 
-           Respond with a short, deep and strategic phrase (max 2 sentences). 
-           Tone: mystical-technological with high authority. No emojis.`
-        : `Tipo de usuário: ${userType}. Input: "${input}". 
-           Responda com uma frase curta, profunda e estratégica (máx 2 frases). 
-           Tom: místico-tecnológico de alta autoridade. Sem emojis.`;
-
-    // Simulação de IA (pode ser substituída por chamada real depois)
+    // Simulação inteligente com delay realista
     setTimeout(() => {
-        if (aiLoader) aiLoader.style.display = 'none';
-
         let response = "";
 
-        if (language === "EN") {
+        const lowerQuery = query.toLowerCase();
+
+        // Comandos específicos (mantendo o espírito anterior)
+        if (lowerQuery.includes('aram')) {
+            response = isEnglishPage
+                ? "ARAM METHOD: Portable architecture system for decision-making under extreme pressure. Status: ACTIVE."
+                : "MÉTODO ARAM: Sistema de arquitetura portátil para decisão sob pressão extrema. Status: ATIVO.";
+        }
+        else if (lowerQuery.includes('preço') || lowerQuery.includes('price') || lowerQuery.includes('valor') || lowerQuery.includes('cost')) {
+            response = isEnglishPage
+                ? "VALUE: Investment is proportional to the complexity of the system to be restructured. Request strategic access for proper analysis."
+                : "VALOR: O investimento é proporcional à complexidade do sistema a ser reestruturado. Solicite acesso estratégico para análise detalhada.";
+        }
+        else if (lowerQuery.includes('como funciona') || lowerQuery.includes('how does it work') || lowerQuery.includes('method')) {
+            response = isEnglishPage
+                ? "We operate at the intersection of Strategic Architecture and Cognitive Systems. We don't advise — we reconfigure decision architecture."
+                : "Atuamos na interseção entre Arquitetura Estratégica e Sistemas Cognitivos. Não aconselhamos — reconfiguramos a arquitetura de decisão.";
+        }
+        else {
+            // Respostas dinâmicas baseadas no perfil do usuário
             if (userType === "decisor") {
-                response = "Your urgency indicates that the decision point has already been reached. The next step is structural, not tactical.";
-            } else if (userType === "analitico") {
-                response = "Your analysis is deep. The bottleneck is not in the data, but in the architecture that organizes that data.";
-            } else if (userType === "morno") {
-                response = "You are on the threshold. Clarity will come when you align perception with decision structure.";
-            } else {
-                response = "The system has detected cognitive hesitation. The first reconfiguration begins with how you perceive the problem.";
+                response = isEnglishPage
+                    ? "Your urgency suggests the decision point has already been reached. The next move must be structural."
+                    : "Sua urgência indica que o ponto de decisão já foi alcançado. O próximo movimento deve ser estrutural.";
             }
-        } else {
-            // Português
-            if (userType === "decisor") {
-                response = "Sua urgência indica que o ponto de decisão já foi alcançado. O próximo passo é estrutural, não tático.";
-            } else if (userType === "analitico") {
-                response = "Sua análise é profunda. O gargalo não está nos dados, mas na arquitetura que organiza esses dados.";
-            } else if (userType === "morno") {
-                response = "Você está no limiar. A clareza virá quando alinhar percepção com estrutura de decisão.";
-            } else {
-                response = "O sistema detectou hesitação cognitiva. A primeira reconfiguração começa na forma como você percebe o problema.";
+            else if (userType === "analitico") {
+                response = isEnglishPage
+                    ? "Your deep analysis shows the bottleneck is not in the data, but in the architecture organizing that data."
+                    : "Sua análise profunda mostra que o gargalo não está nos dados, mas na arquitetura que organiza esses dados.";
+            }
+            else if (userType === "morno") {
+                response = isEnglishPage
+                    ? "You are on the threshold. Clarity comes when perception aligns with decision structure."
+                    : "Você está no limiar. A clareza vem quando a percepção se alinha com a estrutura de decisão.";
+            }
+            else {
+                response = isEnglishPage
+                    ? "The system has detected cognitive hesitation. The first reconfiguration begins with how you perceive the problem."
+                    : "O sistema detectou hesitação cognitiva. A primeira reconfiguração começa na forma como você percebe o problema.";
             }
         }
 
-        aiOutput.textContent = isEnglishPage
-            ? `SYS-RESPONSE: ${response}`
-            : `SYS-RESPONSE: ${response}`;
+        // Exibe a resposta
+        const sysLine = isEnglishPage
+            ? `<br><span class="sys-msg">SYS-RESPONSE:</span> ${response}`
+            : `<br><span class="sys-msg">SYS-RESPONSE:</span> ${response}`;
 
-        aiOutput.style.transition = 'opacity 0.4s';
-        aiOutput.style.opacity = '0';
-        setTimeout(() => aiOutput.style.opacity = '1', 300);
-    }, 1200);
+        terminalOutput.innerHTML += sysLine;
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+
+        // Reset do loader
+        if (aiLoader) aiLoader.style.display = 'none';
+        if (terminalSubmit) terminalSubmit.style.opacity = '1';
+
+    }, 1350);
 }
 
-// Eventos do Terminal
-if (aiInput) {
-    aiInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleAISubmission();
+// Eventos
+if (terminalInput) {
+    terminalInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') processTerminalCommand();
     });
 }
 
-if (document.getElementById('ai-terminal-submit')) {
-    document.getElementById('ai-terminal-submit').addEventListener('click', handleAISubmission);
+if (terminalSubmit) {
+    terminalSubmit.addEventListener('click', processTerminalCommand);
 }
 
 // ====================== WHATSAPP INTELIGENTE ======================
