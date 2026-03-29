@@ -1,21 +1,33 @@
-// ====================== JANNUNZELLI COGNITIVE SYSTEM v0.7 - COM TERMINAL IA ======================
+// ====================== JANNUNZELLI COGNITIVE SYSTEM v0.9.2 - FULL MULTILINGUAL ======================
 
 // Importações
 import { updateProfile, getUserType } from './js/profile-engine.js';
 
-// ====================== LOADER ======================
+// 1. DETECÇÃO DE IDIOMA ÚNICA (Global para o script)
+const isEnglishPage = window.location.pathname.includes('/en/') || document.documentElement.lang === 'en';
+
+// ====================== LOADER BILÍNGUE ======================
 const loaderText = document.getElementById("loader-text");
-const sequence = [
+const sequencePT = [
+    "INICIALIZANDO SISTEMA...",
+    "Mapeando Camadas Cognitivas...",
+    "Sincronizando Inteligência...",
+    "Calibrando Percepção Estratégica...",
+    "Protocolo de Acesso Pronto"
+];
+const sequenceEN = [
     "INITIALIZING SYSTEM...",
     "Mapping Cognitive Layers...",
     "Synchronizing Intelligence...",
     "Calibrating Strategic Perception...",
     "Access Protocol Ready"
 ];
+
+const sequence = isEnglishPage ? sequenceEN : sequencePT;
 let step = 0;
 
 function runLoader() {
-    if (step < sequence.length) {
+    if (loaderText && step < sequence.length) {
         loaderText.textContent = sequence[step++];
         setTimeout(runLoader, 750);
     } else {
@@ -119,33 +131,44 @@ if (canvas) {
 // ====================== PERFIL PSICOLÓGICO ======================
 updateProfile();
 
-// ====================== COPY DINÂMICO ======================
+// ====================== COPY DINÂMICO (CORRIGIDO PARA BILÍNGUE) ======================
 function updateDynamicCopy() {
     const el = document.querySelector('.hero-highlight');
     if (!el) return;
+    
     const type = getUserType();
-    const messages = {
+    
+    // Dicionário de mensagens por idioma
+    const messagesPT = {
         "decisor": "Você já sabe o que precisa fazer.",
         "analitico": "Tudo já foi analisado. Falta apenas sua decisão.",
         "morno": "Você está perto de ver o que poucos enxergam.",
         "frio": "Poucos percebem o que realmente importa agora."
     };
+
+    const messagesEN = {
+        "decisor": "You already know what needs to be done.",
+        "analitico": "Everything has been analyzed. Only your decision is missing.",
+        "morno": "You are close to seeing what few perceive.",
+        "frio": "Few perceive what really matters now."
+    };
+
+    const activeMessages = isEnglishPage ? messagesEN : messagesPT;
+
     el.style.transition = "opacity 0.9s";
     el.style.opacity = "0";
     setTimeout(() => {
-        el.textContent = messages[type] || messages["frio"];
+        el.textContent = activeMessages[type] || activeMessages["frio"];
         el.style.opacity = "1";
     }, 700);
 }
 setInterval(updateDynamicCopy, 5500);
 
-// ====================== TERMINAL IA - INTELIGÊNCIA ESTRATÉGICA APRIMORADA ======================
+// ====================== TERMINAL IA ======================
 const terminalInput = document.getElementById('ai-terminal-input');
 const terminalOutput = document.getElementById('ai-terminal-output');
 const terminalSubmit = document.getElementById('ai-terminal-submit');
 const aiLoader = document.getElementById('ai-loader');
-
-const isEnglishPage = window.location.pathname.includes('/en/');
 
 const initialMsg = isEnglishPage
     ? "SYS: Awaiting strategic input... Try 'ARAM', 'Context', 'Decision', 'Price' or 'Strategy'."
@@ -157,29 +180,19 @@ function processTerminalCommand() {
     const query = terminalInput.value.trim();
     if (!query) return;
 
-    // Limpa input e mostra loader
     terminalInput.value = '';
     if (aiLoader) aiLoader.style.display = 'block';
     if (terminalSubmit) terminalSubmit.style.opacity = '0.5';
 
-    // Adiciona mensagem do usuário no terminal
-    const userLine = isEnglishPage
-        ? `<br><span class="user-msg">&gt; ${query}</span>`
-        : `<br><span class="user-msg">&gt; ${query}</span>`;
-
-    terminalOutput.innerHTML += userLine;
+    terminalOutput.innerHTML += `<br><span class="user-msg">&gt; ${query}</span>`;
     terminalOutput.scrollTop = terminalOutput.scrollHeight;
 
-    // Obtém o tipo de usuário atual
     const userType = getUserType();
 
-    // Simulação inteligente com delay realista
     setTimeout(() => {
         let response = "";
-
         const lowerQuery = query.toLowerCase();
 
-        // Comandos específicos (mantendo o espírito anterior)
         if (lowerQuery.includes('aram')) {
             response = isEnglishPage
                 ? "ARAM METHOD: Portable architecture system for decision-making under extreme pressure. Status: ACTIVE."
@@ -196,7 +209,6 @@ function processTerminalCommand() {
                 : "Atuamos na interseção entre Arquitetura Estratégica e Sistemas Cognitivos. Não aconselhamos — reconfiguramos a arquitetura de decisão.";
         }
         else {
-            // Respostas dinâmicas baseadas no perfil do usuário
             if (userType === "decisor") {
                 response = isEnglishPage
                     ? "Your urgency suggests the decision point has already been reached. The next move must be structural."
@@ -219,22 +231,15 @@ function processTerminalCommand() {
             }
         }
 
-        // Exibe a resposta
-        const sysLine = isEnglishPage
-            ? `<br><span class="sys-msg">SYS-RESPONSE:</span> ${response}`
-            : `<br><span class="sys-msg">SYS-RESPONSE:</span> ${response}`;
-
-        terminalOutput.innerHTML += sysLine;
+        terminalOutput.innerHTML += `<br><span class="sys-msg">SYS-RESPONSE:</span> ${response}`;
         terminalOutput.scrollTop = terminalOutput.scrollHeight;
 
-        // Reset do loader
         if (aiLoader) aiLoader.style.display = 'none';
         if (terminalSubmit) terminalSubmit.style.opacity = '1';
 
     }, 1350);
 }
 
-// Eventos
 if (terminalInput) {
     terminalInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') processTerminalCommand();
@@ -249,10 +254,17 @@ if (terminalSubmit) {
 function handleCTA(e) {
     e.preventDefault();
     const type = getUserType();
-    let msg = "Quero entender melhor o que você faz.";
-    if (type === "decisor") msg = "Quero começar agora. Me mostra o caminho direto.";
-    else if (type === "analitico") msg = "Analisei seu método. Quero entender como aplicar no meu caso.";
-    const url = `https://wa.me/5512981216006?text=${encodeURIComponent(msg)}`;
+    
+    let msgPT = "Quero entender melhor o que você faz.";
+    if (type === "decisor") msgPT = "Quero começar agora. Me mostra o caminho direto.";
+    else if (type === "analitico") msgPT = "Analisei seu método. Quero entender como aplicar no meu caso.";
+
+    let msgEN = "I want to better understand what you do.";
+    if (type === "decisor") msgEN = "I want to start now. Show me the direct path.";
+    else if (type === "analitico") msgEN = "I analyzed your method. I want to understand how to apply it to my case.";
+
+    const finalMsg = isEnglishPage ? msgEN : msgPT;
+    const url = `https://wa.me/5512981216006?text=${encodeURIComponent(finalMsg)}`;
     window.open(url, '_blank');
 }
 
@@ -260,6 +272,4 @@ document.querySelectorAll('.cta').forEach(btn => {
     btn.addEventListener('click', handleCTA);
 });
 
-// ====================== INIT ======================
-console.log("%c🧠 Cognitive System v0.7 - Terminal IA Restaurado + Partículas Avançadas", "color:#00f0ff; font-size:12px");
-revealOnScroll();
+console.log("%c🧠 Cognitive System v0.9.2 - Full Multilingual Mode Active", "color:#00f0ff; font-size:12px");
