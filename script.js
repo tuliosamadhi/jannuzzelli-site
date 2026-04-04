@@ -278,6 +278,18 @@ function generateResponse(query, userType) {
 
     let response = "";
 
+    // ====================== RESPOSTA DIRETA POR INTENÇÃO ======================
+
+    if (intent === "decisor") {
+
+        if (lang === "en") {
+            return "You're not looking for more information. You're deciding whether this is worth moving forward.\n\n→ Request strategic access.";
+        } else {
+            return "Você não está buscando mais informação. Está decidindo se vale avançar.\n\n→ Solicitar acesso estratégico.";
+        }
+
+    }
+
     // ====================== CORE RESPONSE ======================
 
     if (lang === "en") {
