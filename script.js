@@ -290,8 +290,17 @@ function generateResponse(query, userType) {
             response = "What you're describing is not complexity. It's unstructured variables.";
         }
 
-        else if (persona === "mentor") {
-            response = "You're exploring something that can evolve if properly structured.";
+        if (persona === "mentor") {
+
+            const variations = [
+                "Você está explorando algo que pode evoluir se bem estruturado.",
+                "O que você trouxe ainda está na superfície do problema.",
+                "Existe um padrão aqui — mas você ainda não isolou a variável crítica.",
+                "Você está olhando para o sintoma, não para a estrutura.",
+                "Isso só começa a fazer sentido quando você muda o nível de análise."
+            ];
+
+            response = variations[Math.floor(Math.random() * variations.length)];
         }
 
         else {
