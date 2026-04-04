@@ -164,7 +164,7 @@ function updateDynamicCopy() {
 }
 setInterval(updateDynamicCopy, 5500);
 
-// ====================== TERMINAL IA COM I-CHING EMBUTIDO (VERSÃO PARA TESTE) ======================
+// ====================== TERMINAL IA COM I-CHING EMBUTIDO (VERSÃO FINAL OTIMIZADA) ======================
 const terminalInput = document.getElementById('ai-terminal-input');
 const terminalOutput = document.getElementById('ai-terminal-output');
 const terminalSubmit = document.getElementById('ai-terminal-submit');
@@ -175,34 +175,6 @@ const initialMsg = isEnglishPage
     : "SYS: Aguardando entrada cognitiva... Tente 'ARAM', 'Contexto', 'Decisão', 'Preço' ou 'Estratégia'.";
 
 if (terminalOutput) terminalOutput.textContent = initialMsg;
-
-// IchingEngine embutido (sem arquivo separado)
-const iching = {
-    castHexagram() {
-        return Array.from({ length: 6 }, () => Math.floor(Math.random() * 4) + 6);
-    },
-    getHexagramData(lines) {
-        const intensity = lines.filter(l => l === 6 || l === 9).length;
-        return { intensity };
-    },
-    generateCognitiveResponse(hexData, userType) {
-        const hasStrongMutation = hexData.intensity >= 3;
-
-        if (userType === "decisor") {
-            return isEnglishPage
-                ? "The pattern indicates the strategic decision point has already been surpassed. Maintaining current governance architecture exposes the organization to significant institutional risks. A fundamental reconfiguration of executive decision frameworks is now required."
-                : "O padrão indica que o ponto de decisão estratégica já foi ultrapassado. Manter a arquitetura atual de governança expõe a organização a riscos institucionais significativos. É necessária uma reconfiguração fundamental dos frameworks executivos de decisão.";
-        }
-        if (userType === "analitico") {
-            return isEnglishPage
-                ? "The misalignment is not in the data, but in the cognitive architecture that organizes governance and execution. Consolidation of institutional structures is required before any digital transformation."
-                : "O desalinhamento não está nos dados, mas na arquitetura cognitiva que organiza governança e execução. É necessária a consolidação de estruturas institucionais antes de qualquer transformação digital.";
-        }
-        return isEnglishPage
-            ? "The system has detected structural hesitation at the executive level. Before advancing in digital integration or restructuring, C-Level decision frameworks and institutional governance must be redefined."
-            : "O sistema detectou hesitação estrutural no nível executivo. Antes de avançar em integração digital ou reestruturação, é essencial redefinir os frameworks de decisão de C-Level e a governança institucional.";
-    }
-};
 
 function processTerminalCommand() {
     const query = terminalInput.value.trim();
@@ -219,48 +191,87 @@ function processTerminalCommand() {
 
     setTimeout(() => {
         let response = "";
+        const lowerQuery = query.toLowerCase();
 
-        // Ativação forte para teste (80% de chance)
-        const useIching = Math.random() < 0.80;
-
-        console.log(`🔥 I-Ching ativado: ${useIching} | Tipo: ${userType}`);   // Debug
+        // Ativação do I-Ching em 75% das consultas (bem perceptível)
+        const useIching = Math.random() < 0.75;
 
         if (useIching) {
-            const lines = iching.castHexagram();
-            const hexData = iching.getHexagramData(lines);
-            response = iching.generateCognitiveResponse(hexData, userType);
+            // Gera intensidade do I-Ching
+            const intensity = Math.floor(Math.random() * 5) + 2; // 2 a 6 mutações
+
+            if (userType === "decisor") {
+                response = isEnglishPage
+                    ? "The pattern indicates the strategic decision point has already been surpassed. Maintaining current governance architecture exposes the organization to significant institutional risks. A fundamental reconfiguration of executive decision frameworks is required."
+                    : "O padrão indica que o ponto de decisão estratégica já foi ultrapassado. Manter a arquitetura atual de governança expõe a organização a riscos institucionais significativos. É necessária uma reconfiguração fundamental dos frameworks executivos de decisão.";
+            }
+            else if (userType === "analitico") {
+                response = isEnglishPage
+                    ? "The misalignment is not in the data, but in the cognitive architecture organizing governance and execution. Institutional structures must be consolidated before any digital transformation."
+                    : "O desalinhamento não está nos dados, mas na arquitetura cognitiva que organiza governança e execução. É necessária a consolidação de estruturas institucionais antes de qualquer transformação digital.";
+            }
+            else {
+                response = isEnglishPage
+                    ? "The system has detected structural hesitation at the executive level. Before advancing in any digital integration or restructuring, C-Level decision frameworks and institutional governance must be redefined."
+                    : "O sistema detectou hesitação estrutural no nível executivo. Antes de avançar em integração digital ou reestruturação, é essencial redefinir os frameworks de decisão de C-Level e a governança institucional.";
+            }
+
+            // Camada extra quando a mutação é forte
+            if (intensity >= 4) {
+                response += isEnglishPage
+                    ? " The mutation intensity suggests this is not an incremental correction, but a structural transformation."
+                    : " A intensidade da mutação sugere que não se trata de uma correção incremental, mas de uma transformação estrutural.";
+            }
         }
         else {
-            // Respostas normais (suas antigas)
-            const lowerQuery = query.toLowerCase();
+            // Respostas normais (sem I-Ching)
             if (lowerQuery.includes('aram')) {
-                response = isEnglishPage ? "ARAM METHOD: Portable architecture system for decision-making under extreme pressure. Status: ACTIVE." : "MÉTODO ARAM: Sistema de arquitetura portátil para decisão sob pressão extrema. Status: ATIVO.";
-            } else if (lowerQuery.includes('preço') || lowerQuery.includes('price') || lowerQuery.includes('valor')) {
-                response = isEnglishPage ? "VALUE: Investment is proportional to the complexity of the system to be restructured." : "VALOR: O investimento é proporcional à complexidade do sistema a ser reestruturado.";
-            } else {
+                response = isEnglishPage
+                    ? "ARAM METHOD: Portable architecture system for decision-making under extreme pressure. Status: ACTIVE."
+                    : "MÉTODO ARAM: Sistema de arquitetura portátil para decisão sob pressão extrema. Status: ATIVO.";
+            }
+            else if (lowerQuery.includes('preço') || lowerQuery.includes('price') || lowerQuery.includes('valor') || lowerQuery.includes('cost')) {
+                response = isEnglishPage
+                    ? "VALUE: Investment is proportional to the complexity of the system to be restructured."
+                    : "VALOR: O investimento é proporcional à complexidade do sistema a ser reestruturado.";
+            }
+            else if (lowerQuery.includes('como funciona') || lowerQuery.includes('how does it work') || lowerQuery.includes('method')) {
+                response = isEnglishPage
+                    ? "We operate at the intersection of Strategic Architecture and Cognitive Systems. We don't advise — we reconfigure decision architecture."
+                    : "Atuamos na interseção entre Arquitetura Estratégica e Sistemas Cognitivos. Não aconselhamos — reconfiguramos a arquitetura de decisão.";
+            }
+            else {
                 const base = {
-                    "decisor": isEnglishPage ? "Your urgency suggests the decision point has already been reached." : "Sua urgência indica que o ponto de decisão já foi alcançado.",
+                    "decisor": isEnglishPage ? "Your urgency suggests the decision point has already been reached. The next move must be structural." : "Sua urgência indica que o ponto de decisão já foi alcançado. O próximo movimento deve ser estrutural.",
                     "analitico": isEnglishPage ? "The bottleneck is not in the data, but in the architecture." : "O gargalo não está nos dados, mas na arquitetura.",
-                    "morno": isEnglishPage ? "You are on the threshold of structural clarity." : "Você está no limiar da clareza estrutural.",
+                    "morno": isEnglishPage ? "You are on the threshold. Clarity comes when perception aligns with decision structure." : "Você está no limiar. A clareza vem quando a percepção se alinha com a estrutura de decisão.",
                     "frio": isEnglishPage ? "The system has detected cognitive hesitation." : "O sistema detectou hesitação cognitiva."
                 };
                 response = base[userType] || base["frio"];
             }
         }
 
+        // Adiciona a resposta do sistema
         terminalOutput.innerHTML += `<br><span class="sys-msg">SYS-RESPONSE:</span> ${response}`;
         terminalOutput.scrollTop = terminalOutput.scrollHeight;
 
+        // Reset completo do estado
         if (aiLoader) aiLoader.style.display = 'none';
         if (terminalSubmit) terminalSubmit.style.opacity = '1';
         terminalInput.focus();
 
-    }, 1400);
+    }, 1350);
 }
 
-// Eventos
-if (terminalInput) terminalInput.addEventListener('keypress', e => { if (e.key === 'Enter') processTerminalCommand(); });
-if (terminalSubmit) terminalSubmit.addEventListener('click', processTerminalCommand);
+// Eventos do terminal
+if (terminalInput) {
+    terminalInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') processTerminalCommand();
+    });
+}
+if (terminalSubmit) {
+    terminalSubmit.addEventListener('click', processTerminalCommand);
+}
 
 // ====================== WHATSAPP INTELIGENTE ======================
 function handleCTA(e) {
@@ -286,6 +297,3 @@ document.querySelectorAll('.cta').forEach(btn => {
 
 console.log("%c🧠 Cognitive System v0.9.2 - Full Multilingual Mode Active", "color:#00f0ff; font-size:12px");
 
-// Dentro do setTimeout, após calcular 'response':
-
-terminalOutput.innerHTML += `<br><span class="sys-msg">SYS-RESPONSE:</span> ${response}`;
