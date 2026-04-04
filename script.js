@@ -380,7 +380,12 @@ function processTerminalCommand() {
     cognitiveState.intensity = Math.min(cognitiveState.intensity, 3);
     cognitiveState.depth += 0.1;
 
-    terminalOutput.innerHTML += `<br>&gt; ${query}`;
+    const safeQuery = query
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+    terminalOutput.innerHTML += `<br>&gt; ${safeQuery}`;
 
     const userType = getUserType();
 
@@ -400,18 +405,115 @@ if (terminalSubmit) {
     terminalSubmit.addEventListener('click', processTerminalCommand);
 }
 
-// ====================== WHATSAPP ======================
-function handleCTA(e) {
-    e.preventDefault();
+// ====================== WHATSAPP ELITE ======================
+function buildWhatsAppMessage() {
+
     const type = getUserType();
+    const lastInput = memory.length ? memory[memory.length - 1] : "";
+    const lang = lastInput ? detectLanguage(lastInput) : (isEnglishPage ? "en" : "pt");
+    const intensity = getCognitiveIntensity();
 
-    let msg = "Quero entender melhor.";
-    if (type === "decisor") msg = "Quero começar agora.";
-    if (type === "analitico") msg = "Quero aplicar no meu caso.";
+    // ====================== BASE ======================
 
-    window.open(`https://wa.me/5512981216006?text=${encodeURIComponent(msg)}`, '_blank');
+    let msg = "";
+
+    if (lang === "en") {
+
+        msg += "Access initiated.\n\n";
+        msg += "I went through the cognitive interface";
+
+        if (intensity >= 3) {
+            msg += " and identified consistent patterns";
+        }
+
+        msg += ".\n";
+
+        if (type === "decisor") {
+            msg += "I'm ready to move forward.\n";
+        } else if (type === "analitico") {
+            msg += "I want to validate this in my context.\n";
+        } else {
+            msg += "I want to explore the next layer.\n";
+        }
+
+        if (lastInput) {
+            msg += `\nStrategic context detected: "${lastInput.substring(0, 120)}"`;
+        }
+
+        if (intensity >= 4) {
+            msg += "\nPriority level: High.";
+        }
+
+        msg += "\n\n— Cognitive Interface Protocol";
+
+    } else {
+
+        msg += "Acesso iniciado.\n\n";
+        msg += "Passei pela interface cognitiva";
+
+        if (intensity >= 3) {
+            msg += " e identifiquei padrões consistentes";
+        }
+
+        msg += ".\n";
+
+        if (type === "decisor") {
+            msg += "Estou pronto para avançar.\n";
+        } else if (type === "analitico") {
+            msg += "Quero validar isso no meu contexto.\n";
+        } else {
+            msg += "Quero explorar a próxima camada.\n";
+        }
+
+        if (lastInput) {
+            msg += `\nContexto estratégico detectado: "${lastInput.substring(0, 120)}"`;
+        }
+
+        if (intensity >= 4) {
+            msg += "\nNível de prioridade: Alto.";
+        }
+
+        msg += "\n\n— Protocolo de Interface Cognitiva";
+    }
+
+    return msg;
 }
 
+// ====================== HANDLER ======================
+function handleCTA(e) {
+    e.preventDefault();
+
+    // Micro-delay para simular sistema
+    const loaderMsg = isEnglishPage
+        ? "SYS: Opening restricted channel..."
+        : "SYS: Abrindo canal restrito...";
+
+    const terminalOutput = document.getElementById('ai-terminal-output');
+
+    if (terminalOutput) {
+        terminalOutput.innerHTML += `<br>${loaderMsg}`;
+        terminalOutput.innerHTML += isEnglishPage
+            ? "<br>SYS: Validating access..."
+            : "<br>SYS: Validando acesso...";
+
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
+
+    setTimeout(() => {
+
+        // 🔥 UPGRADE COGNITIVO
+        cognitiveState.intensity += 1;
+        cognitiveState.intensity = Math.min(cognitiveState.intensity, 5);
+
+        const msg = buildWhatsAppMessage();
+
+        window.open(`https://wa.me/5512981216006?text=${encodeURIComponent(msg)}`, '_blank');
+
+    }, 900);
+
+}
+
+// ====================== BIND GLOBAL ======================
 document.querySelectorAll('.cta').forEach(btn => {
     btn.addEventListener('click', handleCTA);
 });
