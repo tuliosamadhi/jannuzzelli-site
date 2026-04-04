@@ -188,44 +188,155 @@ function generateHexagram() {
     return mutation;
 }
 
+// ====================== INTENT ENGINE ======================
+function detectIntent(query) {
+    const q = query.toLowerCase();
+
+    if (q.match(/price|cost|buy|contratar|valor|preço/)) return "decisor";
+    if (q.match(/how|como|process|metodo|estrategia|strategy/)) return "analitico";
+    if (q.match(/what|o que|explore|entender/)) return "explorador";
+
+    return "indefinido";
+}
+
+// ====================== LANGUAGE ENGINE ======================
+function detectLanguage(query) {
+    const hasEN = query.match(/\b(the|is|are|how|what|why)\b/i);
+    const hasPT = query.match(/\b(o|a|como|por que|qual)\b/i);
+
+    if (hasEN && !hasPT) return "en";
+    if (hasPT && !hasEN) return "pt";
+
+    return isEnglishPage ? "en" : "pt";
+}
+
+// ====================== PERSONA ENGINE ======================
+function getPersona(intent, intensity) {
+    if (intent === "decisor") return intensity >= 3 ? "provocador" : "analista";
+    if (intent === "analitico") return "analista";
+    if (intent === "explorador") return "mentor";
+    return "oraculo";
+}
+
+// ====================== CASE ENGINE ======================
+function generateCase(lang) {
+
+    const casesPT = [
+        "Em um projeto de alta complexidade no setor energético, uma decisão de CAPEX superior a 40M ficou travada até reestruturarmos o modelo de risco.",
+        "Em um ambiente de inovação com múltiplas variáveis, o problema não era tecnologia, mas desalinhamento cognitivo na tomada de decisão.",
+        "Em um contexto de IA aplicada, o gargalo não era algoritmo, mas a ausência de um modelo estratégico de priorização."
+    ];
+
+    const casesEN = [
+        "In a high-complexity energy project, a $40M CAPEX decision stalled until we restructured the risk model.",
+        "In an innovation environment, the issue wasn't technology, but cognitive misalignment in decision-making.",
+        "In applied AI, the bottleneck wasn't the algorithm, but the absence of a strategic prioritization model."
+    ];
+
+    const pool = lang === "en" ? casesEN : casesPT;
+    return pool[Math.floor(Math.random() * pool.length)];
+}
+
+// ====================== CTA ENGINE ======================
+function generateCTA(intent, lang, intensity) {
+
+    if (memory.length < 3) return "";
+
+    if (lang === "en") {
+
+        if (intent === "decisor") return "→ Request strategic access.";
+        if (intent === "analitico") return "→ See this applied to your context.";
+
+        return "→ Continue this exploration.";
+
+    } else {
+
+        if (intent === "decisor") return "→ Solicitar acesso estratégico.";
+        if (intent === "analitico") return "→ Ver aplicação no seu contexto.";
+
+        return "→ Aprofundar essa exploração.";
+    }
+}
+
+// ====================== INTENSITY ======================
+function getCognitiveIntensity() {
+    let base = cognitiveState.intensity;
+
+    if (memory.length > 3) base += 1;
+    if (memory.length > 6) base += 1;
+
+    return Math.min(base, 5);
+}
+
 // ====================== RESPONSE ENGINE ======================
 function generateResponse(query, userType) {
 
-    const mutation = generateHexagram();
+    const intent = detectIntent(query);
+    const lang = detectLanguage(query);
+    const intensity = getCognitiveIntensity();
+    const persona = getPersona(intent, intensity);
 
-    const base = {
-        decisor: [
-            "Você já cruzou o ponto de decisão.",
-            "A estrutura atual não sustenta o próximo movimento.",
-            "O custo de não agir já está ativo."
-        ],
-        analitico: [
-            "Você já tem dados suficientes.",
-            "O excesso de análise mascara o desalinhamento.",
-            "A estrutura não acompanha sua capacidade cognitiva."
-        ],
-        morno: [
-            "Existe um padrão que você ainda não nomeou.",
-            "Você percebe, mas não estruturou."
-        ],
-        frio: [
-            "Há algo aqui que você ainda não está vendo.",
-            "O sistema ainda está sendo observado."
-        ]
-    };
+    let response = "";
 
-    let response = base[userType][Math.floor(Math.random() * base[userType].length)];
+    // ====================== CORE RESPONSE ======================
 
-    if (memory.length > 2) {
-        response += " Um padrão recorrente foi detectado.";
+    if (lang === "en") {
+
+        if (persona === "provocador") {
+            response = "You're not stuck. You're avoiding the real decision.";
+        }
+
+        else if (persona === "analista") {
+            response = "What you're describing is not complexity. It's unstructured variables.";
+        }
+
+        else if (persona === "mentor") {
+            response = "You're exploring something that can evolve if properly structured.";
+        }
+
+        else {
+            response = "There is a signal here. You just haven't decoded it yet.";
+        }
+
+    } else {
+
+        if (persona === "provocador") {
+            response = "Você não está travado. Está evitando a decisão real.";
+        }
+
+        else if (persona === "analista") {
+            response = "O que você descreve não é complexidade. São variáveis não estruturadas.";
+        }
+
+        else if (persona === "mentor") {
+            response = "Você está explorando algo que pode evoluir se bem estruturado.";
+        }
+
+        else {
+            response = "Existe um sinal aqui. Você ainda não decodificou.";
+        }
+
     }
 
-    if (mutation >= 3) {
-        response += " Isso indica transformação estrutural.";
+    // ====================== CAMADA ESTRATÉGICA ======================
+
+    if (intensity >= 3) {
+        response += "\n\n" + generateCase(lang);
     }
 
-    if (cognitiveState.depth > 2) {
-        response += " Isso é arquitetura de identidade.";
+    // ====================== CAMADA PROFUNDA ======================
+
+    if (intensity >= 4) {
+        response += lang === "en"
+            ? "\n\nThe system is already mapping your decision pattern."
+            : "\n\nO sistema já está mapeando seu padrão decisório.";
+    }
+
+    // ====================== CTA ======================
+
+    const cta = generateCTA(intent, lang, intensity);
+    if (cta) {
+        response += "\n\n" + cta;
     }
 
     return response;
