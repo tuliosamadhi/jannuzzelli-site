@@ -164,7 +164,7 @@ function updateDynamicCopy() {
 }
 setInterval(updateDynamicCopy, 5500);
 
-// ====================== TERMINAL IA COM I-CHING INVISÍVEL ======================
+// ====================== TERMINAL IA COM I-CHING INVISÍVEL (VERSÃO CORRIGIDA) ======================
 const terminalInput = document.getElementById('ai-terminal-input');
 const terminalOutput = document.getElementById('ai-terminal-output');
 const terminalSubmit = document.getElementById('ai-terminal-submit');
@@ -180,10 +180,12 @@ function processTerminalCommand() {
     const query = terminalInput.value.trim();
     if (!query) return;
 
+    // Limpa input e mostra loader
     terminalInput.value = '';
     if (aiLoader) aiLoader.style.display = 'block';
     if (terminalSubmit) terminalSubmit.style.opacity = '0.5';
 
+    // Adiciona mensagem do usuário
     terminalOutput.innerHTML += `<br><span class="user-msg">&gt; ${query}</span>`;
     terminalOutput.scrollTop = terminalOutput.scrollHeight;
 
@@ -193,17 +195,16 @@ function processTerminalCommand() {
         let response = "";
         const lowerQuery = query.toLowerCase();
 
-        // Ativação do I-Ching em 50% a 80% dos casos
-        const useIching = Math.random() < 0.68;   // 68% de chance (dentro da sua faixa)
+        // Ativação do I-Ching em ~68% das consultas
+        const useIching = Math.random() < 0.68;
 
         if (useIching) {
-            // I-Ching invisível + interpretação C-Level
             const lines = iching.castHexagram();
             const hexData = iching.getHexagramData(lines);
             response = iching.generateCognitiveResponse(hexData, userType, query);
         }
         else {
-            // Resposta normal (sem I-Ching) - mantida igual à sua versão atual
+            // Respostas normais (mantidas iguais às suas)
             if (lowerQuery.includes('aram')) {
                 response = isEnglishPage
                     ? "ARAM METHOD: Portable architecture system for decision-making under extreme pressure. Status: ACTIVE."
@@ -220,43 +221,45 @@ function processTerminalCommand() {
                     : "Atuamos na interseção entre Arquitetura Estratégica e Sistemas Cognitivos. Não aconselhamos — reconfiguramos a arquitetura de decisão.";
             }
             else {
-                if (userType === "decisor") {
-                    response = isEnglishPage
+                const baseResponses = {
+                    "decisor": isEnglishPage
                         ? "Your urgency suggests the decision point has already been reached. The next move must be structural."
-                        : "Sua urgência indica que o ponto de decisão já foi alcançado. O próximo movimento deve ser estrutural.";
-                }
-                else if (userType === "analitico") {
-                    response = isEnglishPage
+                        : "Sua urgência indica que o ponto de decisão já foi alcançado. O próximo movimento deve ser estrutural.",
+                    "analitico": isEnglishPage
                         ? "Your deep analysis shows the bottleneck is not in the data, but in the architecture organizing that data."
-                        : "Sua análise profunda mostra que o gargalo não está nos dados, mas na arquitetura que organiza esses dados.";
-                }
-                else if (userType === "morno") {
-                    response = isEnglishPage
+                        : "Sua análise profunda mostra que o gargalo não está nos dados, mas na arquitetura que organiza esses dados.",
+                    "morno": isEnglishPage
                         ? "You are on the threshold. Clarity comes when perception aligns with decision structure."
-                        : "Você está no limiar. A clareza vem quando a percepção se alinha com a estrutura de decisão.";
-                }
-                else {
-                    response = isEnglishPage
+                        : "Você está no limiar. A clareza vem quando a percepção se alinha com a estrutura de decisão.",
+                    "frio": isEnglishPage
                         ? "The system has detected cognitive hesitation. The first reconfiguration begins with how you perceive the problem."
-                        : "O sistema detectou hesitação cognitiva. A primeira reconfiguração começa na forma como você percebe o problema.";
-                }
+                        : "O sistema detectou hesitação cognitiva. A primeira reconfiguração começa na forma como você percebe o problema."
+                };
+                response = baseResponses[userType] || baseResponses["frio"];
             }
         }
 
+        // Adiciona resposta do sistema
         terminalOutput.innerHTML += `<br><span class="sys-msg">SYS-RESPONSE:</span> ${response}`;
         terminalOutput.scrollTop = terminalOutput.scrollHeight;
 
+        // Reset do estado (IMPORTANTE - corrige o botão ficar off)
         if (aiLoader) aiLoader.style.display = 'none';
         if (terminalSubmit) terminalSubmit.style.opacity = '1';
+
+        // Limpa o input visualmente
+        terminalInput.focus();
+
     }, 1450);
 }
 
-// Eventos do terminal (mantidos iguais)
+// Eventos (corrigido para funcionar múltiplas vezes)
 if (terminalInput) {
     terminalInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') processTerminalCommand();
     });
 }
+
 if (terminalSubmit) {
     terminalSubmit.addEventListener('click', processTerminalCommand);
 }
