@@ -135,9 +135,9 @@ updateProfile();
 function updateDynamicCopy() {
     const el = document.querySelector('.hero-highlight');
     if (!el) return;
-    
+
     const type = getUserType();
-    
+
     // Dicionário de mensagens por idioma
     const messagesPT = {
         "decisor": "Você já sabe o que precisa fazer.",
@@ -164,7 +164,7 @@ function updateDynamicCopy() {
 }
 setInterval(updateDynamicCopy, 5500);
 
-// ====================== TERMINAL IA ======================
+// ====================== TERMINAL IA COM I-CHING INVISÍVEL ======================
 const terminalInput = document.getElementById('ai-terminal-input');
 const terminalOutput = document.getElementById('ai-terminal-output');
 const terminalSubmit = document.getElementById('ai-terminal-submit');
@@ -193,41 +193,53 @@ function processTerminalCommand() {
         let response = "";
         const lowerQuery = query.toLowerCase();
 
-        if (lowerQuery.includes('aram')) {
-            response = isEnglishPage
-                ? "ARAM METHOD: Portable architecture system for decision-making under extreme pressure. Status: ACTIVE."
-                : "MÉTODO ARAM: Sistema de arquitetura portátil para decisão sob pressão extrema. Status: ATIVO.";
-        }
-        else if (lowerQuery.includes('preço') || lowerQuery.includes('price') || lowerQuery.includes('valor') || lowerQuery.includes('cost')) {
-            response = isEnglishPage
-                ? "VALUE: Investment is proportional to the complexity of the system to be restructured. Request strategic access for proper analysis."
-                : "VALOR: O investimento é proporcional à complexidade do sistema a ser reestruturado. Solicite acesso estratégico para análise detalhada.";
-        }
-        else if (lowerQuery.includes('como funciona') || lowerQuery.includes('how does it work') || lowerQuery.includes('method')) {
-            response = isEnglishPage
-                ? "We operate at the intersection of Strategic Architecture and Cognitive Systems. We don't advise — we reconfigure decision architecture."
-                : "Atuamos na interseção entre Arquitetura Estratégica e Sistemas Cognitivos. Não aconselhamos — reconfiguramos a arquitetura de decisão.";
+        // Ativação do I-Ching em 50% a 80% dos casos
+        const useIching = Math.random() < 0.68;   // 68% de chance (dentro da sua faixa)
+
+        if (useIching) {
+            // I-Ching invisível + interpretação C-Level
+            const lines = iching.castHexagram();
+            const hexData = iching.getHexagramData(lines);
+            response = iching.generateCognitiveResponse(hexData, userType, query);
         }
         else {
-            if (userType === "decisor") {
+            // Resposta normal (sem I-Ching) - mantida igual à sua versão atual
+            if (lowerQuery.includes('aram')) {
                 response = isEnglishPage
-                    ? "Your urgency suggests the decision point has already been reached. The next move must be structural."
-                    : "Sua urgência indica que o ponto de decisão já foi alcançado. O próximo movimento deve ser estrutural.";
+                    ? "ARAM METHOD: Portable architecture system for decision-making under extreme pressure. Status: ACTIVE."
+                    : "MÉTODO ARAM: Sistema de arquitetura portátil para decisão sob pressão extrema. Status: ATIVO.";
             }
-            else if (userType === "analitico") {
+            else if (lowerQuery.includes('preço') || lowerQuery.includes('price') || lowerQuery.includes('valor') || lowerQuery.includes('cost')) {
                 response = isEnglishPage
-                    ? "Your deep analysis shows the bottleneck is not in the data, but in the architecture organizing that data."
-                    : "Sua análise profunda mostra que o gargalo não está nos dados, mas na arquitetura que organiza esses dados.";
+                    ? "VALUE: Investment is proportional to the complexity of the system to be restructured. Request strategic access for proper analysis."
+                    : "VALOR: O investimento é proporcional à complexidade do sistema a ser reestruturado. Solicite acesso estratégico para análise detalhada.";
             }
-            else if (userType === "morno") {
+            else if (lowerQuery.includes('como funciona') || lowerQuery.includes('how does it work') || lowerQuery.includes('method')) {
                 response = isEnglishPage
-                    ? "You are on the threshold. Clarity comes when perception aligns with decision structure."
-                    : "Você está no limiar. A clareza vem quando a percepção se alinha com a estrutura de decisão.";
+                    ? "We operate at the intersection of Strategic Architecture and Cognitive Systems. We don't advise — we reconfigure decision architecture."
+                    : "Atuamos na interseção entre Arquitetura Estratégica e Sistemas Cognitivos. Não aconselhamos — reconfiguramos a arquitetura de decisão.";
             }
             else {
-                response = isEnglishPage
-                    ? "The system has detected cognitive hesitation. The first reconfiguration begins with how you perceive the problem."
-                    : "O sistema detectou hesitação cognitiva. A primeira reconfiguração começa na forma como você percebe o problema.";
+                if (userType === "decisor") {
+                    response = isEnglishPage
+                        ? "Your urgency suggests the decision point has already been reached. The next move must be structural."
+                        : "Sua urgência indica que o ponto de decisão já foi alcançado. O próximo movimento deve ser estrutural.";
+                }
+                else if (userType === "analitico") {
+                    response = isEnglishPage
+                        ? "Your deep analysis shows the bottleneck is not in the data, but in the architecture organizing that data."
+                        : "Sua análise profunda mostra que o gargalo não está nos dados, mas na arquitetura que organiza esses dados.";
+                }
+                else if (userType === "morno") {
+                    response = isEnglishPage
+                        ? "You are on the threshold. Clarity comes when perception aligns with decision structure."
+                        : "Você está no limiar. A clareza vem quando a percepção se alinha com a estrutura de decisão.";
+                }
+                else {
+                    response = isEnglishPage
+                        ? "The system has detected cognitive hesitation. The first reconfiguration begins with how you perceive the problem."
+                        : "O sistema detectou hesitação cognitiva. A primeira reconfiguração começa na forma como você percebe o problema.";
+                }
             }
         }
 
@@ -236,16 +248,15 @@ function processTerminalCommand() {
 
         if (aiLoader) aiLoader.style.display = 'none';
         if (terminalSubmit) terminalSubmit.style.opacity = '1';
-
-    }, 1350);
+    }, 1450);
 }
 
+// Eventos do terminal (mantidos iguais)
 if (terminalInput) {
     terminalInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') processTerminalCommand();
     });
 }
-
 if (terminalSubmit) {
     terminalSubmit.addEventListener('click', processTerminalCommand);
 }
@@ -254,7 +265,7 @@ if (terminalSubmit) {
 function handleCTA(e) {
     e.preventDefault();
     const type = getUserType();
-    
+
     let msgPT = "Quero entender melhor o que você faz.";
     if (type === "decisor") msgPT = "Quero começar agora. Me mostra o caminho direto.";
     else if (type === "analitico") msgPT = "Analisei seu método. Quero entender como aplicar no meu caso.";
@@ -273,3 +284,7 @@ document.querySelectorAll('.cta').forEach(btn => {
 });
 
 console.log("%c🧠 Cognitive System v0.9.2 - Full Multilingual Mode Active", "color:#00f0ff; font-size:12px");
+
+// Dentro do setTimeout, após calcular 'response':
+
+terminalOutput.innerHTML += `<br><span class="sys-msg">SYS-RESPONSE:</span> ${response}`;
