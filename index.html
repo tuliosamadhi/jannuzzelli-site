@@ -21,11 +21,22 @@
         content="Arquitetura Cognitiva Estratégica para decisões em ambientes de alta complexidade.">
     <meta name="theme-color" content="#020304">
 
+    <!-- SEO & Social -->
     <meta property="og:title" content="Jannuzzelli — Cognitive Strategic Architecture">
-    <meta property="og:description" content="Reconfiguração cognitiva estrutural.">
+    <meta property="og:description"
+        content="Reconfiguração cognitiva estrutural. Arquitetura de decisão para ambientes de alta complexidade.">
     <meta property="og:image" content="https://www.jannuzzelli.com.br/assets/monogram.svg">
+    <meta property="og:url" content="https://www.jannuzzelli.com.br/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jannuzzelli — Cognitive Strategic Architecture">
+    <meta name="twitter:description" content="Reconfiguração cognitiva estrutural.">
+    <meta name="twitter:image" content="https://www.jannuzzelli.com.br/assets/monogram.svg">
+    <link rel="canonical" href="https://www.jannuzzelli.com.br/">
 
     <link rel="icon" type="image/svg+xml" href="assets/monogram.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono&display=swap"
         rel="stylesheet">
@@ -50,13 +61,13 @@
             <h4 class="micro-tag">COGNITIVE SYSTEM v0.9</h4>
         </header>
 
+        <!-- ─── HERO ──────────────────────────────────────────────────── -->
         <section class="hero">
             <h1>Jannuzzelli</h1>
-            <h2><h2>Arquitetura Cognitiva de Decisão Estratégica</h2></h2>
+            <h2>Arquitetura Cognitiva de Decisão Estratégica</h2>
 
             <p class="hero-text">
-                Você não está sem estratégia.
-                <br>
+                Você não está sem estratégia.<br>
                 Está operando dentro de um sistema de decisão distorcido.
             </p>
 
@@ -64,24 +75,37 @@
                 Poucos percebem. Menos ainda conseguem reconfigurar.
             </p>
 
-            <a href="#" class="cta glow magnetic" id="cta-main" data-intent="access" data-intensity="primary">
-                INICIAR ACESSO ESTRATÉGICO
+            <a href="#assessment" class="cta glow magnetic" id="cta-main" data-intent="access" data-intensity="primary">
+                INICIAR DIAGNÓSTICO
             </a>
         </section>
 
-        <!--
-  JANNUZZELLI — COGNITIVE PRESSURE ASSESSMENT
-  Insira esta seção no index.html após a seção .hero e antes do .ai-terminal-section
-  Adicione também o <link> das fontes se ainda não estiver no <head>:
-  Space Grotesk, Inter, JetBrains Mono — já presentes no site original
--->
-
+        <!-- ─── COGNITIVE PRESSURE ASSESSMENT ───────────────────────── -->
         <section class="jnz-assessment" id="assessment">
             <style>
                 .jnz-assessment {
                     position: relative;
                     padding: 100px 0 120px;
                     overflow: hidden;
+                    /* Isola do bg-monogram, canvas Three.js e scan-line */
+                    background: rgba(2, 3, 4, 0.72);
+                    backdrop-filter: blur(3px);
+                    -webkit-backdrop-filter: blur(3px);
+                    isolation: isolate;
+                }
+
+                /* Gradiente de fade nas bordas para integrar suavemente ao site */
+                .jnz-assessment::after {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(to bottom,
+                            rgba(2, 3, 4, 0.0) 0%,
+                            rgba(2, 3, 4, 0.55) 6%,
+                            rgba(2, 3, 4, 0.55) 94%,
+                            rgba(2, 3, 4, 0.0) 100%);
+                    pointer-events: none;
+                    z-index: 0;
                 }
 
                 .jnz-assessment::before {
@@ -93,12 +117,15 @@
                     width: 1px;
                     height: 60px;
                     background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.15));
+                    z-index: 1;
                 }
 
                 .asm-container {
                     max-width: 680px;
                     margin: 0 auto;
                     padding: 0 2rem;
+                    position: relative;
+                    z-index: 2;
                 }
 
                 .asm-header {
@@ -118,7 +145,7 @@
                     font-family: 'Space Grotesk', sans-serif;
                     font-size: clamp(24px, 4vw, 36px);
                     font-weight: 600;
-                    color: rgba(255, 255, 255, 0.92);
+                    color: rgba(255, 255, 255, 0.95);
                     line-height: 1.2;
                     margin-bottom: 16px;
                     letter-spacing: -0.02em;
@@ -127,11 +154,10 @@
                 .asm-sub {
                     font-family: 'Inter', sans-serif;
                     font-size: 15px;
-                    color: rgba(255, 255, 255, 0.38);
+                    color: rgba(255, 255, 255, 0.42);
                     line-height: 1.7;
                 }
 
-                /* Progress bar */
                 .asm-progress-wrap {
                     display: flex;
                     align-items: center;
@@ -165,7 +191,6 @@
                     text-align: right;
                 }
 
-                /* Question card */
                 .asm-question {
                     display: none;
                     animation: asm-fadein 0.5s ease forwards;
@@ -190,7 +215,7 @@
                 .asm-q-number {
                     font-family: 'JetBrains Mono', monospace;
                     font-size: 10px;
-                    color: rgba(255, 255, 255, 0.2);
+                    color: rgba(255, 255, 255, 0.25);
                     letter-spacing: 0.15em;
                     margin-bottom: 12px;
                 }
@@ -199,7 +224,7 @@
                     font-family: 'Space Grotesk', sans-serif;
                     font-size: clamp(17px, 2.5vw, 21px);
                     font-weight: 500;
-                    color: rgba(255, 255, 255, 0.88);
+                    color: rgba(255, 255, 255, 0.97);
                     line-height: 1.4;
                     margin-bottom: 10px;
                     letter-spacing: -0.01em;
@@ -208,12 +233,11 @@
                 .asm-q-sub {
                     font-family: 'Inter', sans-serif;
                     font-size: 13px;
-                    color: rgba(255, 255, 255, 0.28);
+                    color: rgba(255, 255, 255, 0.48);
                     margin-bottom: 36px;
                     line-height: 1.6;
                 }
 
-                /* Options */
                 .asm-options {
                     display: flex;
                     flex-direction: column;
@@ -225,11 +249,11 @@
                     align-items: center;
                     gap: 14px;
                     padding: 16px 20px;
-                    border: 0.5px solid rgba(255, 255, 255, 0.08);
+                    border: 0.5px solid rgba(255, 255, 255, 0.13);
                     border-radius: 4px;
                     cursor: pointer;
                     transition: all 0.2s ease;
-                    background: rgba(255, 255, 255, 0.01);
+                    background: rgba(0, 0, 0, 0.35);
                     position: relative;
                     overflow: hidden;
                 }
@@ -238,7 +262,7 @@
                     content: '';
                     position: absolute;
                     inset: 0;
-                    background: rgba(255, 255, 255, 0.03);
+                    background: rgba(255, 255, 255, 0.04);
                     opacity: 0;
                     transition: opacity 0.2s;
                 }
@@ -248,12 +272,12 @@
                 }
 
                 .asm-option:hover {
-                    border-color: rgba(255, 255, 255, 0.18);
+                    border-color: rgba(255, 255, 255, 0.28);
                 }
 
                 .asm-option.selected {
-                    border-color: rgba(255, 255, 255, 0.35);
-                    background: rgba(255, 255, 255, 0.04);
+                    border-color: rgba(255, 255, 255, 0.42);
+                    background: rgba(255, 255, 255, 0.07);
                 }
 
                 .asm-option.selected::before {
@@ -264,7 +288,7 @@
                     width: 6px;
                     height: 6px;
                     border-radius: 50%;
-                    border: 1px solid rgba(255, 255, 255, 0.25);
+                    border: 1px solid rgba(255, 255, 255, 0.28);
                     flex-shrink: 0;
                     transition: all 0.2s;
                 }
@@ -278,13 +302,13 @@
                 .asm-option-text {
                     font-family: 'Inter', sans-serif;
                     font-size: 14px;
-                    color: rgba(255, 255, 255, 0.55);
+                    color: rgba(255, 255, 255, 0.72);
                     line-height: 1.5;
                     transition: color 0.2s;
                 }
 
                 .asm-option.selected .asm-option-text {
-                    color: rgba(255, 255, 255, 0.88);
+                    color: rgba(255, 255, 255, 0.95);
                 }
 
                 .asm-option-score {
@@ -295,7 +319,6 @@
                     flex-shrink: 0;
                 }
 
-                /* Navigation */
                 .asm-nav {
                     display: flex;
                     align-items: center;
@@ -342,11 +365,10 @@
                 .asm-btn-hint {
                     font-family: 'JetBrains Mono', monospace;
                     font-size: 9px;
-                    color: rgba(255, 255, 255, 0.15);
+                    color: rgba(255, 255, 255, 0.18);
                     letter-spacing: 0.1em;
                 }
 
-                /* Result panel */
                 .asm-result {
                     display: none;
                     animation: asm-fadein 0.8s ease forwards;
@@ -451,12 +473,11 @@
 
                 .asm-analysis-title {
                     font-family: 'Space Grotesk', sans-serif;
-                    font-size: 14px;
+                    font-size: 11px;
                     font-weight: 600;
                     color: rgba(255, 255, 255, 0.5);
                     letter-spacing: 0.05em;
                     text-transform: uppercase;
-                    font-size: 11px;
                     margin-bottom: 14px;
                 }
 
@@ -487,8 +508,9 @@
 
                 .asm-dim-card {
                     padding: 16px;
-                    border: 0.5px solid rgba(255, 255, 255, 0.06);
+                    border: 0.5px solid rgba(255, 255, 255, 0.07);
                     border-radius: 2px;
+                    background: rgba(0, 0, 0, 0.2);
                 }
 
                 .asm-dim-label {
@@ -594,7 +616,6 @@
                         específico.</p>
                 </div>
 
-                <!-- Progress -->
                 <div class="asm-progress-wrap">
                     <div class="asm-progress-track">
                         <div class="asm-progress-fill" id="asm-progress"></div>
@@ -602,7 +623,6 @@
                     <div class="asm-progress-label" id="asm-progress-label">0 / 5</div>
                 </div>
 
-                <!-- Questions -->
                 <div id="asm-questions">
 
                     <div class="asm-question active" data-q="0">
@@ -792,7 +812,6 @@
 
                 </div><!-- /questions -->
 
-                <!-- Result -->
                 <div class="asm-result" id="asm-result">
                     <div class="asm-score-display">
                         <div class="asm-score-number" id="asm-score-num">0</div>
@@ -823,31 +842,25 @@
                     <div class="asm-cta-block">
                         <div class="asm-cta-pre">PRÓXIMO PASSO</div>
                         <div class="asm-cta-text" id="asm-cta-text"></div>
-                        <!-- 
-          SUBSTITUA o href abaixo pelo link do seu calendário (Cal.com, Calendly, etc.)
-          ou aponte para #intake para abrir o Strategic Access Protocol
-        -->
                         <a href="#intake" class="asm-cta-btn" id="asm-cta-btn">SOLICITAR SESSÃO DE DIAGNÓSTICO</a>
                         <button class="asm-restart" onclick="restartAssessment()">↺ REINICIAR AVALIAÇÃO</button>
                     </div>
                 </div>
 
-            </div><!-- /container -->
+            </div><!-- /asm-container -->
 
             <script>
                 (function () {
                     const scores = [null, null, null, null, null];
                     let current = 0;
-
                     const qLabels = ['Velocidade', 'Complexidade', 'Alinhamento', 'Pressão Externa', 'Clareza'];
 
                     window.selectOption = function (el, qIdx) {
-                        const options = el.parentElement.querySelectorAll('.asm-option');
-                        options.forEach(o => o.classList.remove('selected'));
+                        el.parentElement.querySelectorAll('.asm-option').forEach(o => o.classList.remove('selected'));
                         el.classList.add('selected');
                         scores[qIdx] = parseInt(el.getAttribute('data-val'));
-                        const nextBtn = document.getElementById('asm-next-' + qIdx);
-                        if (nextBtn) nextBtn.disabled = false;
+                        const btn = document.getElementById('asm-next-' + qIdx);
+                        if (btn) btn.disabled = false;
                     };
 
                     window.nextQuestion = function () {
@@ -855,10 +868,7 @@
                         const qs = document.querySelectorAll('.asm-question');
                         qs[current].classList.remove('active');
                         current++;
-                        if (current < qs.length) {
-                            qs[current].classList.add('active');
-                            updateProgress();
-                        }
+                        if (current < qs.length) { qs[current].classList.add('active'); updateProgress(); }
                     };
 
                     window.prevQuestion = function () {
@@ -876,45 +886,33 @@
                     }
 
                     window.calculateResult = function () {
-                        const total = scores.reduce((a, b) => a + b, 0);
-                        const avg = Math.round(total / 5);
-
+                        const avg = Math.round(scores.reduce((a, b) => a + b, 0) / 5);
                         document.getElementById('asm-questions').style.display = 'none';
                         document.getElementById('asm-progress').style.width = '100%';
                         document.getElementById('asm-progress-label').textContent = '5 / 5';
+                        document.getElementById('asm-result').classList.add('active');
 
-                        const result = document.getElementById('asm-result');
-                        result.classList.add('active');
-
-                        // Animate score number
                         let n = 0;
-                        const target = avg;
                         const interval = setInterval(() => {
-                            n += Math.ceil(target / 40);
-                            if (n >= target) { n = target; clearInterval(interval); }
+                            n += Math.ceil(avg / 40);
+                            if (n >= avg) { n = avg; clearInterval(interval); }
                             document.getElementById('asm-score-num').textContent = n;
                         }, 30);
 
                         let profile, profileClass, fillClass, analysisText, ctaText;
 
                         if (avg <= 35) {
-                            profile = 'Sistema Estável';
-                            profileClass = 'profile-estavel';
-                            fillClass = 'fill-estavel';
+                            profile = 'Sistema Estável'; profileClass = 'profile-estavel'; fillClass = 'fill-estavel';
                             analysisText = `Seu ambiente apresenta <strong>níveis saudáveis de pressão cognitiva</strong>. O sistema de decisão opera dentro de parâmetros gerenciáveis. Isso não significa ausência de complexidade — significa que os mecanismos de absorção estão funcionando. O risco neste estágio é a <strong>complacência estrutural</strong>: sistemas estáveis tendem a não perceber o momento em que a pressão começa a escalar. Uma revisão preventiva da arquitetura de decisão pode capturar vetores de crescimento que ainda não são visíveis.`;
                             ctaText = 'Seu sistema está estável. Mas os que crescem mais rápido são os que refinam a arquitetura antes da pressão chegar.';
                             document.getElementById('asm-cta-btn').textContent = 'AGENDAR REVISÃO PREVENTIVA';
                         } else if (avg <= 65) {
-                            profile = 'Pressão Crescente';
-                            profileClass = 'profile-pressao';
-                            fillClass = 'fill-pressao';
+                            profile = 'Pressão Crescente'; profileClass = 'profile-pressao'; fillClass = 'fill-pressao';
                             analysisText = `Seu ambiente está em <strong>zona de pressão crescente</strong>. Os parâmetros indicam que o sistema de decisão está sendo testado — há sinais de desalinhamento, complexidade acumulada e velocidade comprometida. Este é o momento mais crítico: a janela <strong>antes</strong> do colapso, quando a intervenção tem o maior retorno. Ambientes neste estágio tipicamente experimentam uma degradação silenciosa que só se torna evidente quando já custou capital estratégico significativo.`;
                             ctaText = 'A janela de intervenção está aberta. Cada semana sem reconfiguração é capital estratégico perdido.';
                             document.getElementById('asm-cta-btn').textContent = 'SOLICITAR DIAGNÓSTICO ARQUITETURAL';
                         } else {
-                            profile = 'Colapso Iminente';
-                            profileClass = 'profile-colapso';
-                            fillClass = 'fill-colapso';
+                            profile = 'Colapso Iminente'; profileClass = 'profile-colapso'; fillClass = 'fill-colapso';
                             analysisText = `Seu ambiente está em <strong>zona crítica de pressão cognitiva</strong>. Os parâmetros indicam que o sistema de decisão está operando sob carga sistêmica severa: velocidade comprometida, complexidade sem contenção, desalinhamento entre decisão e execução. Este estágio é marcado por um fenômeno específico — <strong>as causas reais dos travamentos tornam-se invisíveis</strong> para quem está dentro do sistema. A intervenção arquitetural não é opcional; é o que determina se o sistema se reinventa ou colapsa.`;
                             ctaText = 'Os sinais são claros. O próximo passo requer precisão cirúrgica — não mais análise, mas intervenção.';
                             document.getElementById('asm-cta-btn').textContent = 'SOLICITAR ACESSO ESTRATÉGICO URGENTE';
@@ -931,31 +929,24 @@
                             fill.style.width = avg + '%';
                         }, 300);
 
-                        // Dimensions
                         const dims = document.getElementById('asm-dimensions');
                         dims.innerHTML = '';
                         qLabels.forEach((label, i) => {
                             const pct = scores[i];
                             const card = document.createElement('div');
                             card.className = 'asm-dim-card';
-                            let interpretation = '';
-                            if (pct <= 30) interpretation = 'Operando bem';
-                            else if (pct <= 60) interpretation = 'Atenção necessária';
-                            else interpretation = 'Intervenção crítica';
-                            card.innerHTML = `<div class="asm-dim-label">${label}</div><div class="asm-dim-val">${interpretation}</div><div class="asm-dim-bar"><div class="asm-dim-fill" style="width:${pct}%"></div></div>`;
+                            const interp = pct <= 30 ? 'Operando bem' : pct <= 60 ? 'Atenção necessária' : 'Intervenção crítica';
+                            card.innerHTML = `<div class="asm-dim-label">${label}</div><div class="asm-dim-val">${interp}</div><div class="asm-dim-bar"><div class="asm-dim-fill" style="width:${pct}%"></div></div>`;
                             dims.appendChild(card);
                         });
                     };
 
                     window.restartAssessment = function () {
-                        scores.fill(null);
-                        current = 0;
+                        scores.fill(null); current = 0;
                         document.querySelectorAll('.asm-option').forEach(o => o.classList.remove('selected'));
                         document.querySelectorAll('.asm-btn.primary').forEach(b => b.disabled = true);
                         document.getElementById('asm-questions').style.display = 'block';
-                        document.querySelectorAll('.asm-question').forEach((q, i) => {
-                            q.classList.toggle('active', i === 0);
-                        });
+                        document.querySelectorAll('.asm-question').forEach((q, i) => q.classList.toggle('active', i === 0));
                         document.getElementById('asm-result').classList.remove('active');
                         document.getElementById('asm-progress').style.width = '0%';
                         document.getElementById('asm-progress-label').textContent = '0 / 5';
@@ -964,6 +955,7 @@
             </script>
         </section>
 
+        <!-- ─── AI TERMINAL ───────────────────────────────────────────── -->
         <section class="section ai-terminal-section">
             <div class="terminal-window">
                 <div class="terminal-header">
@@ -985,6 +977,7 @@
             </div>
         </section>
 
+        <!-- ─── PERFIL ─────────────────────────────────────────────────── -->
         <section class="profile-section">
             <div class="profile-grid">
                 <div class="profile-image">
@@ -1018,6 +1011,7 @@
                                 <li>Decision Science</li>
                             </ul>
                         </div>
+
                         <p class="experience">Experiência em ecossistemas de inovação (MIT, NASA, Google, Distrito) e
                             com organizações premiadas.</p>
                     </div>
@@ -1025,12 +1019,7 @@
             </div>
         </section>
 
-        <!--
-  JANNUZZELLI — CASE FRAGMENTS / SINAIS DE CAMPO
-  Insira esta seção após .profile-section e antes de .content-enhancement-section
-  Personalize os casos abaixo com situações reais (anonimizadas)
--->
-
+        <!-- ─── CASE FRAGMENTS / SINAIS DE CAMPO ─────────────────────── -->
         <section class="jnz-cases" id="sinais">
             <style>
                 .jnz-cases {
@@ -1092,7 +1081,6 @@
                     line-height: 1.8;
                 }
 
-                /* Grid */
                 .cases-grid {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
@@ -1107,7 +1095,6 @@
                     }
                 }
 
-                /* Card */
                 .case-card {
                     background: rgba(2, 3, 4, 0.95);
                     padding: 32px;
@@ -1134,7 +1121,6 @@
                     opacity: 1;
                 }
 
-                /* Encrypted overlay */
                 .case-encrypted {
                     position: absolute;
                     inset: 0;
@@ -1182,7 +1168,6 @@
                     background: rgba(255, 255, 255, 0.15);
                 }
 
-                /* Revealed content */
                 .case-content {
                     position: relative;
                     z-index: 1;
@@ -1273,7 +1258,6 @@
                     line-height: 1.6;
                 }
 
-                /* Wide card (full width) */
                 .case-card.wide {
                     grid-column: 1 / -1;
                 }
@@ -1282,7 +1266,6 @@
                     font-size: 17px;
                 }
 
-                /* Bottom strip */
                 .cases-footer {
                     margin-top: 40px;
                     display: flex;
@@ -1305,7 +1288,6 @@
                     white-space: nowrap;
                 }
 
-                /* Glitch animation */
                 @keyframes glitch-reveal {
                     0% {
                         opacity: 0.15;
@@ -1355,7 +1337,6 @@
 
                 <div class="cases-grid" id="cases-grid">
 
-                    <!-- CARD 1 -->
                     <div class="case-card" data-index="0" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-0"></div>
@@ -1381,7 +1362,6 @@
                         </div>
                     </div>
 
-                    <!-- CARD 2 -->
                     <div class="case-card" data-index="1" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-1"></div>
@@ -1406,7 +1386,6 @@
                         </div>
                     </div>
 
-                    <!-- CARD 3 (wide) -->
                     <div class="case-card wide" data-index="2" onmouseenter="revealCase(this)"
                         onmouseleave="hideCase(this)">
                         <div class="case-encrypted">
@@ -1434,7 +1413,6 @@
                         </div>
                     </div>
 
-                    <!-- CARD 4 -->
                     <div class="case-card" data-index="3" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-3"></div>
@@ -1460,7 +1438,6 @@
                         </div>
                     </div>
 
-                    <!-- CARD 5 -->
                     <div class="case-card" data-index="4" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-4"></div>
@@ -1487,7 +1464,7 @@
                         </div>
                     </div>
 
-                </div><!-- /grid -->
+                </div><!-- /cases-grid -->
 
                 <div class="cases-footer">
                     <div class="cases-footer-line"></div>
@@ -1501,29 +1478,25 @@
                 (function () {
                     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789█▓▒░∂∇∑≈≡∞⟨⟩⊕⊗∧∨∩∪ΔΨΩ';
 
-                    function randomChars(length) {
-                        let result = '';
-                        for (let i = 0; i < length; i++) {
-                            if (Math.random() < 0.12) { result += '\n'; continue; }
-                            result += chars[Math.floor(Math.random() * chars.length)];
+                    function randomChars(len) {
+                        let r = '';
+                        for (let i = 0; i < len; i++) {
+                            if (Math.random() < 0.12) { r += '\n'; continue; }
+                            r += chars[Math.floor(Math.random() * chars.length)];
                         }
-                        return result;
+                        return r;
                     }
 
-                    // Fill encrypted placeholders
                     for (let i = 0; i < 5; i++) {
                         const el = document.getElementById('enc-' + i);
                         if (el) el.textContent = randomChars(200);
                     }
 
-                    // Animate encrypted text
                     setInterval(() => {
                         document.querySelectorAll('.case-enc-text').forEach(el => {
                             if (!el.closest('.case-card.revealed')) {
-                                const len = el.textContent.length;
-                                const pos = Math.floor(Math.random() * len);
                                 const arr = el.textContent.split('');
-                                arr[pos] = chars[Math.floor(Math.random() * chars.length)];
+                                arr[Math.floor(Math.random() * arr.length)] = chars[Math.floor(Math.random() * chars.length)];
                                 el.textContent = arr.join('');
                             }
                         });
@@ -1541,12 +1514,10 @@
                     };
 
                     window.hideCase = function (card) {
-                        const idx = card.getAttribute('data-index');
-                        clearTimeout(revealTimers[idx]);
+                        clearTimeout(revealTimers[card.getAttribute('data-index')]);
                         card.classList.remove('revealed', 'revealing');
                     };
 
-                    // On mobile: tap to reveal
                     document.querySelectorAll('.case-card').forEach(card => {
                         card.addEventListener('touchstart', function (e) {
                             e.preventDefault();
@@ -1559,13 +1530,12 @@
                         }, { passive: false });
                     });
 
-                    // Intersection Observer for scroll reveal hint
                     if ('IntersectionObserver' in window) {
-                        const obs = new IntersectionObserver((entries) => {
-                            entries.forEach(entry => {
-                                if (entry.isIntersecting) {
-                                    entry.target.style.opacity = '1';
-                                    entry.target.style.transform = 'translateY(0)';
+                        const obs = new IntersectionObserver(entries => {
+                            entries.forEach(e => {
+                                if (e.isIntersecting) {
+                                    e.target.style.opacity = '1';
+                                    e.target.style.transform = 'translateY(0)';
                                 }
                             });
                         }, { threshold: 0.1 });
@@ -1581,6 +1551,7 @@
             </script>
         </section>
 
+        <!-- ─── CONTENT SECTIONS ──────────────────────────────────────── -->
         <section class="content-enhancement-section">
             <div class="content-grid">
                 <div class="content-visual-placeholder">
@@ -1609,21 +1580,7 @@
             </div>
         </section>
 
-        <!--
-  JANNUZZELLI — STRATEGIC ACCESS PROTOCOL
-  Substitui a seção .cta-final do index.html original
-  
-  CONFIGURAÇÃO OBRIGATÓRIA:
-  1. Defina INTAKE_EMAIL abaixo com seu email real
-  2. Configure o endpoint de envio (Formspree, Netlify Forms, ou serverless)
-  3. Substitua o ACTION_URL pelo endpoint correto
-  
-  OPÇÃO FÁCIL (zero backend): Use Formspree.io
-  - Crie conta em formspree.io
-  - Crie um form e copie o endpoint
-  - Substitua ACTION_URL abaixo
--->
-
+        <!-- ─── STRATEGIC ACCESS PROTOCOL ────────────────────────────── -->
         <section class="jnz-intake" id="intake">
             <style>
                 .jnz-intake {
@@ -1679,7 +1636,6 @@
                     max-width: 520px;
                 }
 
-                /* Terminal window */
                 .intake-terminal {
                     border: 0.5px solid rgba(255, 255, 255, 0.1);
                     border-radius: 4px;
@@ -1723,7 +1679,6 @@
                     letter-spacing: 0.1em;
                 }
 
-                /* Output log */
                 .intake-output {
                     padding: 28px 28px 0;
                     min-height: 60px;
@@ -1754,7 +1709,6 @@
                     color: rgba(255, 255, 255, 0.2);
                 }
 
-                /* Active question area */
                 .intake-active-q {
                     padding: 24px 28px;
                 }
@@ -1778,13 +1732,11 @@
                     letter-spacing: -0.01em;
                 }
 
-                /* Input area */
                 .intake-input-wrap {
                     display: flex;
                     align-items: flex-start;
                     gap: 10px;
                     padding: 0 28px 28px;
-                    position: relative;
                 }
 
                 .intake-prompt {
@@ -1820,7 +1772,6 @@
                     margin: 0 28px;
                 }
 
-                /* Char counter and submit */
                 .intake-controls {
                     display: flex;
                     align-items: center;
@@ -1865,7 +1816,6 @@
                     color: rgba(255, 255, 255, 0.75);
                 }
 
-                /* Steps indicator */
                 .intake-steps {
                     display: flex;
                     gap: 4px;
@@ -1888,7 +1838,6 @@
                     background: rgba(255, 255, 255, 0.6);
                 }
 
-                /* Success state */
                 .intake-success {
                     display: none;
                     padding: 60px 28px;
@@ -1936,7 +1885,6 @@
                     border-radius: 2px;
                 }
 
-                /* Error */
                 .intake-error {
                     display: none;
                     padding: 12px 28px;
@@ -1950,7 +1898,6 @@
                     display: block;
                 }
 
-                /* Loading state */
                 @keyframes intake-blink {
 
                     0%,
@@ -1960,34 +1907,6 @@
 
                     50% {
                         opacity: 0;
-                    }
-                }
-
-                .intake-cursor {
-                    display: inline-block;
-                    width: 8px;
-                    height: 14px;
-                    background: rgba(255, 255, 255, 0.5);
-                    animation: intake-blink 1s step-end infinite;
-                    vertical-align: middle;
-                    margin-left: 2px;
-                }
-
-                @keyframes intake-sending {
-                    0% {
-                        content: 'ENVIANDO.  ';
-                    }
-
-                    33% {
-                        content: 'ENVIANDO.. ';
-                    }
-
-                    66% {
-                        content: 'ENVIANDO...';
-                    }
-
-                    100% {
-                        content: 'ENVIANDO.  ';
                     }
                 }
             </style>
@@ -2008,7 +1927,6 @@
                         <div class="tbar-title">STRATEGIC ACCESS PROTOCOL v1.0</div>
                     </div>
 
-                    <!-- Log output -->
                     <div class="intake-output" id="intake-output">
                         <div class="intake-log-line">
                             <span class="log-prefix">SYS</span>
@@ -2021,7 +1939,6 @@
                         </div>
                     </div>
 
-                    <!-- Steps -->
                     <div class="intake-steps" id="intake-steps">
                         <div class="intake-step-dot active" id="sdot-0"></div>
                         <div class="intake-step-dot" id="sdot-1"></div>
@@ -2030,7 +1947,6 @@
                         <div class="intake-step-dot" id="sdot-4"></div>
                     </div>
 
-                    <!-- Active question -->
                     <div class="intake-active-q" id="intake-active-q">
                         <div class="active-q-label" id="active-q-label">PARÂMETRO 01 — CONTEXTO</div>
                         <div class="active-q-text" id="active-q-text">Qual é a sua posição e o setor em que atua?</div>
@@ -2038,7 +1954,6 @@
 
                     <div class="intake-divider"></div>
 
-                    <!-- Input -->
                     <div class="intake-input-wrap">
                         <span class="intake-prompt">&gt;&gt;</span>
                         <textarea class="intake-textarea" id="intake-textarea" placeholder="sua resposta..." rows="3"
@@ -2047,15 +1962,13 @@
 
                     <div class="intake-controls">
                         <span class="intake-char-count" id="intake-chars">0 / 600</span>
-                        <button class="intake-submit-btn" id="intake-submit-btn" onclick="advanceStep()" disabled>
-                            CONFIRMAR →
-                        </button>
+                        <button class="intake-submit-btn" id="intake-submit-btn" onclick="advanceStep()"
+                            disabled>CONFIRMAR →</button>
                     </div>
 
                     <div class="intake-error" id="intake-error">ERRO: não foi possível transmitir. Tente por
                         intelligence@jannuzzelli.pro</div>
 
-                    <!-- Success -->
                     <div class="intake-success" id="intake-success">
                         <div class="success-icon">_</div>
                         <div class="success-title">Protocolo transmitido.</div>
@@ -2070,44 +1983,17 @@
 
             <script>
                 (function () {
-                    // =====================================================
-                    // CONFIGURAÇÃO — edite aqui
-                    // =====================================================
-                    const ACTION_URL = 'https://formspree.io/f/xjgppwnj'; // substitua pelo seu endpoint
+                    // ── CONFIGURE AQUI ─────────────────────────────────────
+                    const ACTION_URL = 'https://formspree.io/f/xjgppwnj';
                     const INTAKE_EMAIL = 'intelligence@jannuzzelli.pro';
-                    // =====================================================
+                    // ───────────────────────────────────────────────────────
 
                     const questions = [
-                        {
-                            label: 'PARÂMETRO 01 — CONTEXTO',
-                            text: 'Qual é a sua posição e o setor em que atua?',
-                            placeholder: 'ex: CEO de empresa de tecnologia B2B com 200 pessoas...',
-                            key: 'contexto'
-                        },
-                        {
-                            label: 'PARÂMETRO 02 — SITUAÇÃO',
-                            text: 'Descreva o que está travado ou sob pressão no seu ambiente estratégico agora.',
-                            placeholder: 'seja específico — o que exatamente não está avançando...',
-                            key: 'situacao'
-                        },
-                        {
-                            label: 'PARÂMETRO 03 — TENTATIVAS',
-                            text: 'O que já foi tentado para resolver? Quais abordagens não funcionaram?',
-                            placeholder: 'consultores contratados, processos implementados, mudanças feitas...',
-                            key: 'tentativas'
-                        },
-                        {
-                            label: 'PARÂMETRO 04 — URGÊNCIA',
-                            text: 'Qual o custo de não resolver isto nos próximos 90 dias?',
-                            placeholder: 'financeiro, estratégico, organizacional, reputacional...',
-                            key: 'urgencia'
-                        },
-                        {
-                            label: 'PARÂMETRO 05 — INTENÇÃO',
-                            text: 'O que você espera de uma intervenção arquitetural? O que seria sucesso para você?',
-                            placeholder: 'o que mudaria concretamente se o problema fosse resolvido...',
-                            key: 'intencao'
-                        }
+                        { label: 'PARÂMETRO 01 — CONTEXTO', text: 'Qual é a sua posição e o setor em que atua?', placeholder: 'ex: CEO de empresa de tecnologia B2B com 200 pessoas...', key: 'contexto' },
+                        { label: 'PARÂMETRO 02 — SITUAÇÃO', text: 'Descreva o que está travado ou sob pressão no seu ambiente estratégico agora.', placeholder: 'seja específico — o que exatamente não está avançando...', key: 'situacao' },
+                        { label: 'PARÂMETRO 03 — TENTATIVAS', text: 'O que já foi tentado para resolver? Quais abordagens não funcionaram?', placeholder: 'consultores contratados, processos implementados, mudanças feitas...', key: 'tentativas' },
+                        { label: 'PARÂMETRO 04 — URGÊNCIA', text: 'Qual o custo de não resolver isto nos próximos 90 dias?', placeholder: 'financeiro, estratégico, organizacional, reputacional...', key: 'urgencia' },
+                        { label: 'PARÂMETRO 05 — INTENÇÃO', text: 'O que você espera de uma intervenção arquitetural? O que seria sucesso para você?', placeholder: 'o que mudaria concretamente se o problema fosse resolvido...', key: 'intencao' }
                     ];
 
                     let currentStep = 0;
@@ -2117,14 +2003,12 @@
                     const submitBtn = document.getElementById('intake-submit-btn');
                     const output = document.getElementById('intake-output');
                     const charCount = document.getElementById('intake-chars');
-                    const errorEl = document.getElementById('intake-error');
 
                     window.onInputChange = function () {
                         const len = textarea.value.trim().length;
                         charCount.textContent = textarea.value.length + ' / 600';
                         submitBtn.disabled = len < 10;
-                        if (len >= 10) submitBtn.classList.add('ready');
-                        else submitBtn.classList.remove('ready');
+                        submitBtn.classList.toggle('ready', len >= 10);
                     };
 
                     window.onKeyDown = function (e) {
@@ -2134,7 +2018,7 @@
                         }
                     };
 
-                    function addLogLine(prefix, text, cls) {
+                    function addLog(prefix, text, cls) {
                         const line = document.createElement('div');
                         line.className = 'intake-log-line';
                         line.innerHTML = `<span class="log-prefix">${prefix}</span><span class="log-text ${cls || ''}">${text}</span>`;
@@ -2152,43 +2036,28 @@
                         submitBtn.classList.remove('ready');
                         charCount.textContent = '0 / 600';
                         textarea.focus();
-                        updateStepDots(idx);
-                    }
-
-                    function updateStepDots(idx) {
                         for (let i = 0; i < 5; i++) {
-                            const dot = document.getElementById('sdot-' + i);
-                            dot.className = 'intake-step-dot';
-                            if (i < idx) dot.classList.add('done');
-                            else if (i === idx) dot.classList.add('active');
+                            const d = document.getElementById('sdot-' + i);
+                            d.className = 'intake-step-dot' + (i < idx ? ' done' : i === idx ? ' active' : '');
                         }
                     }
 
                     window.advanceStep = function () {
                         const val = textarea.value.trim();
                         if (val.length < 10) return;
-
                         const q = questions[currentStep];
                         answers[q.key] = val;
-
-                        // Log the confirmed answer
-                        const shortPreview = val.length > 60 ? val.slice(0, 60) + '...' : val;
-                        addLogLine('IN', `[${q.key.toUpperCase()}] ${shortPreview}`, 'accent');
-                        addLogLine('SYS', `Parâmetro ${currentStep + 1} registrado.`, 'muted');
-
+                        addLog('IN', `[${q.key.toUpperCase()}] ${val.length > 60 ? val.slice(0, 60) + '...' : val}`, 'accent');
+                        addLog('SYS', `Parâmetro ${currentStep + 1} registrado.`, 'muted');
                         currentStep++;
-
                         if (currentStep < questions.length) {
                             updateQuestion(currentStep);
-                            const nextQ = questions[currentStep];
-                            addLogLine('SYS', `Parâmetro ${currentStep + 1}: ${nextQ.text}`, '');
+                            addLog('SYS', `Parâmetro ${currentStep + 1}: ${questions[currentStep].text}`, '');
                         } else {
-                            // All done — send
                             submitBtn.textContent = 'TRANSMITINDO...';
                             submitBtn.disabled = true;
                             document.getElementById('intake-active-q').style.opacity = '0.3';
                             textarea.disabled = true;
-
                             sendData();
                         }
                     };
@@ -2200,11 +2069,9 @@
                     async function sendData() {
                         const ref = generateRef();
                         const body = Object.entries(answers).map(([k, v]) => `[${k.toUpperCase()}]\n${v}`).join('\n\n---\n\n');
-
                         const payload = {
-                            _subject: `[Strategic Access] ${ref} — ${answers.contexto?.slice(0, 60) || 'Novo Protocolo'}`,
-                            referencia: ref,
-                            ...answers,
+                            _subject: `[Strategic Access] ${ref} — ${(answers.contexto || '').slice(0, 60)}`,
+                            referencia: ref, ...answers,
                             _body: `STRATEGIC ACCESS PROTOCOL\nRef: ${ref}\n\n${body}`
                         };
 
@@ -2214,33 +2081,23 @@
                                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                                 body: JSON.stringify(payload)
                             });
-
-                            if (res.ok) {
-                                showSuccess(ref);
-                            } else {
-                                showError();
-                            }
-                        } catch (e) {
-                            // Fallback: open mailto
-                            const mailBody = encodeURIComponent(`STRATEGIC ACCESS PROTOCOL\nRef: ${ref}\n\n${body}`);
+                            res.ok ? showSuccess(ref) : showError();
+                        } catch {
+                            const mb = encodeURIComponent(`STRATEGIC ACCESS PROTOCOL\nRef: ${ref}\n\n${body}`);
                             showSuccess(ref, true);
-                            // Open mailto as fallback
-                            setTimeout(() => {
-                                window.location.href = `mailto:${INTAKE_EMAIL}?subject=Strategic Access ${ref}&body=${mailBody}`;
-                            }, 1000);
+                            setTimeout(() => { window.location.href = `mailto:${INTAKE_EMAIL}?subject=Strategic Access ${ref}&body=${mb}`; }, 1000);
                         }
                     }
 
-                    function showSuccess(ref, fallback) {
-                        document.getElementById('intake-active-q').style.display = 'none';
-                        document.querySelector('.intake-input-wrap').style.display = 'none';
-                        document.querySelector('.intake-divider').style.display = 'none';
-                        document.querySelector('.intake-controls').style.display = 'none';
-                        document.getElementById('intake-steps').style.display = 'none';
-
-                        addLogLine('SYS', 'Protocolo completo. Transmitindo...', 'muted');
+                    function showSuccess(ref) {
+                        ['intake-active-q', 'intake-steps'].forEach(id => document.getElementById(id).style.display = 'none');
+                        ['.intake-input-wrap', '.intake-divider', '.intake-controls'].forEach(sel => {
+                            const el = document.querySelector(sel);
+                            if (el) el.style.display = 'none';
+                        });
+                        addLog('SYS', 'Protocolo completo. Transmitindo...', 'muted');
                         setTimeout(() => {
-                            addLogLine('SYS', `[${ref}] Dados transmitidos com sucesso.`, 'accent');
+                            addLog('SYS', `[${ref}] Dados transmitidos com sucesso.`, 'accent');
                             setTimeout(() => {
                                 document.getElementById('intake-success').classList.add('active');
                                 document.getElementById('success-code').textContent = `REF: ${ref}`;
@@ -2253,17 +2110,17 @@
                         submitBtn.disabled = false;
                         document.getElementById('intake-active-q').style.opacity = '1';
                         textarea.disabled = false;
-                        const errorEl = document.getElementById('intake-error');
-                        errorEl.classList.add('active');
-                        setTimeout(() => errorEl.classList.remove('active'), 5000);
+                        const err = document.getElementById('intake-error');
+                        err.classList.add('active');
+                        setTimeout(() => err.classList.remove('active'), 5000);
                     }
 
-                    // Init
                     updateQuestion(0);
                 })();
             </script>
         </section>
 
+        <!-- ─── FOOTER ────────────────────────────────────────────────── -->
         <footer>
             <a href="mailto:intelligence@jannuzzelli.pro" class="footer-contact">intelligence@jannuzzelli.pro</a>
             <p class="footer-rights">© 2026 Jannuzzelli — All Rights Reserved</p>
