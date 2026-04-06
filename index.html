@@ -962,16 +962,35 @@
                     <span class="terminal-dot red"></span>
                     <span class="terminal-dot yellow"></span>
                     <span class="terminal-dot green"></span>
-                    <span class="terminal-title">Cognitive Inquiry v0.9</span>
+                    <span class="terminal-title">COGNITIVE INQUIRY v2.0 · PT</span>
                 </div>
                 <div class="terminal-body">
-                    <p id="ai-terminal-output" class="output">SYS: Aguardando entrada cognitiva estratégica... Tente
-                        'ARAM', 'Contexto' ou 'Estratégia'.</p>
+                    <div id="ai-terminal-output" class="terminal-output">
+                        <div class="terminal-line">
+                            <span class="terminal-line-prefix">SYS</span>
+                            <span class="terminal-line-accent">Sistema cognitivo inicializado. Pronto para
+                                análise.</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-line-prefix">SYS</span>
+                            <span class="terminal-line-muted">Digite seu contexto ou use um dos gatilhos abaixo.</span>
+                        </div>
+                    </div>
+                    <div class="terminal-divider"></div>
                     <div class="terminal-input-row">
                         <span class="prompt">&gt;&gt;</span>
-                        <input type="text" id="ai-terminal-input" placeholder="Digite seu input...">
+                        <input type="text" id="ai-terminal-input" placeholder="Digite seu contexto estratégico..."
+                            autocomplete="off">
                         <div id="ai-loader" class="terminal-loader"></div>
                         <button id="ai-terminal-submit">PROCESSAR</button>
+                    </div>
+                    <div class="terminal-hint-bar">
+                        <span class="term-hint-chip" data-cmd="ARAM">ARAM</span>
+                        <span class="term-hint-chip" data-cmd="como funciona">processo</span>
+                        <span class="term-hint-chip" data-cmd="estratégia">estratégia</span>
+                        <span class="term-hint-chip" data-cmd="preço">preço</span>
+                        <span class="term-hint-chip" data-cmd="casos">casos</span>
+                        <span class="term-hint-chip" data-cmd="contato">contato</span>
                     </div>
                 </div>
             </div>
@@ -1073,9 +1092,9 @@
 
                 .cases-disclaimer {
                     font-family: 'JetBrains Mono', monospace;
-                    font-size: 9px;
+                    font-size: 10px;
                     letter-spacing: 0.1em;
-                    color: rgba(255, 255, 255, 0.12);
+                    color: rgba(255, 255, 255, 0.32);
                     text-align: right;
                     max-width: 180px;
                     line-height: 1.8;
@@ -1199,8 +1218,8 @@
 
                 .case-context {
                     font-family: 'Inter', sans-serif;
-                    font-size: 12px;
-                    color: rgba(255, 255, 255, 0.28);
+                    font-size: 13px;
+                    color: rgba(255, 255, 255, 0.52);
                     line-height: 1.6;
                     margin-bottom: 16px;
                     font-style: italic;
@@ -1253,8 +1272,8 @@
 
                 .case-result-text {
                     font-family: 'Inter', sans-serif;
-                    font-size: 12px;
-                    color: rgba(255, 255, 255, 0.38);
+                    font-size: 13px;
+                    color: rgba(255, 255, 255, 0.55);
                     line-height: 1.6;
                 }
 
@@ -1281,9 +1300,9 @@
 
                 .cases-footer-text {
                     font-family: 'JetBrains Mono', monospace;
-                    font-size: 9px;
+                    font-size: 10px;
                     letter-spacing: 0.15em;
-                    color: rgba(255, 255, 255, 0.15);
+                    color: rgba(255, 255, 255, 0.38);
                     text-transform: uppercase;
                     white-space: nowrap;
                 }
@@ -1337,10 +1356,11 @@
 
                 <div class="cases-grid" id="cases-grid">
 
-                    <div class="case-card" data-index="0" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)">
+                    <div class="case-card" data-index="0" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)"
+                        ontouchend="toggleCase(event,this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-0"></div>
-                            <div class="case-enc-hint">passe o cursor para descriptografar</div>
+                            <div class="case-enc-hint" id="enc-hint-0">passe o cursor · toque para revelar</div>
                         </div>
                         <div class="case-content">
                             <div class="case-tag">SETOR FINANCEIRO · MÉDIO PORTE</div>
@@ -1362,10 +1382,11 @@
                         </div>
                     </div>
 
-                    <div class="case-card" data-index="1" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)">
+                    <div class="case-card" data-index="1" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)"
+                        ontouchend="toggleCase(event,this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-1"></div>
-                            <div class="case-enc-hint">passe o cursor para descriptografar</div>
+                            <div class="case-enc-hint">passe o cursor · toque para revelar</div>
                         </div>
                         <div class="case-content">
                             <div class="case-tag">TECNOLOGIA · SCALE-UP</div>
@@ -1387,10 +1408,10 @@
                     </div>
 
                     <div class="case-card wide" data-index="2" onmouseenter="revealCase(this)"
-                        onmouseleave="hideCase(this)">
+                        onmouseleave="hideCase(this)" ontouchend="toggleCase(event,this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-2"></div>
-                            <div class="case-enc-hint">passe o cursor para descriptografar</div>
+                            <div class="case-enc-hint">passe o cursor · toque para revelar</div>
                         </div>
                         <div class="case-content">
                             <div class="case-tag">SAÚDE · GRANDE PORTE · AMBIENTE DE PRESSÃO REGULATÓRIA</div>
@@ -1413,10 +1434,11 @@
                         </div>
                     </div>
 
-                    <div class="case-card" data-index="3" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)">
+                    <div class="case-card" data-index="3" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)"
+                        ontouchend="toggleCase(event,this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-3"></div>
-                            <div class="case-enc-hint">passe o cursor para descriptografar</div>
+                            <div class="case-enc-hint">passe o cursor · toque para revelar</div>
                         </div>
                         <div class="case-content">
                             <div class="case-tag">CONSUMO · FAMÍLIA CONTROLADORA</div>
@@ -1438,10 +1460,11 @@
                         </div>
                     </div>
 
-                    <div class="case-card" data-index="4" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)">
+                    <div class="case-card" data-index="4" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)"
+                        ontouchend="toggleCase(event,this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-4"></div>
-                            <div class="case-enc-hint">passe o cursor para descriptografar</div>
+                            <div class="case-enc-hint">passe o cursor · toque para revelar</div>
                         </div>
                         <div class="case-content">
                             <div class="case-tag">INOVAÇÃO · ECOSSISTEMA CORPORATIVO</div>
@@ -1518,16 +1541,30 @@
                         card.classList.remove('revealed', 'revealing');
                     };
 
+                    // Touch toggle — sem preventDefault para permitir scroll
+                    window.toggleCase = function (e, card) {
+                        // Ignore if a significant scroll occurred
+                        if (e.changedTouches && e.changedTouches[0]) {
+                            const touch = card._touchStart;
+                            if (touch) {
+                                const dx = Math.abs(e.changedTouches[0].clientX - touch.x);
+                                const dy = Math.abs(e.changedTouches[0].clientY - touch.y);
+                                if (dx > 10 || dy > 15) return; // was a scroll, not a tap
+                            }
+                        }
+                        e.stopPropagation();
+                        if (card.classList.contains('revealed')) {
+                            hideCase(card);
+                        } else {
+                            document.querySelectorAll('.case-card.revealed').forEach(c => hideCase(c));
+                            revealCase(card);
+                        }
+                    };
+
                     document.querySelectorAll('.case-card').forEach(card => {
                         card.addEventListener('touchstart', function (e) {
-                            e.preventDefault();
-                            if (card.classList.contains('revealed')) {
-                                hideCase(card);
-                            } else {
-                                document.querySelectorAll('.case-card.revealed').forEach(c => hideCase(c));
-                                revealCase(card);
-                            }
-                        }, { passive: false });
+                            card._touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                        }, { passive: true });
                     });
 
                     if ('IntersectionObserver' in window) {
@@ -1945,6 +1982,8 @@
                         <div class="intake-step-dot" id="sdot-2"></div>
                         <div class="intake-step-dot" id="sdot-3"></div>
                         <div class="intake-step-dot" id="sdot-4"></div>
+                        <div class="intake-step-dot" id="sdot-5"></div>
+                        <div class="intake-step-dot" id="sdot-6"></div>
                     </div>
 
                     <div class="intake-active-q" id="intake-active-q">
@@ -1993,7 +2032,9 @@
                         { label: 'PARÂMETRO 02 — SITUAÇÃO', text: 'Descreva o que está travado ou sob pressão no seu ambiente estratégico agora.', placeholder: 'seja específico — o que exatamente não está avançando...', key: 'situacao' },
                         { label: 'PARÂMETRO 03 — TENTATIVAS', text: 'O que já foi tentado para resolver? Quais abordagens não funcionaram?', placeholder: 'consultores contratados, processos implementados, mudanças feitas...', key: 'tentativas' },
                         { label: 'PARÂMETRO 04 — URGÊNCIA', text: 'Qual o custo de não resolver isto nos próximos 90 dias?', placeholder: 'financeiro, estratégico, organizacional, reputacional...', key: 'urgencia' },
-                        { label: 'PARÂMETRO 05 — INTENÇÃO', text: 'O que você espera de uma intervenção arquitetural? O que seria sucesso para você?', placeholder: 'o que mudaria concretamente se o problema fosse resolvido...', key: 'intencao' }
+                        { label: 'PARÂMETRO 05 — INTENÇÃO', text: 'O que você espera de uma intervenção arquitetural? O que seria sucesso para você?', placeholder: 'o que mudaria concretamente se o problema fosse resolvido...', key: 'intencao' },
+                        { label: 'PARÂMETRO 06 — WHATSAPP', text: 'Qual o seu WhatsApp para contato direto?', placeholder: '+55 (11) 9xxxx-xxxx — apenas para o primeiro contato...', key: 'whatsapp' },
+                        { label: 'PARÂMETRO 07 — LINKEDIN', text: 'Qual o link do seu perfil no LinkedIn?', placeholder: 'linkedin.com/in/seuperfil — opcional mas útil para contexto...', key: 'linkedin' }
                     ];
 
                     let currentStep = 0;
@@ -2007,8 +2048,10 @@
                     window.onInputChange = function () {
                         const len = textarea.value.trim().length;
                         charCount.textContent = textarea.value.length + ' / 600';
-                        submitBtn.disabled = len < 10;
-                        submitBtn.classList.toggle('ready', len >= 10);
+                        // WhatsApp and LinkedIn steps only need 3 chars minimum
+                        const minLen = currentStep >= 5 ? 3 : 10;
+                        submitBtn.disabled = len < minLen;
+                        submitBtn.classList.toggle('ready', len >= minLen);
                     };
 
                     window.onKeyDown = function (e) {
@@ -2036,7 +2079,7 @@
                         submitBtn.classList.remove('ready');
                         charCount.textContent = '0 / 600';
                         textarea.focus();
-                        for (let i = 0; i < 5; i++) {
+                        for (let i = 0; i < 7; i++) {
                             const d = document.getElementById('sdot-' + i);
                             d.className = 'intake-step-dot' + (i < idx ? ' done' : i === idx ? ' active' : '');
                         }
@@ -2044,7 +2087,7 @@
 
                     window.advanceStep = function () {
                         const val = textarea.value.trim();
-                        if (val.length < 10) return;
+                        if (val.length < 3) return;
                         const q = questions[currentStep];
                         answers[q.key] = val;
                         addLog('IN', `[${q.key.toUpperCase()}] ${val.length > 60 ? val.slice(0, 60) + '...' : val}`, 'accent');
