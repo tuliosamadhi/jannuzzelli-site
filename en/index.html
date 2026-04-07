@@ -4,28 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Jannuzzelli — Cognitive Strategic Architecture</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="Cognitive Strategic Architecture for high-complexity decision environments.">
     <meta name="theme-color" content="#020304">
-
     <meta property="og:title" content="Jannuzzelli — Cognitive Strategic Architecture">
-    <meta property="og:description" content="Structural cognitive reconfiguration.">
-    <meta property="og:image" content="https://www.jannuzzelli.com.br/assets/monogram.svg">
-
+    <meta property="og:description"
+        content="Structural cognitive reconfiguration. Decision architecture for high-complexity environments.">
+    <meta property="og:image" content="https://www.jannuzzelli.pro/assets/monogram.svg">
+    <meta property="og:url" content="https://www.jannuzzelli.pro/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jannuzzelli — Cognitive Strategic Architecture">
+    <meta name="twitter:description" content="Structural cognitive reconfiguration.">
+    <meta name="twitter:image" content="https://www.jannuzzelli.pro/assets/monogram.svg">
+    <link rel="canonical" href="https://www.jannuzzelli.pro/">
+    <link rel="icon" type="image/svg+xml" href="../assets/monogram.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
     <div class="scan-line"></div>
-
     <div id="loader">
         <div class="loader-text" id="loader-text">INITIALIZING SYSTEM...</div>
     </div>
-
-    <div class="bg-monogram"></div>
+    <div class="bg-monogram" style="background-image:url('../assets/monogram.svg')"></div>
     <div class="bg-energy"></div>
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
@@ -35,55 +42,782 @@
             <h4 class="micro-tag">COGNITIVE SYSTEM v0.9</h4>
         </header>
 
+        <!-- ─── HERO ─────────────────────────────────────────── -->
         <section class="hero">
             <h1>Jannuzzelli</h1>
-            <h2>Cognitive Strategic Architecture</h2>
-
+            <h2>Cognitive Decision Architecture</h2>
             <p class="hero-text">
-                You are not lacking strategy.
-                <br>
+                You are not lacking strategy.<br>
                 You are operating inside a distorted decision system.
             </p>
-
-            <p class="hero-highlight">
-                Few can perceive it. Fewer can redesign it.
-            </p>
-
-            <a href="#" class="cta glow magnetic" id="cta-main" data-intent="access" data-intensity="primary">
-                INITIATE STRATEGIC ACCESS
-            </a>
+            <p class="hero-highlight">Few can perceive it. Fewer can redesign it.</p>
+            <a href="#assessment" class="cta glow magnetic" id="cta-main">INITIATE DIAGNOSIS</a>
         </section>
 
-        <section class="section ai-terminal-section">
-            <div class="terminal-window">
-                <div class="terminal-header">
-                    <span class="terminal-dot red"></span>
-                    <span class="terminal-dot yellow"></span>
-                    <span class="terminal-dot green"></span>
-                    <span class="terminal-title">Cognitive Inquiry v0.9</span>
+        <!-- ─── ASSESSMENT ────────────────────────────────────── -->
+        <section class="jnz-assessment" id="assessment">
+            <style>
+                .jnz-assessment {
+                    position: relative;
+                    padding: 100px 0 120px;
+                    overflow: hidden;
+                    background: rgba(2, 3, 4, 0.75);
+                    backdrop-filter: blur(4px);
+                    -webkit-backdrop-filter: blur(4px);
+                    isolation: isolate
+                }
+
+                .jnz-assessment::after {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(to bottom, rgba(2, 3, 4, 0) 0%, rgba(2, 3, 4, 0.6) 6%, rgba(2, 3, 4, 0.6) 94%, rgba(2, 3, 4, 0) 100%);
+                    pointer-events: none;
+                    z-index: 0
+                }
+
+                .jnz-assessment::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 1px;
+                    height: 60px;
+                    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12));
+                    z-index: 1
+                }
+
+                .asm-container {
+                    max-width: 680px;
+                    margin: 0 auto;
+                    padding: 0 2rem;
+                    position: relative;
+                    z-index: 2
+                }
+
+                .asm-header {
+                    margin-bottom: 52px
+                }
+
+                .asm-micro {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    letter-spacing: .2em;
+                    color: rgba(255, 255, 255, .25);
+                    text-transform: uppercase;
+                    margin-bottom: 14px
+                }
+
+                .asm-title {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: clamp(22px, 4vw, 34px);
+                    font-weight: 600;
+                    color: rgba(255, 255, 255, .96);
+                    line-height: 1.2;
+                    margin-bottom: 14px;
+                    letter-spacing: -.02em
+                }
+
+                .asm-sub {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 15px;
+                    color: rgba(255, 255, 255, .45);
+                    line-height: 1.7
+                }
+
+                .asm-progress-wrap {
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+                    margin-bottom: 44px
+                }
+
+                .asm-progress-track {
+                    flex: 1;
+                    height: 1px;
+                    background: rgba(255, 255, 255, .08);
+                    position: relative
+                }
+
+                .asm-progress-fill {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 1px;
+                    background: rgba(255, 255, 255, .4);
+                    transition: width .6s cubic-bezier(.4, 0, .2, 1);
+                    width: 0
+                }
+
+                .asm-progress-label {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    color: rgba(255, 255, 255, .25);
+                    min-width: 40px;
+                    text-align: right
+                }
+
+                .asm-question {
+                    display: none;
+                    animation: asm-fadein .45s ease forwards
+                }
+
+                .asm-question.active {
+                    display: block
+                }
+
+                @keyframes asm-fadein {
+                    from {
+                        opacity: 0;
+                        transform: translateY(10px)
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0)
+                    }
+                }
+
+                .asm-q-number {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    color: rgba(255, 255, 255, .28);
+                    letter-spacing: .15em;
+                    margin-bottom: 10px
+                }
+
+                .asm-q-text {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: clamp(16px, 2.5vw, 20px);
+                    font-weight: 500;
+                    color: rgba(255, 255, 255, .97);
+                    line-height: 1.4;
+                    margin-bottom: 10px;
+                    letter-spacing: -.01em
+                }
+
+                .asm-q-sub {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 13px;
+                    color: rgba(255, 255, 255, .48);
+                    margin-bottom: 32px;
+                    line-height: 1.6
+                }
+
+                .asm-options {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px
+                }
+
+                .asm-option {
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                    padding: 15px 18px;
+                    border: .5px solid rgba(255, 255, 255, .13);
+                    border-radius: 3px;
+                    cursor: pointer;
+                    transition: all .2s;
+                    background: rgba(0, 0, 0, .35)
+                }
+
+                .asm-option:hover {
+                    border-color: rgba(255, 255, 255, .28)
+                }
+
+                .asm-option.selected {
+                    border-color: rgba(255, 255, 255, .42);
+                    background: rgba(255, 255, 255, .06)
+                }
+
+                .asm-option-dot {
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    border: 1px solid rgba(255, 255, 255, .28);
+                    flex-shrink: 0;
+                    transition: all .2s
+                }
+
+                .asm-option.selected .asm-option-dot {
+                    background: rgba(255, 255, 255, .8);
+                    border-color: rgba(255, 255, 255, .8);
+                    box-shadow: 0 0 8px rgba(255, 255, 255, .3)
+                }
+
+                .asm-option-text {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 14px;
+                    color: rgba(255, 255, 255, .72);
+                    line-height: 1.5;
+                    transition: color .2s
+                }
+
+                .asm-option.selected .asm-option-text {
+                    color: rgba(255, 255, 255, .96)
+                }
+
+                .asm-option-score {
+                    margin-left: auto;
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 9px;
+                    color: rgba(255, 255, 255, .12);
+                    flex-shrink: 0
+                }
+
+                .asm-nav {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-top: 32px
+                }
+
+                .asm-btn {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 11px;
+                    letter-spacing: .15em;
+                    text-transform: uppercase;
+                    padding: 13px 26px;
+                    border: .5px solid rgba(255, 255, 255, .18);
+                    background: transparent;
+                    color: rgba(255, 255, 255, .6);
+                    cursor: pointer;
+                    border-radius: 2px;
+                    transition: all .2s
+                }
+
+                .asm-btn:hover {
+                    border-color: rgba(255, 255, 255, .4);
+                    color: rgba(255, 255, 255, .9);
+                    background: rgba(255, 255, 255, .04)
+                }
+
+                .asm-btn:disabled {
+                    opacity: .2;
+                    cursor: not-allowed
+                }
+
+                .asm-btn.primary {
+                    border-color: rgba(255, 255, 255, .35);
+                    color: rgba(255, 255, 255, .85)
+                }
+
+                .asm-btn.primary:hover {
+                    background: rgba(255, 255, 255, .08);
+                    border-color: rgba(255, 255, 255, .6);
+                    color: #fff
+                }
+
+                .asm-btn-hint {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 9px;
+                    color: rgba(255, 255, 255, .18);
+                    letter-spacing: .1em
+                }
+
+                .asm-result {
+                    display: none;
+                    animation: asm-fadein .8s ease forwards
+                }
+
+                .asm-result.active {
+                    display: block
+                }
+
+                .asm-score-display {
+                    display: flex;
+                    align-items: flex-end;
+                    gap: 16px;
+                    margin-bottom: 36px
+                }
+
+                .asm-score-number {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 70px;
+                    font-weight: 700;
+                    line-height: 1;
+                    letter-spacing: -.04em;
+                    color: rgba(255, 255, 255, .92)
+                }
+
+                .asm-score-meta {
+                    padding-bottom: 10px
+                }
+
+                .asm-score-label {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    letter-spacing: .15em;
+                    text-transform: uppercase;
+                    color: rgba(255, 255, 255, .25);
+                    margin-bottom: 4px
+                }
+
+                .asm-score-profile {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 16px;
+                    font-weight: 600;
+                    letter-spacing: -.01em
+                }
+
+                .profile-estavel {
+                    color: rgba(255, 255, 255, .48)
+                }
+
+                .profile-pressao {
+                    color: rgba(255, 200, 80, .88)
+                }
+
+                .profile-colapso {
+                    color: rgba(255, 90, 80, .92)
+                }
+
+                .asm-score-bar-wrap {
+                    margin-bottom: 40px
+                }
+
+                .asm-score-track {
+                    height: 2px;
+                    background: rgba(255, 255, 255, .06);
+                    border-radius: 1px;
+                    position: relative;
+                    margin-bottom: 8px
+                }
+
+                .asm-score-fill {
+                    height: 2px;
+                    border-radius: 1px;
+                    transition: width 1.2s cubic-bezier(.4, 0, .2, 1);
+                    width: 0
+                }
+
+                .fill-estavel {
+                    background: rgba(255, 255, 255, .3)
+                }
+
+                .fill-pressao {
+                    background: rgba(255, 200, 80, .7)
+                }
+
+                .fill-colapso {
+                    background: rgba(255, 80, 70, .8)
+                }
+
+                .asm-score-markers {
+                    display: flex;
+                    justify-content: space-between;
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 9px;
+                    color: rgba(255, 255, 255, .18)
+                }
+
+                .asm-analysis {
+                    border-left: 1px solid rgba(255, 255, 255, .08);
+                    padding-left: 24px;
+                    margin-bottom: 44px
+                }
+
+                .asm-analysis-title {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    letter-spacing: .15em;
+                    text-transform: uppercase;
+                    color: rgba(255, 255, 255, .35);
+                    margin-bottom: 14px
+                }
+
+                .asm-analysis-text {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 15px;
+                    color: rgba(255, 255, 255, .68);
+                    line-height: 1.78
+                }
+
+                .asm-analysis-text strong {
+                    color: rgba(255, 255, 255, .9);
+                    font-weight: 500
+                }
+
+                .asm-dimensions {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 10px;
+                    margin-bottom: 44px
+                }
+
+                @media(max-width:480px) {
+                    .asm-dimensions {
+                        grid-template-columns: 1fr
+                    }
+                }
+
+                .asm-dim-card {
+                    padding: 14px;
+                    border: .5px solid rgba(255, 255, 255, .07);
+                    border-radius: 2px;
+                    background: rgba(0, 0, 0, .22)
+                }
+
+                .asm-dim-label {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 9px;
+                    letter-spacing: .15em;
+                    text-transform: uppercase;
+                    color: rgba(255, 255, 255, .22);
+                    margin-bottom: 7px
+                }
+
+                .asm-dim-val {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 13px;
+                    color: rgba(255, 255, 255, .58);
+                    line-height: 1.5
+                }
+
+                .asm-dim-bar {
+                    height: 1px;
+                    background: rgba(255, 255, 255, .05);
+                    margin-top: 9px
+                }
+
+                .asm-dim-fill {
+                    height: 1px;
+                    background: rgba(255, 255, 255, .22);
+                    transition: width 1s ease .3s
+                }
+
+                .asm-cta-block {
+                    text-align: center;
+                    padding: 44px 0 0;
+                    border-top: .5px solid rgba(255, 255, 255, .06)
+                }
+
+                .asm-cta-pre {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    letter-spacing: .2em;
+                    color: rgba(255, 255, 255, .22);
+                    text-transform: uppercase;
+                    margin-bottom: 14px
+                }
+
+                .asm-cta-text {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: clamp(17px, 2.5vw, 21px);
+                    font-weight: 600;
+                    color: rgba(255, 255, 255, .85);
+                    line-height: 1.35;
+                    margin-bottom: 28px;
+                    letter-spacing: -.02em
+                }
+
+                .asm-cta-btn {
+                    display: inline-block;
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 11px;
+                    letter-spacing: .2em;
+                    text-transform: uppercase;
+                    padding: 17px 38px;
+                    border: .5px solid rgba(255, 255, 255, .35);
+                    color: rgba(255, 255, 255, .85);
+                    text-decoration: none;
+                    border-radius: 2px;
+                    transition: all .25s;
+                    cursor: pointer;
+                    background: transparent
+                }
+
+                .asm-cta-btn:hover {
+                    background: rgba(255, 255, 255, .06);
+                    border-color: rgba(255, 255, 255, .6);
+                    color: #fff
+                }
+
+                .asm-restart {
+                    display: block;
+                    margin-top: 18px;
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 9px;
+                    letter-spacing: .15em;
+                    color: rgba(255, 255, 255, .15);
+                    cursor: pointer;
+                    text-transform: uppercase;
+                    border: none;
+                    background: none;
+                    transition: color .2s
+                }
+
+                .asm-restart:hover {
+                    color: rgba(255, 255, 255, .35)
+                }
+            </style>
+            <div class="asm-container">
+                <div class="asm-header">
+                    <div class="asm-micro">COGNITIVE PRESSURE ASSESSMENT · v1.0</div>
+                    <h2 class="asm-title">Map your decision<br>environment now.</h2>
+                    <p class="asm-sub">5 parameters. 3 minutes. A diagnosis calibrated to your specific strategic
+                        context.</p>
                 </div>
-                <div class="terminal-body">
-                    <p id="ai-terminal-output" class="output">SYS: Awaiting strategic input... Try 'ARAM', 'Context' or
-                        'Strategy'.</p>
-                    <div class="terminal-input-row">
-                        <span class="prompt">&gt;&gt;</span>
-                        <input type="text" id="ai-terminal-input" placeholder="Type your input...">
-                        <div id="ai-loader" class="terminal-loader"></div>
-                        <button id="ai-terminal-submit">PROCESS</button>
+                <div class="asm-progress-wrap">
+                    <div class="asm-progress-track">
+                        <div class="asm-progress-fill" id="asm-progress"></div>
                     </div>
+                    <div class="asm-progress-label" id="asm-progress-label">0 / 5</div>
+                </div>
+                <div id="asm-questions">
+                    <div class="asm-question active" data-q="0">
+                        <div class="asm-q-number">PARAMETER 01 — VELOCITY</div>
+                        <div class="asm-q-text">How often do critical decisions get stuck for more than two weeks?</div>
+                        <div class="asm-q-sub">Consider decisions that affect strategy, people, or significant resource
+                            allocation.</div>
+                        <div class="asm-options">
+                            <div class="asm-option" data-val="5" onclick="selectOption(this,0)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Rarely — our system decides with velocity</div>
+                                <div class="asm-option-score">05</div>
+                            </div>
+                            <div class="asm-option" data-val="25" onclick="selectOption(this,0)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Sometimes — in situations of high ambiguity</div>
+                                <div class="asm-option-score">25</div>
+                            </div>
+                            <div class="asm-option" data-val="55" onclick="selectOption(this,0)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Frequently — it's a recurring pattern</div>
+                                <div class="asm-option-score">55</div>
+                            </div>
+                            <div class="asm-option" data-val="85" onclick="selectOption(this,0)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Systematically — it's the norm in our environment</div>
+                                <div class="asm-option-score">85</div>
+                            </div>
+                        </div>
+                        <div class="asm-nav"><span class="asm-btn-hint">select to continue</span><button
+                                class="asm-btn primary" onclick="nextQuestion()" id="asm-next-0" disabled>NEXT
+                                →</button></div>
+                    </div>
+                    <div class="asm-question" data-q="1">
+                        <div class="asm-q-number">PARAMETER 02 — COMPLEXITY</div>
+                        <div class="asm-q-text">What is the level of interdependency between your main strategic
+                            initiatives?</div>
+                        <div class="asm-q-sub">High interdependency means moving one piece causes unpredictable effects
+                            in others.</div>
+                        <div class="asm-options">
+                            <div class="asm-option" data-val="5" onclick="selectOption(this,1)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Low — initiatives operate relatively independently</div>
+                                <div class="asm-option-score">05</div>
+                            </div>
+                            <div class="asm-option" data-val="30" onclick="selectOption(this,1)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Moderate — there are manageable convergence points</div>
+                                <div class="asm-option-score">30</div>
+                            </div>
+                            <div class="asm-option" data-val="60" onclick="selectOption(this,1)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">High — local decisions create systemic ripples</div>
+                                <div class="asm-option-score">60</div>
+                            </div>
+                            <div class="asm-option" data-val="90" onclick="selectOption(this,1)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Extreme — it's difficult to separate cause from effect
+                                </div>
+                                <div class="asm-option-score">90</div>
+                            </div>
+                        </div>
+                        <div class="asm-nav"><button class="asm-btn" onclick="prevQuestion()">← BACK</button><button
+                                class="asm-btn primary" onclick="nextQuestion()" id="asm-next-1" disabled>NEXT
+                                →</button></div>
+                    </div>
+                    <div class="asm-question" data-q="2">
+                        <div class="asm-q-number">PARAMETER 03 — ALIGNMENT</div>
+                        <div class="asm-q-text">Is there coherence between what your leadership decides and what is
+                            actually executed?</div>
+                        <div class="asm-q-sub">Misalignment between decision and execution is one of the greatest
+                            destroyers of strategic velocity.</div>
+                        <div class="asm-options">
+                            <div class="asm-option" data-val="5" onclick="selectOption(this,2)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">High coherence — what is decided, happens</div>
+                                <div class="asm-option-score">05</div>
+                            </div>
+                            <div class="asm-option" data-val="30" onclick="selectOption(this,2)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Reasonable — there are gaps, but they are visible and
+                                    managed</div>
+                                <div class="asm-option-score">30</div>
+                            </div>
+                            <div class="asm-option" data-val="65" onclick="selectOption(this,2)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Fractured — decisions are frequently lost in execution
+                                </div>
+                                <div class="asm-option-score">65</div>
+                            </div>
+                            <div class="asm-option" data-val="90" onclick="selectOption(this,2)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Disconnected — two parallel realities: discourse and
+                                    practice</div>
+                                <div class="asm-option-score">90</div>
+                            </div>
+                        </div>
+                        <div class="asm-nav"><button class="asm-btn" onclick="prevQuestion()">← BACK</button><button
+                                class="asm-btn primary" onclick="nextQuestion()" id="asm-next-2" disabled>NEXT
+                                →</button></div>
+                    </div>
+                    <div class="asm-question" data-q="3">
+                        <div class="asm-q-number">PARAMETER 04 — EXTERNAL PRESSURE</div>
+                        <div class="asm-q-text">How is the external environment impacting your ability to make strategic
+                            decisions?</div>
+                        <div class="asm-q-sub">External pressure includes market, competition, regulation,
+                            macroeconomics, and sectoral crises.</div>
+                        <div class="asm-options">
+                            <div class="asm-option" data-val="5" onclick="selectOption(this,3)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Controlled — we have clarity about the environment and
+                                    adapt well</div>
+                                <div class="asm-option-score">05</div>
+                            </div>
+                            <div class="asm-option" data-val="35" onclick="selectOption(this,3)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Growing — there are turbulence signals requiring attention
+                                </div>
+                                <div class="asm-option-score">35</div>
+                            </div>
+                            <div class="asm-option" data-val="65" onclick="selectOption(this,3)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Intense — external is overriding the internal strategic
+                                    agenda</div>
+                                <div class="asm-option-score">65</div>
+                            </div>
+                            <div class="asm-option" data-val="90" onclick="selectOption(this,3)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Critical — we are reacting, not choosing</div>
+                                <div class="asm-option-score">90</div>
+                            </div>
+                        </div>
+                        <div class="asm-nav"><button class="asm-btn" onclick="prevQuestion()">← BACK</button><button
+                                class="asm-btn primary" onclick="nextQuestion()" id="asm-next-3" disabled>NEXT
+                                →</button></div>
+                    </div>
+                    <div class="asm-question" data-q="4">
+                        <div class="asm-q-number">PARAMETER 05 — CLARITY</div>
+                        <div class="asm-q-text">How clearly can you articulate the three biggest blockers to your
+                            growth?</div>
+                        <div class="asm-q-sub">Not what you think they are — the ones that actually stall the system
+                            when you need to move.</div>
+                        <div class="asm-options">
+                            <div class="asm-option" data-val="5" onclick="selectOption(this,4)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Total clarity — I know exactly what they are and how to
+                                    address them</div>
+                                <div class="asm-option-score">05</div>
+                            </div>
+                            <div class="asm-option" data-val="35" onclick="selectOption(this,4)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Partial clarity — I identify some, but there are blind
+                                    spots</div>
+                                <div class="asm-option-score">35</div>
+                            </div>
+                            <div class="asm-option" data-val="65" onclick="selectOption(this,4)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Fog — I sense the blockers but can't name them precisely
+                                </div>
+                                <div class="asm-option-score">65</div>
+                            </div>
+                            <div class="asm-option" data-val="90" onclick="selectOption(this,4)">
+                                <div class="asm-option-dot"></div>
+                                <div class="asm-option-text">Opacity — the system stalls without identifiable apparent
+                                    cause</div>
+                                <div class="asm-option-score">90</div>
+                            </div>
+                        </div>
+                        <div class="asm-nav"><button class="asm-btn" onclick="prevQuestion()">← BACK</button><button
+                                class="asm-btn primary" onclick="calculateResult()" id="asm-next-4" disabled>CALCULATE
+                                DIAGNOSIS →</button></div>
+                    </div>
+                </div>
+                <div class="asm-result" id="asm-result">
+                    <div class="asm-score-display">
+                        <div class="asm-score-number" id="asm-score-num">0</div>
+                        <div class="asm-score-meta">
+                            <div class="asm-score-label">COGNITIVE PRESSURE INDEX</div>
+                            <div class="asm-score-profile" id="asm-profile-name">—</div>
+                        </div>
+                    </div>
+                    <div class="asm-score-bar-wrap">
+                        <div class="asm-score-track">
+                            <div class="asm-score-fill" id="asm-score-fill"></div>
+                        </div>
+                        <div class="asm-score-markers"><span>STABLE</span><span>PRESSURE</span><span>COLLAPSE</span>
+                        </div>
+                    </div>
+                    <div class="asm-analysis">
+                        <div class="asm-analysis-title">System Analysis</div>
+                        <div class="asm-analysis-text" id="asm-analysis-text"></div>
+                    </div>
+                    <div class="asm-dimensions" id="asm-dimensions"></div>
+                    <div class="asm-cta-block">
+                        <div class="asm-cta-pre">NEXT STEP</div>
+                        <div class="asm-cta-text" id="asm-cta-text"></div>
+                        <a href="#intake" class="asm-cta-btn" id="asm-cta-btn">REQUEST DIAGNOSTIC SESSION</a>
+                        <button class="asm-restart" onclick="restartAssessment()">↺ RESTART ASSESSMENT</button>
+                    </div>
+                </div>
+            </div>
+            <script>
+                (function () {
+                    const scores = [null, null, null, null, null]; let current = 0;
+                    const qL = ['Velocity', 'Complexity', 'Alignment', 'External Pressure', 'Clarity'];
+                    window.selectOption = function (el, i) { el.parentElement.querySelectorAll('.asm-option').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); scores[i] = parseInt(el.getAttribute('data-val')); const b = document.getElementById('asm-next-' + i); if (b) b.disabled = false };
+                    window.nextQuestion = function () { if (scores[current] === null) return; const qs = document.querySelectorAll('.asm-question'); qs[current].classList.remove('active'); current++; if (current < qs.length) { qs[current].classList.add('active'); upProg() } };
+                    window.prevQuestion = function () { const qs = document.querySelectorAll('.asm-question'); qs[current].classList.remove('active'); current--; qs[current].classList.add('active'); upProg() };
+                    function upProg() { const f = scores.filter(s => s !== null).length; document.getElementById('asm-progress').style.width = (f / 5 * 100) + '%'; document.getElementById('asm-progress-label').textContent = f + ' / 5' }
+                    window.calculateResult = function () {
+                        const avg = Math.round(scores.reduce((a, b) => a + b, 0) / 5); document.getElementById('asm-questions').style.display = 'none'; document.getElementById('asm-progress').style.width = '100%'; document.getElementById('asm-progress-label').textContent = '5 / 5'; document.getElementById('asm-result').classList.add('active'); let n = 0; const iv = setInterval(() => { n += Math.ceil(avg / 40); if (n >= avg) { n = avg; clearInterval(iv) } document.getElementById('asm-score-num').textContent = n }, 30); let p, pc, fc, at, ct; if (avg <= 35) { p = 'Stable System'; pc = 'profile-estavel'; fc = 'fill-estavel'; at = 'Your environment presents <strong>healthy cognitive pressure levels</strong>. The decision system operates within manageable parameters. The risk at this stage is <strong>structural complacency</strong>: stable systems tend not to notice when pressure begins to escalate. A preventive review of your decision architecture can capture growth vectors not yet visible.'; ct = 'Your system is stable. Those who grow fastest are the ones who refine architecture before pressure arrives.'; document.getElementById('asm-cta-btn').textContent = 'SCHEDULE PREVENTIVE REVIEW' } else if (avg <= 65) { p = 'Growing Pressure'; pc = 'profile-pressao'; fc = 'fill-pressao'; at = 'Your environment is in a <strong>growing pressure zone</strong>. Parameters indicate the decision system is being tested. This is the most critical moment: the window <strong>before</strong> collapse, when intervention has the greatest return. Environments at this stage typically experience silent degradation that only becomes evident after significant strategic capital has been lost.'; ct = 'The intervention window is open. Every week without reconfiguration is lost strategic capital.'; document.getElementById('asm-cta-btn').textContent = 'REQUEST ARCHITECTURAL DIAGNOSIS' } else { p = 'Imminent Collapse'; pc = 'profile-colapso'; fc = 'fill-colapso'; at = 'Your environment is in a <strong>critical cognitive pressure zone</strong>. Parameters indicate the decision system is operating under severe systemic load. This stage is marked by a specific phenomenon — <strong>the real causes of blockages become invisible</strong> to those inside the system. Architectural intervention is not optional.'; ct = 'The signals are clear. The next step requires surgical precision — not more analysis, but intervention.'; document.getElementById('asm-cta-btn').textContent = 'REQUEST URGENT STRATEGIC ACCESS' }
+                        document.getElementById('asm-profile-name').textContent = p; document.getElementById('asm-profile-name').className = 'asm-score-profile ' + pc; document.getElementById('asm-analysis-text').innerHTML = at; document.getElementById('asm-cta-text').textContent = ct; setTimeout(() => { const f = document.getElementById('asm-score-fill'); f.className = 'asm-score-fill ' + fc; f.style.width = avg + '%' }, 300);
+                        const dims = document.getElementById('asm-dimensions'); dims.innerHTML = ''; qL.forEach((label, i) => { const pct = scores[i]; const card = document.createElement('div'); card.className = 'asm-dim-card'; const interp = pct <= 30 ? 'Operating well' : pct <= 60 ? 'Attention needed' : 'Critical intervention'; card.innerHTML = `<div class="asm-dim-label">${label}</div><div class="asm-dim-val">${interp}</div><div class="asm-dim-bar"><div class="asm-dim-fill" style="width:${pct}%"></div></div>`; dims.appendChild(card) })
+                    };
+                    window.restartAssessment = function () { scores.fill(null); current = 0; document.querySelectorAll('.asm-option').forEach(o => o.classList.remove('selected')); document.querySelectorAll('.asm-btn.primary').forEach(b => b.disabled = true); document.getElementById('asm-questions').style.display = 'block'; document.querySelectorAll('.asm-question').forEach((q, i) => q.classList.toggle('active', i === 0)); document.getElementById('asm-result').classList.remove('active'); document.getElementById('asm-progress').style.width = '0%'; document.getElementById('asm-progress-label').textContent = '0 / 5' };
+                })();
+            </script>
+        </section>
+
+        <!-- ─── TERMINAL v2 ───────────────────────────────────── -->
+        <section class="ai-terminal-section" id="terminal">
+            <div class="terminal-v2">
+                <div class="terminal-v2-bar">
+                    <span class="tvbar-dot red"></span>
+                    <span class="tvbar-dot yellow"></span>
+                    <span class="tvbar-dot green"></span>
+                    <div class="tvbar-title">COGNITIVE INQUIRY v1.0</div>
+                    <div class="tvbar-status" id="term-status">AWAITING INPUT</div>
+                </div>
+                <div class="terminal-v2-output" id="ai-terminal-output"></div>
+                <div class="terminal-v2-profile" id="term-profile"></div>
+                <div class="terminal-v2-divider"></div>
+                <div class="terminal-v2-input-row">
+                    <span class="tv2-prompt">&gt;&gt;</span>
+                    <input type="text" id="ai-terminal-input" placeholder="decision · strategy · ARAM · growth..."
+                        autocomplete="off" spellcheck="false">
+                    <div class="terminal-loader" id="ai-loader"></div>
+                </div>
+                <div class="terminal-v2-footer">
+                    <span class="tv2-hint">ENTER to process · ESC to clear</span>
+                    <button id="ai-terminal-submit">PROCESS</button>
                 </div>
             </div>
         </section>
 
+        <!-- ─── PROFILE ────────────────────────────────────────── -->
         <section class="profile-section">
             <div class="profile-grid">
-                <div class="profile-image">
-                    <img src="../assets/profile.png" alt="Tulio Jannuzzelli">
-                </div>
+                <div class="profile-image"><img src="../assets/profile.png" alt="Tulio Jannuzzelli"></div>
                 <div class="profile-content">
                     <div class="profile-text">
                         <h2>Tulio Jannuzzelli</h2>
-                        <h3>Strategic &amp; Cognitive Architect</h3>
+                        <h3>Strategic & Cognitive Architect</h3>
                         <p class="lead">I unlock strategic decisions in high-complexity contexts.</p>
                         <div class="content-block">
                             <h4>You seek me when:</h4>
@@ -112,12 +846,466 @@
             </div>
         </section>
 
+        <!-- ─── CASES ──────────────────────────────────────────── -->
+        <section class="jnz-cases" id="signals">
+            <style>
+                .jnz-cases {
+                    position: relative;
+                    padding: 100px 0 120px
+                }
+
+                .jnz-cases::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 1px;
+                    height: 60px;
+                    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, .08))
+                }
+
+                .cases-container {
+                    max-width: 680px;
+                    margin: 0 auto;
+                    padding: 0 2rem
+                }
+
+                .cases-header {
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: space-between;
+                    margin-bottom: 52px;
+                    gap: 24px;
+                    flex-wrap: wrap
+                }
+
+                .cases-micro {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    letter-spacing: .2em;
+                    color: rgba(255, 255, 255, .22);
+                    text-transform: uppercase;
+                    margin-bottom: 12px
+                }
+
+                .cases-title {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: clamp(20px, 3.5vw, 30px);
+                    font-weight: 600;
+                    color: rgba(255, 255, 255, .9);
+                    line-height: 1.2;
+                    letter-spacing: -.02em
+                }
+
+                .cases-disclaimer {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 9px;
+                    letter-spacing: .1em;
+                    color: rgba(255, 255, 255, .22);
+                    text-align: right;
+                    max-width: 180px;
+                    line-height: 1.8
+                }
+
+                @media(max-width:560px) {
+                    .cases-header {
+                        flex-direction: column;
+                        align-items: flex-start
+                    }
+
+                    .cases-disclaimer {
+                        text-align: left;
+                        max-width: 100%
+                    }
+                }
+
+                .cases-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1px;
+                    background: rgba(255, 255, 255, .05);
+                    border: .5px solid rgba(255, 255, 255, .05)
+                }
+
+                @media(max-width:560px) {
+                    .cases-grid {
+                        grid-template-columns: 1fr
+                    }
+                }
+
+                .case-card {
+                    background: rgba(2, 3, 4, .96);
+                    padding: 28px;
+                    position: relative;
+                    overflow: hidden;
+                    transition: background .3s
+                }
+
+                .case-card:hover {
+                    background: rgba(10, 12, 15, .98)
+                }
+
+                .case-encrypted {
+                    position: absolute;
+                    inset: 0;
+                    padding: 28px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    background: rgba(2, 3, 4, .96);
+                    transition: opacity .5s;
+                    z-index: 2
+                }
+
+                .case-card.revealed .case-encrypted {
+                    opacity: 0;
+                    pointer-events: none
+                }
+
+                .case-enc-text {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    color: rgba(255, 255, 255, .13);
+                    line-height: 1.9;
+                    letter-spacing: .04em;
+                    flex: 1;
+                    overflow: hidden;
+                    word-break: break-all
+                }
+
+                .case-enc-hint {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 9px;
+                    letter-spacing: .18em;
+                    color: rgba(255, 255, 255, .22);
+                    text-transform: uppercase;
+                    margin-top: 20px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px
+                }
+
+                .case-enc-hint::before {
+                    content: '';
+                    display: block;
+                    width: 14px;
+                    height: 1px;
+                    background: rgba(255, 255, 255, .2)
+                }
+
+                .case-content {
+                    position: relative;
+                    z-index: 1;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column
+                }
+
+                .case-tag {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 9px;
+                    letter-spacing: .18em;
+                    text-transform: uppercase;
+                    color: rgba(255, 255, 255, .28);
+                    margin-bottom: 18px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px
+                }
+
+                .case-tag::before {
+                    content: '';
+                    display: block;
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, .28)
+                }
+
+                .case-context {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 12px;
+                    color: rgba(255, 255, 255, .45);
+                    line-height: 1.65;
+                    margin-bottom: 14px;
+                    font-style: italic
+                }
+
+                .case-problem {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: rgba(255, 255, 255, .82);
+                    line-height: 1.5;
+                    margin-bottom: 22px;
+                    letter-spacing: -.01em;
+                    flex: 1
+                }
+
+                .case-divider {
+                    height: .5px;
+                    background: rgba(255, 255, 255, .07);
+                    margin-bottom: 18px
+                }
+
+                .case-result-row {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 14px
+                }
+
+                .case-result-metric {
+                    flex-shrink: 0
+                }
+
+                .case-metric-val {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 22px;
+                    font-weight: 700;
+                    color: rgba(255, 255, 255, .88);
+                    letter-spacing: -.03em;
+                    line-height: 1
+                }
+
+                .case-metric-unit {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 9px;
+                    color: rgba(255, 255, 255, .32);
+                    letter-spacing: .1em;
+                    text-transform: uppercase;
+                    margin-top: 3px
+                }
+
+                .case-result-text {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 12px;
+                    color: rgba(255, 255, 255, .52);
+                    line-height: 1.65
+                }
+
+                .case-card.wide {
+                    grid-column: 1/-1
+                }
+
+                .case-card.wide .case-problem {
+                    font-size: 15px
+                }
+
+                .cases-footer {
+                    margin-top: 36px;
+                    display: flex;
+                    align-items: center;
+                    gap: 14px
+                }
+
+                .cases-footer-line {
+                    flex: 1;
+                    height: .5px;
+                    background: rgba(255, 255, 255, .06)
+                }
+
+                .cases-footer-text {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 9px;
+                    letter-spacing: .14em;
+                    color: rgba(255, 255, 255, .2);
+                    text-transform: uppercase;
+                    white-space: nowrap
+                }
+
+                @media(max-width:560px) {
+                    .cases-footer-text {
+                        white-space: normal;
+                        text-align: center
+                    }
+                }
+
+                @keyframes glitch-reveal {
+                    0% {
+                        opacity: .15;
+                        filter: blur(1px)
+                    }
+
+                    30% {
+                        opacity: .9;
+                        filter: blur(.3px)
+                    }
+
+                    45% {
+                        opacity: .5;
+                        filter: blur(.8px)
+                    }
+
+                    60% {
+                        opacity: 1;
+                        filter: blur(0)
+                    }
+
+                    70% {
+                        opacity: .85;
+                        filter: blur(.2px)
+                    }
+
+                    100% {
+                        opacity: 1;
+                        filter: blur(0)
+                    }
+                }
+
+                .case-card.revealing .case-content {
+                    animation: glitch-reveal .6s ease forwards
+                }
+            </style>
+            <div class="cases-container">
+                <div class="cases-header">
+                    <div class="cases-header-left">
+                        <div class="cases-micro">FIELD SIGNALS · REAL CASES</div>
+                        <div class="cases-title">What happens when<br>the architecture changes.</div>
+                    </div>
+                    <div class="cases-disclaimer">Identities protected by confidentiality protocol. Results verified
+                        internally.</div>
+                </div>
+                <div class="cases-grid" id="cases-grid">
+                    <div class="case-card" data-index="0">
+                        <div class="case-encrypted">
+                            <div class="case-enc-text" id="enc-0"></div>
+                            <div class="case-enc-hint">hover to decrypt</div>
+                        </div>
+                        <div class="case-content">
+                            <div class="case-tag">FINANCIAL SECTOR · MID-SIZE</div>
+                            <div class="case-context">Asset management firm. 3 partners, R$1.2B AUM, chronic divergence
+                                in strategic direction.</div>
+                            <div class="case-problem">Product expansion decision stuck for 9 months due to structural
+                                misalignment between partners — not from lack of data, but from incompatible cognitive
+                                architectures operating the same problem.</div>
+                            <div class="case-divider"></div>
+                            <div class="case-result-row">
+                                <div class="case-result-metric">
+                                    <div class="case-metric-val">3</div>
+                                    <div class="case-metric-unit">weeks</div>
+                                </div>
+                                <div class="case-result-text">Decision made and approved by all 3 partners after shared
+                                    decision model reconfiguration. Product launched in the following quarter.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-card" data-index="1">
+                        <div class="case-encrypted">
+                            <div class="case-enc-text" id="enc-1"></div>
+                            <div class="case-enc-hint">hover to decrypt</div>
+                        </div>
+                        <div class="case-content">
+                            <div class="case-tag">TECHNOLOGY · SCALE-UP</div>
+                            <div class="case-context">B2B SaaS with 180 employees. Growth plateaued for 18 months
+                                despite solid product and expanding market.</div>
+                            <div class="case-problem">Diagnosis revealed the blockage wasn't product or market — it was
+                                a priority governance system creating enough noise to nullify senior leadership's
+                                execution capacity.</div>
+                            <div class="case-divider"></div>
+                            <div class="case-result-row">
+                                <div class="case-result-metric">
+                                    <div class="case-metric-val">+67%</div>
+                                    <div class="case-metric-unit">velocity</div>
+                                </div>
+                                <div class="case-result-text">Increase in strategic initiative execution velocity in the
+                                    6 months following the prioritization system restructuring.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-card wide" data-index="2">
+                        <div class="case-encrypted">
+                            <div class="case-enc-text" id="enc-2"></div>
+                            <div class="case-enc-hint">hover to decrypt</div>
+                        </div>
+                        <div class="case-content">
+                            <div class="case-tag">HEALTHCARE · LARGE · REGULATORY PRESSURE</div>
+                            <div class="case-context">Hospital network across 4 states. Board under regulatory change
+                                pressure with 90-day deadline for critical process compliance.</div>
+                            <div class="case-problem">The operational decision system was fractured into silos that
+                                couldn't communicate under pressure. With 90 days for regulatory compliance, any
+                                integration decision took 3 weeks — mathematically impossible.</div>
+                            <div class="case-divider"></div>
+                            <div class="case-result-row">
+                                <div class="case-result-metric">
+                                    <div class="case-metric-val">52</div>
+                                    <div class="case-metric-unit">days</div>
+                                </div>
+                                <div class="case-result-text">Full compliance delivered 38 days ahead of the regulatory
+                                    deadline. The cross-silo decision protocol created remains active, reducing average
+                                    operational decision cycles by 64%.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-card" data-index="3">
+                        <div class="case-encrypted">
+                            <div class="case-enc-text" id="enc-3"></div>
+                            <div class="case-enc-hint">hover to decrypt</div>
+                        </div>
+                        <div class="case-content">
+                            <div class="case-tag">CONSUMER · FAMILY-CONTROLLED</div>
+                            <div class="case-context">2nd generation family business, R$400M revenue. Management
+                                professionalization generating systemic conflict.</div>
+                            <div class="case-problem">The generational transition had created two parallel authority
+                                systems — the formal (hired C-suite) and the informal (family). No strategic decision
+                                reached completion without being sabotaged by one of the two systems.</div>
+                            <div class="case-divider"></div>
+                            <div class="case-result-row">
+                                <div class="case-result-metric">
+                                    <div class="case-metric-val">1</div>
+                                    <div class="case-metric-unit">system</div>
+                                </div>
+                                <div class="case-result-text">Single governance architecture implemented, integrating
+                                    both authority centers into a coherent decision protocol. Hired leadership turnover
+                                    zeroed the following year.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-card" data-index="4">
+                        <div class="case-encrypted">
+                            <div class="case-enc-text" id="enc-4"></div>
+                            <div class="case-enc-hint">hover to decrypt</div>
+                        </div>
+                        <div class="case-content">
+                            <div class="case-tag">INNOVATION · CORPORATE ECOSYSTEM</div>
+                            <div class="case-context">Multinational innovation hub with 12 startups in portfolio.
+                                Pilot-to-viable-product conversion rate below 8%.</div>
+                            <div class="case-problem">The project evaluation framework used mature business metrics
+                                applied to radical uncertainty contexts — systematically killing highest-potential
+                                projects while approving the safest and smallest ones.</div>
+                            <div class="case-divider"></div>
+                            <div class="case-result-row">
+                                <div class="case-result-metric">
+                                    <div class="case-metric-val">31%</div>
+                                    <div class="case-metric-unit">conversion</div>
+                                </div>
+                                <div class="case-result-text">Pilot-to-viable-product conversion rate in the 12 months
+                                    after framework restructuring. From 8% to 31% without portfolio increase.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cases-footer">
+                    <div class="cases-footer-line"></div>
+                    <div class="cases-footer-text">All cases went through validation and anonymization protocol</div>
+                    <div class="cases-footer-line"></div>
+                </div>
+            </div>
+            <script>
+                (function () {
+                    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789█▓▒░∂∇∑≈≡∞⟨⟩⊕⊗∧∨∩∪ΔΨΩ';
+                    function rnd(n) { let r = ''; for (let i = 0; i < n; i++) { if (Math.random() < .1) { r += '\n'; continue } r += chars[Math.floor(Math.random() * chars.length)] } return r }
+                    for (let i = 0; i < 5; i++) { const el = document.getElementById('enc-' + i); if (el) el.textContent = rnd(180) }
+                    setInterval(() => { document.querySelectorAll('.case-enc-text').forEach(el => { if (!el.closest('.case-card.revealed')) { const a = el.textContent.split(''); a[Math.floor(Math.random() * a.length)] = chars[Math.floor(Math.random() * chars.length)]; el.textContent = a.join('') } }) }, 70);
+                })();
+            </script>
+        </section>
+
+        <!-- ─── CONTENT ────────────────────────────────────────── -->
         <section class="content-enhancement-section">
             <div class="content-grid">
-                <div class="content-visual-placeholder">
-                    <img src="../assets/neural-grid.jpg" alt="Neural Grid"
-                        style="width:100%; height:100%; object-fit:cover; opacity:0.4;">
-                </div>
+                <div class="content-visual-placeholder"><img src="../assets/neural-grid.jpg" alt="Neural Grid"
+                        style="width:100%;height:100%;object-fit:cover;opacity:.38"></div>
                 <div class="content-text">
                     <h2>Structural Misalignment</h2>
                     <p>Most systems appear aligned only on the surface. We identify the invisible misalignments that
@@ -125,12 +1313,10 @@
                 </div>
             </div>
         </section>
-
         <section class="content-enhancement-section">
             <div class="content-grid">
-                <div class="content-visual-placeholder">
-                    <img src="../assets/fractal-intelligence.jpg" alt="Architectural Intervention"
-                        style="width:100%; height:100%; object-fit:cover; opacity:0.4;">
+                <div class="content-visual-placeholder"><img src="../assets/fractal-intelligence.jpg"
+                        alt="Architectural Intervention" style="width:100%;height:100%;object-fit:cover;opacity:.38">
                 </div>
                 <div class="content-text">
                     <h2>Architectural Intervention</h2>
@@ -140,11 +1326,409 @@
             </div>
         </section>
 
-        <section class="cta-final">
-            <p>Access requires clarity of intent.</p>
-            <a href="#" class="cta glow magnetic">ENTER THE SYSTEM</a>
+        <!-- ─── INTAKE ──────────────────────────────────────────── -->
+        <section class="jnz-intake" id="intake">
+            <style>
+                .jnz-intake {
+                    position: relative;
+                    padding: 100px 0 140px
+                }
+
+                .jnz-intake::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 1px;
+                    height: 80px;
+                    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, .08))
+                }
+
+                .intake-container {
+                    max-width: 680px;
+                    margin: 0 auto;
+                    padding: 0 2rem
+                }
+
+                .intake-header {
+                    margin-bottom: 60px
+                }
+
+                .intake-micro {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    letter-spacing: .2em;
+                    color: rgba(255, 255, 255, .2);
+                    text-transform: uppercase;
+                    margin-bottom: 14px
+                }
+
+                .intake-title {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: clamp(24px, 4vw, 38px);
+                    font-weight: 700;
+                    color: rgba(255, 255, 255, .92);
+                    line-height: 1.15;
+                    letter-spacing: -.03em;
+                    margin-bottom: 14px
+                }
+
+                .intake-sub {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 15px;
+                    color: rgba(255, 255, 255, .38);
+                    line-height: 1.72;
+                    max-width: 500px
+                }
+
+                .intake-terminal {
+                    border: .5px solid rgba(255, 255, 255, .1);
+                    border-radius: 4px;
+                    overflow: hidden;
+                    background: rgba(0, 0, 0, .45)
+                }
+
+                .intake-terminal-bar {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 14px 20px;
+                    border-bottom: .5px solid rgba(255, 255, 255, .06);
+                    background: rgba(255, 255, 255, .02)
+                }
+
+                .tbar-dot {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%
+                }
+
+                .tbar-dot.red {
+                    background: rgba(255, 90, 80, .65)
+                }
+
+                .tbar-dot.yellow {
+                    background: rgba(255, 190, 60, .65)
+                }
+
+                .tbar-dot.green {
+                    background: rgba(80, 200, 100, .65)
+                }
+
+                .tbar-title {
+                    flex: 1;
+                    text-align: center;
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    color: rgba(255, 255, 255, .22);
+                    letter-spacing: .1em
+                }
+
+                .intake-output {
+                    padding: 24px 24px 0;
+                    min-height: 60px;
+                    max-height: 200px;
+                    overflow-y: auto
+                }
+
+                .intake-log-line {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 12px;
+                    line-height: 1.9;
+                    display: flex;
+                    gap: 10px
+                }
+
+                .log-prefix {
+                    color: rgba(255, 255, 255, .18);
+                    flex-shrink: 0
+                }
+
+                .log-text {
+                    color: rgba(255, 255, 255, .52)
+                }
+
+                .log-text.accent {
+                    color: rgba(255, 255, 255, .8)
+                }
+
+                .log-text.muted {
+                    color: rgba(255, 255, 255, .22)
+                }
+
+                .intake-steps {
+                    display: flex;
+                    gap: 4px;
+                    padding: 16px 24px 12px
+                }
+
+                .intake-step-dot {
+                    width: 20px;
+                    height: 2px;
+                    background: rgba(255, 255, 255, .08);
+                    border-radius: 1px;
+                    transition: background .3s
+                }
+
+                .intake-step-dot.done {
+                    background: rgba(255, 255, 255, .3)
+                }
+
+                .intake-step-dot.active {
+                    background: rgba(255, 255, 255, .65)
+                }
+
+                .intake-active-q {
+                    padding: 16px 24px
+                }
+
+                .active-q-label {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    letter-spacing: .15em;
+                    text-transform: uppercase;
+                    color: rgba(255, 255, 255, .22);
+                    margin-bottom: 8px
+                }
+
+                .active-q-text {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: rgba(255, 255, 255, .82);
+                    line-height: 1.4;
+                    letter-spacing: -.01em
+                }
+
+                .intake-divider {
+                    height: .5px;
+                    background: rgba(255, 255, 255, .06);
+                    margin: 0 24px
+                }
+
+                .intake-input-wrap {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 10px;
+                    padding: 12px 24px 20px
+                }
+
+                .intake-prompt {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 13px;
+                    color: rgba(255, 255, 255, .3);
+                    padding-top: 10px;
+                    flex-shrink: 0
+                }
+
+                .intake-textarea {
+                    flex: 1;
+                    background: transparent;
+                    border: none;
+                    outline: none;
+                    resize: none;
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 13px;
+                    color: rgba(255, 255, 255, .88);
+                    line-height: 1.7;
+                    padding: 8px 0;
+                    min-height: 44px;
+                    caret-color: rgba(255, 255, 255, .6)
+                }
+
+                .intake-textarea::placeholder {
+                    color: rgba(255, 255, 255, .13)
+                }
+
+                .intake-controls {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 8px 24px 20px
+                }
+
+                .intake-char-count {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 9px;
+                    color: rgba(255, 255, 255, .18);
+                    letter-spacing: .1em
+                }
+
+                .intake-submit-btn {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    letter-spacing: .18em;
+                    text-transform: uppercase;
+                    padding: 11px 22px;
+                    border: .5px solid rgba(255, 255, 255, .2);
+                    background: transparent;
+                    color: rgba(255, 255, 255, .55);
+                    cursor: pointer;
+                    border-radius: 2px;
+                    transition: all .2s
+                }
+
+                .intake-submit-btn:hover:not(:disabled) {
+                    border-color: rgba(255, 255, 255, .45);
+                    color: rgba(255, 255, 255, .88);
+                    background: rgba(255, 255, 255, .04)
+                }
+
+                .intake-submit-btn:disabled {
+                    opacity: .3;
+                    cursor: not-allowed
+                }
+
+                .intake-submit-btn.ready {
+                    border-color: rgba(255, 255, 255, .35);
+                    color: rgba(255, 255, 255, .78)
+                }
+
+                .intake-success {
+                    display: none;
+                    padding: 52px 24px;
+                    text-align: center
+                }
+
+                .intake-success.active {
+                    display: block
+                }
+
+                .success-icon {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 28px;
+                    color: rgba(255, 255, 255, .55);
+                    margin-bottom: 20px
+                }
+
+                .success-title {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 21px;
+                    font-weight: 600;
+                    color: rgba(255, 255, 255, .88);
+                    letter-spacing: -.02em;
+                    margin-bottom: 10px
+                }
+
+                .success-sub {
+                    font-family: 'Inter', sans-serif;
+                    font-size: 14px;
+                    color: rgba(255, 255, 255, .38);
+                    line-height: 1.72;
+                    max-width: 400px;
+                    margin: 0 auto
+                }
+
+                .success-code {
+                    margin-top: 28px;
+                    display: inline-block;
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    letter-spacing: .2em;
+                    color: rgba(255, 255, 255, .2);
+                    border: .5px solid rgba(255, 255, 255, .07);
+                    padding: 9px 18px;
+                    border-radius: 2px
+                }
+
+                .intake-error {
+                    display: none;
+                    padding: 10px 24px;
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 10px;
+                    color: rgba(255, 100, 80, .75);
+                    letter-spacing: .1em
+                }
+
+                .intake-error.active {
+                    display: block
+                }
+            </style>
+            <div class="intake-container">
+                <div class="intake-header">
+                    <div class="intake-micro">STRATEGIC ACCESS PROTOCOL · RESTRICTED ACCESS</div>
+                    <div class="intake-title">Access requires<br>clarity of intent.</div>
+                    <div class="intake-sub">This is not a conventional contact form. It is an initial diagnostic
+                        protocol. Your responses determine whether and how I proceed.</div>
+                </div>
+                <div class="intake-terminal" id="intake-terminal">
+                    <div class="intake-terminal-bar">
+                        <div class="tbar-dot red"></div>
+                        <div class="tbar-dot yellow"></div>
+                        <div class="tbar-dot green"></div>
+                        <div class="tbar-title">STRATEGIC ACCESS PROTOCOL v1.0</div>
+                    </div>
+                    <div class="intake-output" id="intake-output">
+                        <div class="intake-log-line"><span class="log-prefix">SYS</span><span
+                                class="log-text accent">Protocol initialized. Processing strategic input.</span></div>
+                        <div class="intake-log-line"><span class="log-prefix">SYS</span><span
+                                class="log-text muted">Responses are confidential — used only to calibrate first
+                                contact.</span></div>
+                    </div>
+                    <div class="intake-steps" id="intake-steps">
+                        <div class="intake-step-dot active" id="sdot-0"></div>
+                        <div class="intake-step-dot" id="sdot-1"></div>
+                        <div class="intake-step-dot" id="sdot-2"></div>
+                        <div class="intake-step-dot" id="sdot-3"></div>
+                        <div class="intake-step-dot" id="sdot-4"></div>
+                    </div>
+                    <div class="intake-active-q" id="intake-active-q">
+                        <div class="active-q-label" id="active-q-label">PARAMETER 01 — CONTEXT</div>
+                        <div class="active-q-text" id="active-q-text">What is your position and the sector you operate
+                            in?</div>
+                    </div>
+                    <div class="intake-divider"></div>
+                    <div class="intake-input-wrap">
+                        <span class="intake-prompt">&gt;&gt;</span>
+                        <textarea class="intake-textarea" id="intake-textarea" placeholder="your response..." rows="3"
+                            maxlength="600" oninput="onInputChange()" onkeydown="onKeyDown(event)"></textarea>
+                    </div>
+                    <div class="intake-controls">
+                        <span class="intake-char-count" id="intake-chars">0 / 600</span>
+                        <button class="intake-submit-btn" id="intake-submit-btn" onclick="advanceStep()"
+                            disabled>CONFIRM →</button>
+                    </div>
+                    <div class="intake-error" id="intake-error">ERROR: could not transmit. Try
+                        intelligence@jannuzzelli.pro</div>
+                    <div class="intake-success" id="intake-success">
+                        <div class="success-icon">_</div>
+                        <div class="success-title">Protocol transmitted.</div>
+                        <div class="success-sub">Your responses have been received. A preliminary analysis of your
+                            context will be conducted before first contact. Expect a response within 48 business hours —
+                            calibrated to what you wrote.</div>
+                        <div class="success-code" id="success-code">REF: —</div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                (function () {
+                    const ACTION_URL = 'https://formspree.io/f/xjgppwnj';
+                    const INTAKE_EMAIL = 'intelligence@jannuzzelli.pro';
+                    const questions = [
+                        { label: 'PARAMETER 01 — CONTEXT', text: 'What is your position and the sector you operate in?', placeholder: 'e.g.: CEO of a B2B technology company with 200 people...', key: 'context' },
+                        { label: 'PARAMETER 02 — SITUATION', text: 'Describe what is stuck or under pressure in your strategic environment right now.', placeholder: 'be specific — what exactly is not moving forward...', key: 'situation' },
+                        { label: 'PARAMETER 03 — ATTEMPTS', text: 'What has already been tried to resolve it? Which approaches didn\'t work?', placeholder: 'consultants hired, processes implemented, changes made...', key: 'attempts' },
+                        { label: 'PARAMETER 04 — URGENCY', text: 'What is the cost of not resolving this in the next 90 days?', placeholder: 'financial, strategic, organizational, reputational...', key: 'urgency' },
+                        { label: 'PARAMETER 05 — INTENTION', text: 'What do you expect from an architectural intervention? What would success look like for you?', placeholder: 'what would concretely change if the problem were resolved...', key: 'intention' }
+                    ];
+                    let step = 0; const answers = {};
+                    const ta = document.getElementById('intake-textarea'), sb = document.getElementById('intake-submit-btn'), op = document.getElementById('intake-output'), cc = document.getElementById('intake-chars');
+                    window.onInputChange = function () { const l = ta.value.trim().length; cc.textContent = ta.value.length + ' / 600'; sb.disabled = l < 10; sb.classList.toggle('ready', l >= 10) };
+                    window.onKeyDown = function (e) { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); if (!sb.disabled) advanceStep() } };
+                    function addLog(p, t, c) { const line = document.createElement('div'); line.className = 'intake-log-line'; line.innerHTML = `<span class="log-prefix">${p}</span><span class="log-text ${c || ''}">${t}</span>`; op.appendChild(line); op.scrollTop = op.scrollHeight }
+                    function updateQ(i) { const q = questions[i]; document.getElementById('active-q-label').textContent = q.label; document.getElementById('active-q-text').textContent = q.text; ta.placeholder = q.placeholder; ta.value = ''; sb.disabled = true; sb.classList.remove('ready'); cc.textContent = '0 / 600'; ta.focus(); for (let j = 0; j < 5; j++) { const d = document.getElementById('sdot-' + j); d.className = 'intake-step-dot' + (j < i ? ' done' : j === i ? ' active' : '') } }
+                    window.advanceStep = function () { const val = ta.value.trim(); if (val.length < 10) return; const q = questions[step]; answers[q.key] = val; addLog('IN', `[${q.key.toUpperCase()}] ${val.length > 60 ? val.slice(0, 60) + '...' : val}`, 'accent'); addLog('SYS', `Parameter ${step + 1} recorded.`, 'muted'); step++; if (step < questions.length) { updateQ(step); addLog('SYS', `Parameter ${step + 1}: ${questions[step].text}`, '') } else { sb.textContent = 'TRANSMITTING...'; sb.disabled = true; document.getElementById('intake-active-q').style.opacity = '.3'; ta.disabled = true; sendData() } };
+                    function genRef() { return 'JNZ-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2, 6).toUpperCase() }
+                    async function sendData() { const ref = genRef(); const body = Object.entries(answers).map(([k, v]) => `[${k.toUpperCase()}]\n${v}`).join('\n\n---\n\n'); const payload = { _subject: `[Strategic Access EN] ${ref} — ${(answers.context || '').slice(0, 60)}`, referencia: ref, ...answers, _body: `STRATEGIC ACCESS PROTOCOL (EN)\nRef: ${ref}\n\n${body}` }; try { const res = await fetch(ACTION_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) }); res.ok ? showSuccess(ref) : showError() } catch { const mb = encodeURIComponent(`STRATEGIC ACCESS PROTOCOL (EN)\nRef: ${ref}\n\n${body}`); showSuccess(ref); setTimeout(() => { window.location.href = `mailto:${INTAKE_EMAIL}?subject=Strategic Access ${ref}&body=${mb}` }, 1000) } }
+                    function showSuccess(ref) { ['intake-active-q', 'intake-steps'].forEach(id => document.getElementById(id).style.display = 'none');['.intake-input-wrap', '.intake-divider', '.intake-controls'].forEach(s => { const el = document.querySelector(s); if (el) el.style.display = 'none' }); addLog('SYS', 'Protocol complete. Transmitting...', 'muted'); setTimeout(() => { addLog('SYS', `[${ref}] Data transmitted successfully.`, 'accent'); setTimeout(() => { document.getElementById('intake-success').classList.add('active'); document.getElementById('success-code').textContent = `REF: ${ref}` }, 600) }, 800) }
+                    function showError() { sb.textContent = 'CONFIRM →'; sb.disabled = false; document.getElementById('intake-active-q').style.opacity = '1'; ta.disabled = false; const err = document.getElementById('intake-error'); err.classList.add('active'); setTimeout(() => err.classList.remove('active'), 5000) }
+                    updateQ(0);
+                })();
+            </script>
         </section>
 
+        <!-- ─── FOOTER ─────────────────────────────────────────── -->
         <footer>
             <a href="mailto:intelligence@jannuzzelli.pro" class="footer-contact">intelligence@jannuzzelli.pro</a>
             <p class="footer-rights">© 2026 Jannuzzelli — All Rights Reserved</p>
