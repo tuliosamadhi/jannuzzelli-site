@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Jannuzzelli — Cognitive Strategic Architecture</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <meta name="description" content="Cognitive Strategic Architecture for high-complexity decision environments.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cognitive Strategic Architecture for decisions in high-complexity environments.">
     <meta name="theme-color" content="#020304">
+
+    <!-- SEO & Social -->
     <meta property="og:title" content="Jannuzzelli — Cognitive Strategic Architecture">
     <meta property="og:description"
         content="Structural cognitive reconfiguration. Decision architecture for high-complexity environments.">
@@ -18,6 +20,7 @@
     <meta name="twitter:description" content="Structural cognitive reconfiguration.">
     <meta name="twitter:image" content="https://www.jannuzzelli.pro/assets/monogram.svg">
     <link rel="canonical" href="https://www.jannuzzelli.pro/">
+
     <link rel="icon" type="image/svg+xml" href="../assets/monogram.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,11 +32,14 @@
 
 <body>
     <div class="scan-line"></div>
+
     <div id="loader">
         <div class="loader-text" id="loader-text">INITIALIZING SYSTEM...</div>
     </div>
-    <div class="bg-monogram" style="background-image:url('../assets/monogram.svg')"></div>
+
+    <div class="bg-monogram"></div>
     <div class="bg-energy"></div>
+
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
 
@@ -42,19 +48,26 @@
             <h4 class="micro-tag">COGNITIVE SYSTEM v0.9</h4>
         </header>
 
-        <!-- ─── HERO ─────────────────────────────────────────── -->
+        <!-- ─── HERO ──────────────────────────────────────────────────── -->
         <section class="hero">
             <h1>Jannuzzelli</h1>
-            <h2>Cognitive Decision Architecture</h2>
+            <h2>Cognitive Strategic Architecture</h2>
+
             <p class="hero-text">
                 You are not lacking strategy.<br>
                 You are operating inside a distorted decision system.
             </p>
-            <p class="hero-highlight">Few can perceive it. Fewer can redesign it.</p>
-            <a href="#assessment" class="cta glow magnetic" id="cta-main">INITIATE DIAGNOSIS</a>
+
+            <p class="hero-highlight">
+                Few perceive it. Fewer can reconfigure it.
+            </p>
+
+            <a href="#assessment" class="cta glow magnetic" id="cta-main" data-intent="access" data-intensity="primary">
+                INITIATE DIAGNOSIS
+            </a>
         </section>
 
-        <!-- ─── ASSESSMENT ────────────────────────────────────── -->
+        <!-- ─── COGNITIVE PRESSURE ASSESSMENT ───────────────────────── -->
         <section class="jnz-assessment" id="assessment">
             <style>
                 .jnz-assessment {
@@ -785,27 +798,42 @@
         </section>
 
         <!-- ─── TERMINAL v2 ───────────────────────────────────── -->
-        <section class="ai-terminal-section" id="terminal">
-            <div class="terminal-v2">
-                <div class="terminal-v2-bar">
-                    <span class="tvbar-dot red"></span>
-                    <span class="tvbar-dot yellow"></span>
-                    <span class="tvbar-dot green"></span>
-                    <div class="tvbar-title">COGNITIVE INQUIRY v1.0</div>
-                    <div class="tvbar-status" id="term-status">AWAITING INPUT</div>
+        <section class="section ai-terminal-section">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">COGNITIVE INQUIRY v2.0 · EN</span>
                 </div>
-                <div class="terminal-v2-output" id="ai-terminal-output"></div>
-                <div class="terminal-v2-profile" id="term-profile"></div>
-                <div class="terminal-v2-divider"></div>
-                <div class="terminal-v2-input-row">
-                    <span class="tv2-prompt">&gt;&gt;</span>
-                    <input type="text" id="ai-terminal-input" placeholder="decision · strategy · ARAM · growth..."
-                        autocomplete="off" spellcheck="false">
-                    <div class="terminal-loader" id="ai-loader"></div>
-                </div>
-                <div class="terminal-v2-footer">
-                    <span class="tv2-hint">ENTER to process · ESC to clear</span>
-                    <button id="ai-terminal-submit">PROCESS</button>
+                <div class="terminal-body">
+                    <div id="ai-terminal-output" class="terminal-output">
+                        <div class="terminal-line">
+                            <span class="terminal-line-prefix">SYS</span>
+                            <span class="terminal-line-accent">Cognitive system initialized. Ready for analysis.</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-line-prefix">SYS</span>
+                            <span class="terminal-line-muted">Type your context or use one of the triggers below.</span>
+                        </div>
+                    </div>
+                    <div class="terminal-divider"></div>
+                    <div class="terminal-input-row">
+                        <span class="prompt">&gt;&gt;</span>
+                        <input type="text" id="ai-terminal-input" placeholder="Type your strategic context..."
+                            autocomplete="off">
+                        <div id="ai-loader" class="terminal-loader"></div>
+                        <button id="ai-terminal-submit">PROCESS</button>
+                    </div>
+                    <div class="terminal-hint-bar">
+                        <span class="term-hint-chip" data-cmd="ARAM">ARAM</span>
+                        <span class="term-hint-chip" data-cmd="how it works">how it works</span>
+                        <span class="term-hint-chip" data-cmd="process">process</span>
+                        <span class="term-hint-chip" data-cmd="strategy">strategy</span>
+                        <span class="term-hint-chip" data-cmd="price">price</span>
+                        <span class="term-hint-chip" data-cmd="cases">cases</span>
+                        <span class="term-hint-chip" data-cmd="contact">contact</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1167,10 +1195,11 @@
                         internally.</div>
                 </div>
                 <div class="cases-grid" id="cases-grid">
-                    <div class="case-card" data-index="0">
+                    <div class="case-card" data-index="0" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)"
+                        ontouchend="toggleCase(event,this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-0"></div>
-                            <div class="case-enc-hint">hover to decrypt</div>
+                            <div class="case-enc-hint">hover · touch to reveal</div>
                         </div>
                         <div class="case-content">
                             <div class="case-tag">FINANCIAL SECTOR · MID-SIZE</div>
@@ -1190,10 +1219,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="case-card" data-index="1">
+                    <div class="case-card" data-index="1" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)"
+                        ontouchend="toggleCase(event,this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-1"></div>
-                            <div class="case-enc-hint">hover to decrypt</div>
+                            <div class="case-enc-hint">hover · touch to reveal</div>
                         </div>
                         <div class="case-content">
                             <div class="case-tag">TECHNOLOGY · SCALE-UP</div>
@@ -1213,10 +1243,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="case-card wide" data-index="2">
+                    <div class="case-card wide" data-index="2" onmouseenter="revealCase(this)"
+                        onmouseleave="hideCase(this)" ontouchend="toggleCase(event,this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-2"></div>
-                            <div class="case-enc-hint">hover to decrypt</div>
+                            <div class="case-enc-hint">hover · touch to reveal</div>
                         </div>
                         <div class="case-content">
                             <div class="case-tag">HEALTHCARE · LARGE · REGULATORY PRESSURE</div>
@@ -1237,10 +1268,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="case-card" data-index="3">
+                    <div class="case-card" data-index="3" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)"
+                        ontouchend="toggleCase(event,this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-3"></div>
-                            <div class="case-enc-hint">hover to decrypt</div>
+                            <div class="case-enc-hint">hover · touch to reveal</div>
                         </div>
                         <div class="case-content">
                             <div class="case-tag">CONSUMER · FAMILY-CONTROLLED</div>
@@ -1261,10 +1293,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="case-card" data-index="4">
+                    <div class="case-card" data-index="4" onmouseenter="revealCase(this)" onmouseleave="hideCase(this)"
+                        ontouchend="toggleCase(event,this)">
                         <div class="case-encrypted">
                             <div class="case-enc-text" id="enc-4"></div>
-                            <div class="case-enc-hint">hover to decrypt</div>
+                            <div class="case-enc-hint">hover · touch to reveal</div>
                         </div>
                         <div class="case-content">
                             <div class="case-tag">INNOVATION · CORPORATE ECOSYSTEM</div>
@@ -1294,9 +1327,80 @@
             <script>
                 (function () {
                     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789█▓▒░∂∇∑≈≡∞⟨⟩⊕⊗∧∨∩∪ΔΨΩ';
-                    function rnd(n) { let r = ''; for (let i = 0; i < n; i++) { if (Math.random() < .1) { r += '\n'; continue } r += chars[Math.floor(Math.random() * chars.length)] } return r }
-                    for (let i = 0; i < 5; i++) { const el = document.getElementById('enc-' + i); if (el) el.textContent = rnd(180) }
-                    setInterval(() => { document.querySelectorAll('.case-enc-text').forEach(el => { if (!el.closest('.case-card.revealed')) { const a = el.textContent.split(''); a[Math.floor(Math.random() * a.length)] = chars[Math.floor(Math.random() * chars.length)]; el.textContent = a.join('') } }) }, 70);
+                    function randomChars(len) {
+                        let r = '';
+                        for (let i = 0; i < len; i++) {
+                            if (Math.random() < 0.12) { r += '\n'; continue; }
+                            r += chars[Math.floor(Math.random() * chars.length)];
+                        }
+                        return r;
+                    }
+                    for (let i = 0; i < 5; i++) {
+                        const el = document.getElementById('enc-' + i);
+                        if (el) el.textContent = randomChars(200);
+                    }
+                    setInterval(() => {
+                        document.querySelectorAll('.case-enc-text').forEach(el => {
+                            if (!el.closest('.case-card.revealed')) {
+                                const arr = el.textContent.split('');
+                                arr[Math.floor(Math.random() * arr.length)] = chars[Math.floor(Math.random() * chars.length)];
+                                el.textContent = arr.join('');
+                            }
+                        });
+                    }, 60);
+                    let revealTimers = {};
+                    window.revealCase = function (card) {
+                        const idx = card.getAttribute('data-index');
+                        card.classList.add('revealing');
+                        revealTimers[idx] = setTimeout(() => {
+                            card.classList.add('revealed');
+                            card.classList.remove('revealing');
+                        }, 150);
+                    };
+                    window.hideCase = function (card) {
+                        clearTimeout(revealTimers[card.getAttribute('data-index')]);
+                        card.classList.remove('revealed', 'revealing');
+                    };
+                    // Touch toggle — sem preventDefault para permitir scroll
+                    window.toggleCase = function (e, card) {
+                        // Ignore if a significant scroll occurred
+                        if (e.changedTouches && e.changedTouches[0]) {
+                            const touch = card._touchStart;
+                            if (touch) {
+                                const dx = Math.abs(e.changedTouches[0].clientX - touch.x);
+                                const dy = Math.abs(e.changedTouches[0].clientY - touch.y);
+                                if (dx > 10 || dy > 15) return; // was a scroll, not a tap
+                            }
+                        }
+                        e.stopPropagation();
+                        if (card.classList.contains('revealed')) {
+                            hideCase(card);
+                        } else {
+                            document.querySelectorAll('.case-card.revealed').forEach(c => hideCase(c));
+                            revealCase(card);
+                        }
+                    };
+                    document.querySelectorAll('.case-card').forEach(card => {
+                        card.addEventListener('touchstart', function (e) {
+                            card._touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                        }, { passive: true });
+                    });
+                    if ('IntersectionObserver' in window) {
+                        const obs = new IntersectionObserver(entries => {
+                            entries.forEach(e => {
+                                if (e.isIntersecting) {
+                                    e.target.style.opacity = '1';
+                                    e.target.style.transform = 'translateY(0)';
+                                }
+                            });
+                        }, { threshold: 0.1 });
+                        document.querySelectorAll('.case-card').forEach((card, i) => {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            card.style.transition = `opacity 0.6s ease ${i * 0.1}s, transform 0.6s ease ${i * 0.1}s`;
+                            obs.observe(card);
+                        });
+                    }
                 })();
             </script>
         </section>
@@ -1672,6 +1776,8 @@
                         <div class="intake-step-dot" id="sdot-2"></div>
                         <div class="intake-step-dot" id="sdot-3"></div>
                         <div class="intake-step-dot" id="sdot-4"></div>
+                        <div class="intake-step-dot" id="sdot-5"></div>
+                        <div class="intake-step-dot" id="sdot-6"></div>
                     </div>
                     <div class="intake-active-q" id="intake-active-q">
                         <div class="active-q-label" id="active-q-label">PARAMETER 01 — CONTEXT</div>
@@ -1710,14 +1816,16 @@
                         { label: 'PARAMETER 02 — SITUATION', text: 'Describe what is stuck or under pressure in your strategic environment right now.', placeholder: 'be specific — what exactly is not moving forward...', key: 'situation' },
                         { label: 'PARAMETER 03 — ATTEMPTS', text: 'What has already been tried to resolve it? Which approaches didn\'t work?', placeholder: 'consultants hired, processes implemented, changes made...', key: 'attempts' },
                         { label: 'PARAMETER 04 — URGENCY', text: 'What is the cost of not resolving this in the next 90 days?', placeholder: 'financial, strategic, organizational, reputational...', key: 'urgency' },
-                        { label: 'PARAMETER 05 — INTENTION', text: 'What do you expect from an architectural intervention? What would success look like for you?', placeholder: 'what would concretely change if the problem were resolved...', key: 'intention' }
+                        { label: 'PARAMETER 05 — INTENTION', text: 'What do you expect from an architectural intervention? What would success look like for you?', placeholder: 'what would concretely change if the problem were resolved...', key: 'intention' },
+                        { label: 'PARAMETER 06 — WHATSAPP', text: 'What is your WhatsApp for direct contact?', placeholder: '+1 (555) 123-4567 — only for first contact...', key: 'whatsapp' },
+                        { label: 'PARAMETER 07 — LINKEDIN', text: 'What is the link to your LinkedIn profile?', placeholder: 'linkedin.com/in/yourprofile — optional but useful for context...', key: 'linkedin' }
                     ];
                     let step = 0; const answers = {};
                     const ta = document.getElementById('intake-textarea'), sb = document.getElementById('intake-submit-btn'), op = document.getElementById('intake-output'), cc = document.getElementById('intake-chars');
                     window.onInputChange = function () { const l = ta.value.trim().length; cc.textContent = ta.value.length + ' / 600'; sb.disabled = l < 10; sb.classList.toggle('ready', l >= 10) };
                     window.onKeyDown = function (e) { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); if (!sb.disabled) advanceStep() } };
                     function addLog(p, t, c) { const line = document.createElement('div'); line.className = 'intake-log-line'; line.innerHTML = `<span class="log-prefix">${p}</span><span class="log-text ${c || ''}">${t}</span>`; op.appendChild(line); op.scrollTop = op.scrollHeight }
-                    function updateQ(i) { const q = questions[i]; document.getElementById('active-q-label').textContent = q.label; document.getElementById('active-q-text').textContent = q.text; ta.placeholder = q.placeholder; ta.value = ''; sb.disabled = true; sb.classList.remove('ready'); cc.textContent = '0 / 600'; ta.focus(); for (let j = 0; j < 5; j++) { const d = document.getElementById('sdot-' + j); d.className = 'intake-step-dot' + (j < i ? ' done' : j === i ? ' active' : '') } }
+                    function updateQ(i) { const q = questions[i]; document.getElementById('active-q-label').textContent = q.label; document.getElementById('active-q-text').textContent = q.text; ta.placeholder = q.placeholder; ta.value = ''; sb.disabled = true; sb.classList.remove('ready'); cc.textContent = '0 / 600'; ta.focus(); for (let j = 0; j < 7; j++) { const d = document.getElementById('sdot-' + j); d.className = 'intake-step-dot' + (j < i ? ' done' : j === i ? ' active' : '') } }
                     window.advanceStep = function () { const val = ta.value.trim(); if (val.length < 10) return; const q = questions[step]; answers[q.key] = val; addLog('IN', `[${q.key.toUpperCase()}] ${val.length > 60 ? val.slice(0, 60) + '...' : val}`, 'accent'); addLog('SYS', `Parameter ${step + 1} recorded.`, 'muted'); step++; if (step < questions.length) { updateQ(step); addLog('SYS', `Parameter ${step + 1}: ${questions[step].text}`, '') } else { sb.textContent = 'TRANSMITTING...'; sb.disabled = true; document.getElementById('intake-active-q').style.opacity = '.3'; ta.disabled = true; sendData() } };
                     function genRef() { return 'JNZ-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2, 6).toUpperCase() }
                     async function sendData() { const ref = genRef(); const body = Object.entries(answers).map(([k, v]) => `[${k.toUpperCase()}]\n${v}`).join('\n\n---\n\n'); const payload = { _subject: `[Strategic Access EN] ${ref} — ${(answers.context || '').slice(0, 60)}`, referencia: ref, ...answers, _body: `STRATEGIC ACCESS PROTOCOL (EN)\nRef: ${ref}\n\n${body}` }; try { const res = await fetch(ACTION_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) }); res.ok ? showSuccess(ref) : showError() } catch { const mb = encodeURIComponent(`STRATEGIC ACCESS PROTOCOL (EN)\nRef: ${ref}\n\n${body}`); showSuccess(ref); setTimeout(() => { window.location.href = `mailto:${INTAKE_EMAIL}?subject=Strategic Access ${ref}&body=${mb}` }, 1000) } }
