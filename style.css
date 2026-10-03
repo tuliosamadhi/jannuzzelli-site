@@ -835,3 +835,19 @@ footer {
         padding: 0 20px 14px;
     }
 }
+/* ====================== ESCALA DESKTOP (equivale a zoom de 150%) ======================
+   Em telas largas o conteudo fica 1,5x maior, como no navegador com zoom de 150%.
+   O limite de 1350px corresponde a 900px de largura efetiva (breakpoint do layout tablet),
+   entao tablets e celulares seguem exatamente como antes.
+   Para reverter: apague este bloco. */
+@media (min-width: 1350px) {
+    html {
+        zoom: 1.5;
+    }
+
+    /* unidades de viewport nao acompanham o zoom: compensa */
+    .hero,
+    #hero {
+        min-height: calc(100vh / 1.5);
+    }
+}
