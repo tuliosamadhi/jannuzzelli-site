@@ -127,7 +127,7 @@ const KB = {
     // Price / Preço
     price: {
         pt: [
-            "Os engajamentos são estruturados com base na complexidade do ambiente e na profundidade do realinhamento necessário — não em horas ou pacotes padronizados.\n\nO primeiro passo é um diagnóstico de contexto. A partir daí, o escopo determina o investimento.\n\n→ Solicitar acesso: intelligence@jannuzzelli.pro",
+            "Os engajamentos são estruturados com base na complexidade do ambiente e na profundidade do realinhamento necessário — não em horas ou pacotes padronizados.\n\nO primeiro passo é um diagnóstico de contexto. A partir daí, o escopo determina o investimento.\n\n→ Solicitar acesso: contato@jannuzzelli.com.br",
             "Acesso estratégico não começa com uma proposta de preço — começa com precisão de diagnóstico. Sem entender a profundidade do problema, qualquer número seria arbitrário.\n\n→ Você pode descrever brevemente o seu contexto? Use o protocolo abaixo.",
             "O custo de uma intervenção bem estruturada é sempre menor que o custo do problema que ela resolve. A questão relevante não é quanto custa — é quanto custa não resolver.\n\n→ Qual o impacto estimado de não resolver isso nos próximos 90 dias?"
         ],
@@ -169,9 +169,9 @@ const KB = {
     // Contact / Contato
     contact: {
         pt: [
-            "Canal de acesso estratégico:\n→ intelligence@jannuzzelli.pro\n→ WhatsApp: +55 12 98121-6006\n\nOu use o Protocolo de Acesso abaixo — suas respostas são lidas antes do primeiro contato.",
-            "O primeiro contato não é uma call de vendas. É um mapeamento inicial do seu contexto para avaliar se e como uma intervenção faz sentido.\n\n→ Use o formulário abaixo ou escreva diretamente: intelligence@jannuzzelli.pro",
-            "Se você chegou até aqui, provavelmente há algo no seu sistema que precisa de reconfiguração. O próximo passo é uma conversa — sem compromisso, com precisão.\n\n→ intelligence@jannuzzelli.pro | +55 12 98121-6006"
+            "Canal de acesso estratégico:\n→ contato@jannuzzelli.com.br\n→ WhatsApp: +55 12 98121-6006\n\nOu use o Protocolo de Acesso abaixo — suas respostas são lidas antes do primeiro contato.",
+            "O primeiro contato não é uma call de vendas. É um mapeamento inicial do seu contexto para avaliar se e como uma intervenção faz sentido.\n\n→ Use o formulário abaixo ou escreva diretamente: contato@jannuzzelli.com.br",
+            "Se você chegou até aqui, provavelmente há algo no seu sistema que precisa de reconfiguração. O próximo passo é uma conversa — sem compromisso, com precisão.\n\n→ contato@jannuzzelli.com.br | +55 12 98121-6006"
         ],
         en: [
             "Strategic access channel:\n→ intelligence@jannuzzelli.pro\n→ WhatsApp: +55 12 98121-6006\n\nOr use the Access Protocol below — your responses are read before the first contact.",
