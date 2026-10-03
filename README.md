@@ -1,6 +1,6 @@
 # Jannuzzelli — Cognitive Architecture Platform
 
-Strategic and Cognitive Architecture applied to high-level decision-making, behavioral systems, and executive intelligence.
+Cognitive Strategic Architecture applied to high-level decision-making, behavioral systems, and executive intelligence.
 
 This repository contains the core structure of the Jannuzzelli digital platform, designed as a minimal, high-performance interface for:
 
