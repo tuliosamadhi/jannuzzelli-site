@@ -835,3 +835,14 @@ footer {
         padding: 0 20px 14px;
     }
 }
+/* RESPONSIVE POLISH v2 */
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+    .btn, .cta {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
