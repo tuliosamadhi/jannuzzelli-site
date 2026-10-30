@@ -4,19 +4,30 @@
 <head>
     <script>
         (function () {
-            const userLang = navigator.language || navigator.userLanguage;
             const currentPath = window.location.pathname;
-            const hasLangPref = localStorage.getItem('lang_pref');
-            if (!hasLangPref) {
-                if (userLang.startsWith('en') && !currentPath.includes('/en/')) {
-                    window.location.href = '/en/index.html';
+            const requestedLang = new URLSearchParams(window.location.search).get('lang');
+
+            if (requestedLang === 'pt' || requestedLang === 'en') {
+                try { localStorage.setItem('lang_pref', requestedLang); } catch (_) {}
+                if (requestedLang === 'en' && !currentPath.startsWith('/en/')) {
+                    window.location.replace('/en/index.html');
+                } else if (requestedLang === 'pt' && currentPath.startsWith('/en/')) {
+                    window.location.replace('/index.html');
                 }
+                return;
+            }
+
+            let savedLang = null;
+            try { savedLang = localStorage.getItem('lang_pref'); } catch (_) {}
+            const userLang = navigator.language || navigator.userLanguage || '';
+            if (!savedLang && userLang.toLowerCase().startsWith('en') && !currentPath.startsWith('/en/')) {
+                window.location.replace('/en/index.html');
             }
         })();
     </script>
     <meta charset="UTF-8">
-    <title>Jannuzzelli — Arquitetura Estratégica Cognitiva</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jannuzzelli — Arquitetura Cognitiva Estratégica</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description"
         content="Arquitetura Cognitiva Estratégica para decisões em ambientes de alta complexidade.">
     <meta name="theme-color" content="#020304">
@@ -60,16 +71,16 @@
         <header class="header">
             <h4 class="micro-tag">COGNITIVE SYSTEM v0.9</h4>
             <nav class="header-nav">
-                <a href="#" class="lang-link pt">PT</a>
-                <a href="/en/index.html" class="lang-link en">EN</a>
-                <a href="/cv/index.html" class="cv-link">Currículo</a>
+                <a href="/index.html?lang=pt" class="lang-link pt">PT</a>
+                <a href="/en/index.html?lang=en" class="lang-link en">EN</a>
+                <a href="/cv/" class="cv-link">Currículo</a>
             </nav>
         </header>
 
         <!-- ─── HERO ──────────────────────────────────────────────────── -->
         <section class="hero">
             <h1>Jannuzzelli</h1>
-            <h2>Arquitetura Cognitiva de Decisão Estratégica</h2>
+            <h2>Arquitetura Cognitiva Estratégica</h2>
 
             <p class="hero-text">
                 Você não está sem estratégia.<br>
@@ -1416,8 +1427,7 @@
                         <div class="cases-micro">SINAIS DE CAMPO · CASOS ILUSTRATIVOS</div>
                         <div class="cases-title">O que acontece quando<br>a arquitetura muda.</div>
                     </div>
-                    <div class="cases-disclaimer">Identidades protegidas por protocolo de confidencialidade. Dados de
-                        resultado verificados internamente.</div>
+                    <div class="cases-disclaimer">Casos ilustrativos e compostos; detalhes e métricas foram adaptados para fins de demonstração.</div>
                 </div>
 
                 <div class="cases-grid" id="cases-grid">
@@ -1557,8 +1567,7 @@
 
                 <div class="cases-footer">
                     <div class="cases-footer-line"></div>
-                    <div class="cases-footer-text">Todos os casos passaram por protocolo de validação e anonimização
-                    </div>
+                    <div class="cases-footer-text">CASOS ILUSTRATIVOS · DETALHES E MÉTRICAS ADAPTADOS PARA DEMONSTRAÇÃO</div>
                     <div class="cases-footer-line"></div>
                 </div>
             </div>
@@ -2144,7 +2153,10 @@
                         submitBtn.disabled = true;
                         submitBtn.classList.remove('ready');
                         charCount.textContent = '0 / 600';
-                        textarea.focus();
+                        // Do not summon the mobile keyboard or move the viewport on touch devices.
+                        if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                            textarea.focus();
+                        }
                         for (let i = 0; i < 7; i++) {
                             const d = document.getElementById('sdot-' + i);
                             d.className = 'intake-step-dot' + (i < idx ? ' done' : i === idx ? ' active' : '');
