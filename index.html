@@ -20,7 +20,13 @@
             let savedLang = null;
             try { savedLang = localStorage.getItem('lang_pref'); } catch (_) {}
             const userLang = navigator.language || navigator.userLanguage || '';
-            if (!savedLang && userLang.toLowerCase().startsWith('en') && !currentPath.startsWith('/en/')) {
+
+            if (savedLang === 'en' && !currentPath.startsWith('/en/')) {
+                window.location.replace('/en/index.html');
+            } else if (savedLang === 'pt' && currentPath.startsWith('/en/')) {
+                window.location.replace('/index.html');
+            } else if (!savedLang && userLang.toLowerCase().startsWith('en') && !currentPath.startsWith('/en/')) {
+                try { localStorage.setItem('lang_pref', 'en'); } catch (_) {}
                 window.location.replace('/en/index.html');
             }
         })();
