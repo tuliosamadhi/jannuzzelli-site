@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function () {
+            const requestedLang = new URLSearchParams(window.location.search).get('lang');
+            if (requestedLang === 'pt' || requestedLang === 'en') {
+                try { localStorage.setItem('lang_pref', requestedLang); } catch (_) {}
+                if (requestedLang === 'pt') window.location.replace('/index.html?lang=pt');
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <title>Jannuzzelli — Cognitive Strategic Architecture</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
