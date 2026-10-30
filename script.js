@@ -356,7 +356,9 @@ async function processTerminalCommand() {
     }
 
     if (terminalSubmitBtn) terminalSubmitBtn.disabled = false;
-    if (terminalInput) terminalInput.focus();
+    if (terminalInput && !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        terminalInput.focus();
+    }
 }
 
 // ====================== EVENTS — TERMINAL ======================
