@@ -356,7 +356,7 @@ async function processTerminalCommand() {
     }
 
     if (terminalSubmitBtn) terminalSubmitBtn.disabled = false;
-    if (terminalInput && !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    if (terminalInput && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
         terminalInput.focus();
     }
 }
