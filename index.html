@@ -2147,7 +2147,7 @@
                         line.className = 'intake-log-line';
                         line.innerHTML = `<span class="log-prefix">${prefix}</span><span class="log-text ${cls || ''}">${text}</span>`;
                         output.appendChild(line);
-                        line.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        output.scrollTo({ top: output.scrollHeight, behavior: 'smooth' });
                     }
 
                     function updateQuestion(idx) {
@@ -2160,8 +2160,8 @@
                         submitBtn.classList.remove('ready');
                         charCount.textContent = '0 / 600';
                         // Do not summon the mobile keyboard or move the viewport on touch devices.
-                        if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-                            textarea.focus();
+                        if (idx > 0 && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                            textarea.focus({ preventScroll: true });
                         }
                         for (let i = 0; i < 7; i++) {
                             const d = document.getElementById('sdot-' + i);
