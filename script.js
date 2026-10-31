@@ -356,7 +356,9 @@ async function processTerminalCommand() {
     }
 
     if (terminalSubmitBtn) terminalSubmitBtn.disabled = false;
-    if (terminalInput) terminalInput.focus();
+    if (terminalInput && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        terminalInput.focus();
+    }
 }
 
 // ====================== EVENTS — TERMINAL ======================

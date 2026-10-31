@@ -2,9 +2,18 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function () {
+            const requestedLang = new URLSearchParams(window.location.search).get('lang');
+            if (requestedLang === 'pt' || requestedLang === 'en') {
+                try { localStorage.setItem('lang_pref', requestedLang); } catch (_) {}
+                if (requestedLang === 'pt') window.location.replace('/index.html?lang=pt');
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <title>Jannuzzelli — Cognitive Strategic Architecture</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Cognitive Strategic Architecture for decisions in high-complexity environments.">
     <meta name="theme-color" content="#020304">
 
@@ -46,6 +55,11 @@
     <div class="container">
         <header class="header">
             <h4 class="micro-tag">COGNITIVE SYSTEM v0.9</h4>
+            <nav class="header-nav" aria-label="Language selection">
+                <a href="/index.html?lang=pt" class="lang-link" lang="pt-BR">PT</a>
+                <a href="/en/index.html?lang=en" class="lang-link" lang="en">EN</a>
+                <a href="/cv/" class="lang-link cv-link">CV</a>
+            </nav>
         </header>
 
         <!-- ─── HERO ──────────────────────────────────────────────────── -->
@@ -1825,7 +1839,7 @@
                     window.onInputChange = function () { const l = ta.value.trim().length; cc.textContent = ta.value.length + ' / 600'; sb.disabled = l < 10; sb.classList.toggle('ready', l >= 10) };
                     window.onKeyDown = function (e) { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); if (!sb.disabled) advanceStep() } };
                     function addLog(p, t, c) { const line = document.createElement('div'); line.className = 'intake-log-line'; line.innerHTML = `<span class="log-prefix">${p}</span><span class="log-text ${c || ''}">${t}</span>`; op.appendChild(line); op.scrollTop = op.scrollHeight }
-                    function updateQ(i) { const q = questions[i]; document.getElementById('active-q-label').textContent = q.label; document.getElementById('active-q-text').textContent = q.text; ta.placeholder = q.placeholder; ta.value = ''; sb.disabled = true; sb.classList.remove('ready'); cc.textContent = '0 / 600'; ta.focus(); for (let j = 0; j < 7; j++) { const d = document.getElementById('sdot-' + j); d.className = 'intake-step-dot' + (j < i ? ' done' : j === i ? ' active' : '') } }
+                    function updateQ(i) { const q = questions[i]; document.getElementById('active-q-label').textContent = q.label; document.getElementById('active-q-text').textContent = q.text; ta.placeholder = q.placeholder; ta.value = ''; sb.disabled = true; sb.classList.remove('ready'); cc.textContent = '0 / 600'; if (i > 0) ta.focus({ preventScroll: true }); for (let j = 0; j < 7; j++) { const d = document.getElementById('sdot-' + j); d.className = 'intake-step-dot' + (j < i ? ' done' : j === i ? ' active' : '') } }
                     window.advanceStep = function () { const val = ta.value.trim(); if (val.length < 10) return; const q = questions[step]; answers[q.key] = val; addLog('IN', `[${q.key.toUpperCase()}] ${val.length > 60 ? val.slice(0, 60) + '...' : val}`, 'accent'); addLog('SYS', `Parameter ${step + 1} recorded.`, 'muted'); step++; if (step < questions.length) { updateQ(step); addLog('SYS', `Parameter ${step + 1}: ${questions[step].text}`, '') } else { sb.textContent = 'TRANSMITTING...'; sb.disabled = true; document.getElementById('intake-active-q').style.opacity = '.3'; ta.disabled = true; sendData() } };
                     function genRef() { return 'JNZ-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2, 6).toUpperCase() }
                     async function sendData() { const ref = genRef(); const body = Object.entries(answers).map(([k, v]) => `[${k.toUpperCase()}]\n${v}`).join('\n\n---\n\n'); const payload = { _subject: `[Strategic Access EN] ${ref} — ${(answers.context || '').slice(0, 60)}`, referencia: ref, ...answers, _body: `STRATEGIC ACCESS PROTOCOL (EN)\nRef: ${ref}\n\n${body}` }; try { const res = await fetch(ACTION_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) }); res.ok ? showSuccess(ref) : showError() } catch { const mb = encodeURIComponent(`STRATEGIC ACCESS PROTOCOL (EN)\nRef: ${ref}\n\n${body}`); showSuccess(ref); setTimeout(() => { window.location.href = `mailto:${INTAKE_EMAIL}?subject=Strategic Access ${ref}&body=${mb}` }, 1000) } }
@@ -1839,6 +1853,7 @@
         <!-- ─── FOOTER ─────────────────────────────────────────── -->
         <footer>
             <a href="mailto:intelligence@jannuzzelli.pro" class="footer-contact">intelligence@jannuzzelli.pro</a>
+            <a href="/cv/" class="footer-contact">Interactive CV</a>
             <p class="footer-rights">© 2026 Jannuzzelli — All Rights Reserved</p>
         </footer>
     </div>
